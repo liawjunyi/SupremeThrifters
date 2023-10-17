@@ -1,4 +1,4 @@
-/* for login/register page */
+/* for login/register page stlye */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
 *{
@@ -200,3 +200,4 @@ button:active{
     border: 1px solid #ccc;
     border-radius: 50%;
 }
+/* end of login/register page styles*/
