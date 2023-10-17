@@ -12,10 +12,15 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <link
-          async
           rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-        />
+          href="https://use.fontawesome.com/releases/v6.4.2/css/all.css"
+        ></link>
+        <link rel="stylesheet" type="text/css" href="style.css"></link>
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdnjs.cloudfare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+        ></link>
       </head>
       <body className={inter.className}>{children}</body>
     </html>
