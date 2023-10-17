@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supreme Thrifters</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudfare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+
+</head>
+<body>
+    <div class="container" id="main">
+
+        <div class="sign-up">
+            <form action="#">
+                <h1>Create Account</h1>
+                <div class="social-container">
+                    <a href="#" class="social"><i class="fab fa-facbook-f"></i></a>
+                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <p>or use your email for registration</p>
+                <input type="text" name="txt" placeholder="Name" required="">
+                <input type="email" name="email" placeholder="Email" required="">
+                <input type="password" name="pswd" placeholder="Password" required="">
+                <button>Sign Up</button>
+            </form>
+        </div>  <!-- end of signup div -->
+
+        <div class="sign-in">
+            <form action="#">
+                <h1>Sign In</h1>
+                <div class="social-container">
+                    <a href="#" class="social"><i class="fab fa-facbook-f"></i></a>
+                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <p>or use your account</p>
+                <input type="email" name="email" placeholder="Email" required="">
+                <input type="password" name="pswd" placeholder="Password" required="">
+                <a href="#"> Forget you Password?</a>
+                <button>Sign In</button>
+            </form>
+        </div>  <!-- end of signin div -->
+
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-left">
+                    <h1>Welcome Back!</h1>
+                    <p>To keep connected with us please login with your personal info</p>
+                    <button id="signIn">Sign In</button>
+                </div> <!-- end of overlay-left div -->
+                <div class="overlay-right">
+                    <h1>Hello, Friend!</h1>
+                    <p>Enter your personal detials and start your journey with us</p>
+                    <button id="signUp">Sign Up</button>
+                </div><!-- end of overlay-right div -->
+            </div> <!-- end of overlay div -->
+        </div> <!-- end of overlay container div -->
+
+    </div>  <!-- end of main div -->
+    
+    <script type="text/javascript">
+        const signUpButton = document.getElementById('signUp');
+        const signInButton = document.getElementById('signIn');
+        const main = document.getElementById('main');
+
+        signUpButton.addEventListener('click', ()=>{
+            main.classList.add("right-panel-active")
+        });
+        signInButton.addEventListener('click', ()=>{
+            main.classList.remove("right-panel-active")
+        });
+    </script>
+
+</body>
+</html>
