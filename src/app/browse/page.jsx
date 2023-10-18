@@ -1,11 +1,4 @@
 "use client";
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxList,
-  ComboboxOption,
-  ComboboxPopover,
-} from "@reach/combobox";
 import "@reach/combobox/styles.css";
 import {
   GoogleMap,
@@ -13,12 +6,10 @@ import {
   InfoWindowF,
   MarkerF,
 } from "@react-google-maps/api";
-import React, { useState, useEffect } from "react";
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
+import React, { useState } from "react";
 import ItemCard from "@/components/ItemCard";
+import PlacesAutocomplete from "@/components/PlacesAutocomplete";
+import data from "../../../fakedb.json";
 
 export default function Places() {
   const { isLoaded } = useLoadScript({
@@ -35,74 +26,80 @@ function Map() {
   const [selected, setSelected] = useState(null);
   const [highlight, setHighlight] = useState(null);
   const [activeMarker, setActiveMarker] = useState(null);
+  const [hover, setHover] = useState(null);
+ 
 
-  const PlacesAutocomplete = ({ setSelected }) => {
-    const {
-      ready,
-      value,
-      setValue,
-      suggestions: { status, data },
-      clearSuggestions,
-    } = usePlacesAutocomplete();
-
-    const handleSelect = async (address) => {
-      setValue(address, false);
-      clearSuggestions();
-
-      const results = await getGeocode({ address });
-
-      const { lat, lng } = await getLatLng(results[0]);
-      setSelected({ lat, lng });
-    };
-    useEffect(() => {
-      if (!selected) return;
-      setCenter(selected);
-    }, [selected]);
-    return (
-      <Combobox onSelect={handleSelect}>
-        <ComboboxInput
-          value={value}
-          disabled={!ready}
-          onChange={(e) => setValue(e.target.value)}
-          className="w-full p-2"
-        />
-        <ComboboxPopover>
-          <ComboboxList>
-            {status === "OK" &&
-              data.map(({ place_id, description }) => (
-                <ComboboxOption key={place_id} value={description} />
-              ))}
-          </ComboboxList>
-        </ComboboxPopover>
-      </Combobox>
-    );
-  };
-
+  
   return (
     <>
-      <div className="absolute top-5 left-1/2 z-10" style={{ width: "300px" }}>
-        <PlacesAutocomplete setSelected={setSelected} />
+      {/* {selected && ( */}
+
+      <div className="absolute top-0 bg-white z-10 w-80 h-full p-6">
+        <nav class="lg:text-sm lg:leading-6 relative ">
+          <div class="absolute top-0 mt-[76px] flex flex-col p-md flex justify-center w-full">
+            {data.map(
+              ({
+                user_id,
+                username,
+                product: { product_name, price, product_description },
+              }) => (
+                <div
+                  className="p-sm bg-white border border-gray-200 rounded-md shadow hover:bg-gray-100"
+                  onMouseEnter={() => setHover(user_id)}
+                >
+                  {product_name}
+                  {price}
+                  {product_description}
+                </div>
+              )
+            )}
+          </div>
+        </nav>
+      </div>
+      {/* )} */}
+      <div className="absolute top-[20px] left-[15px] z-20 rounded-sm w-[300px]">
+        <PlacesAutocomplete
+          setSelected={setSelected}
+          selected={selected}
+          setCenter={setCenter}
+        />
       </div>
 
       <GoogleMap
         zoom={10}
         center={center}
         mapContainerClassName="w-full h-screen"
-        options={{ mapId: "aa0423f1ef73f4ca" }}
+        options={{ mapId: "aa0423f1ef73f4ca", disableDefaultUI: true }}
       >
-        <MarkerF
-          position={{ lat: 1.3319, lng: 103.9273 }}
-          icon={{ url: "/tshirt.svg" }}
-          onMouseOver={() => setHighlight(true)}
-          animation={2}
-          onClick={() => setActiveMarker(true)}
-        >
-          {activeMarker === true ? (
-            <InfoWindowF onCloseClick={() => setActiveMarker(false)}>
-              <ItemCard></ItemCard>
-            </InfoWindowF>
-          ) : null}
-        </MarkerF>
+        {data.map(({ user_id, address: { geo, street } }) => {
+          let icon =
+            hover == user_id
+              ? {
+                  url: "/tshirt_solid.svg",
+                  scaledSize: { width: 30, height: 30 },
+                }
+              : {
+                  url: "/tshirt_outline.svg",
+                  scaledSize: { width: 15, height: 15 },
+                };
+          console.log(icon);
+          return (
+            <MarkerF
+              position={{ ...geo }}
+              icon={icon}
+              onMouseOver={() => setHighlight(true)}
+              animation={2}
+              onClick={() => setActiveMarker(user_id)}
+            >
+              {activeMarker == user_id ? (
+                <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
+                  <ItemCard></ItemCard>
+                </InfoWindowF>
+              ) : null}
+            </MarkerF>
+          );
+        })}
+
         {selected && (
           <MarkerF
             position={selected}

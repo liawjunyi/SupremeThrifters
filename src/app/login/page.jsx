@@ -13,7 +13,9 @@ export default function Home() {
     <div class="flex flex-col justify-center items-center m-1/10 h-full">
       <div
         id="container"
-        class={"relative w-[768px] h-[480px] rounded-sm shadow-preset"}
+        class={
+          "relative xl:w-4/6 md:w-3/4 sm:w-full h-[480px] rounded-sm shadow-preset"
+        }
       >
         <div
           id="sign-up"
