@@ -5,6 +5,8 @@
     "product": {
       "product_id": 1,
       "product_name": "tshirt",
+      "product_description": "this is a shirt",
+      "product_img_url": "image_url",
       "price": "18",
       "currency": "$",
       "category": ["shirt"]
@@ -12,8 +14,8 @@
     "address": {
       "street": "Bedok North Ave 3",
       "geo": {
-        "lat": "1.3319",
-        "lng": "103.9273"
+        "lat": 1.3319,
+        "lng": 103.9273
       }
     }
   },
@@ -23,6 +25,8 @@
     "product": {
       "product_id": 1,
       "product_name": "pants",
+      "product_description": "this is a shirt",
+      "product_img_url": "image_url",
       "price": "35",
       "currency": "$",
       "category": ["pants"]
@@ -30,8 +34,8 @@
     "address": {
       "street": "Serangoon Garden Way",
       "geo": {
-        "lat": "1.3640",
-        "lng": "103.8658"
+        "lat": 1.364,
+        "lng": 103.8658
       }
     }
   },
@@ -41,6 +45,8 @@
     "product": {
       "product_id": 1,
       "product_name": "cock",
+      "product_description": "this is a shirt",
+      "product_img_url": "image_url",
       "price": "40",
       "currency": "$",
       "category": ["others"]
@@ -48,8 +54,8 @@
     "address": {
       "street": "20 Jurong West Street 93",
       "geo": {
-        "lat": "1.338133",
-        "lng": "103.693924"
+        "lat": 1.338133,
+        "lng": 103.693924
       }
     }
   }
