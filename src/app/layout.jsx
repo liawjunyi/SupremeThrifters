@@ -9,20 +9,27 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
           href="https://use.fontawesome.com/releases/v6.4.2/css/all.css"
         ></link>
+
         <link rel="stylesheet" type="text/css" href="style.css"></link>
+        
         <link
           rel="stylesheet"
           type="text/css"
           href="https://cdnjs.cloudfare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
         ></link>
+
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
         <link
           href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&family=Tilt+Neon&display=swap"
           rel="stylesheet"
         ></link>
+
       </head>
+      
       <body className={inter.className}>{children}</body>
+      
       {/* <script>
         {((g) => {
           var h,
