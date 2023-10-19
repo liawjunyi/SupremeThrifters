@@ -51,7 +51,7 @@ module.exports = {
         100: "100",
       },
       colors: {
-        primary: "#ff4b2b",
+        primary: "#666666",
         secondary: "white",
         button: "#666666",
       },

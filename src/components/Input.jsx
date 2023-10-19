@@ -18,6 +18,7 @@ const Input = ({
       <input
         onFocus={() => setfocus("border-2 border-button")}
         onBlur={() => setfocus("border-2 border-primary")}
+        value={value}
         onChange={handleChange}
         placeholder={placeholder}
         className={`flex ${focus} w-full cursor-text rounded-md  ${size} ${className}`}

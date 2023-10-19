@@ -10,6 +10,10 @@ import React, { useState } from "react";
 import ItemCard from "@/components/ItemCard";
 import PlacesAutocomplete from "@/components/PlacesAutocomplete";
 import data from "../../../fakedb.json";
+import { getAlgoliaResults } from "@algolia/autocomplete-js";
+import algoliasearch from "algoliasearch";
+import { ProductItem } from "@/components/ProductItem";
+import Search from "@/components/Search";
 
 export default function Places() {
   const { isLoaded } = useLoadScript({
@@ -27,9 +31,11 @@ function Map() {
   const [highlight, setHighlight] = useState(null);
   const [activeMarker, setActiveMarker] = useState(null);
   const [hover, setHover] = useState(null);
- 
 
-  
+  const searchClient = algoliasearch(
+    "28OPVE2DNS",
+    "552f6c2e86d06b9d5eaa9ed7f3445326"
+  );
   return (
     <>
       {/* {selected && ( */}
@@ -41,7 +47,9 @@ function Map() {
               ({
                 user_id,
                 username,
-                product: { product_name, price, product_description },
+                product_name,
+                price,
+                product_description,
               }) => (
                 <div
                   className="p-sm bg-white border border-gray-200 rounded-md shadow hover:bg-gray-100"
@@ -58,11 +66,35 @@ function Map() {
       </div>
       {/* )} */}
       <div className="absolute top-[20px] left-[15px] z-20 rounded-sm w-[300px]">
-        <PlacesAutocomplete
+        {/* <PlacesAutocomplete
           setSelected={setSelected}
           selected={selected}
           setCenter={setCenter}
-        />
+          openOnFocus={true}
+          getSources={({ query }) => [
+            {
+              sourceId: "name",
+              getItems() {
+                return getAlgoliaResults({
+                  searchClient,
+                  queries: [
+                    {
+                      indexName: "supremeThrifters",
+                      query,
+                    },
+                  ],
+                });
+              },
+              templates: {
+                item({ item, components }) {
+                  console.log(item, components);
+                  return <ProductItem hit={item} components={components} />;
+                },
+              },
+            },
+          ]}
+        /> */}
+        <Search data={data}></Search>
       </div>
 
       <GoogleMap
@@ -82,7 +114,7 @@ function Map() {
                   url: "/tshirt_outline.svg",
                   scaledSize: { width: 15, height: 15 },
                 };
-          console.log(icon);
+
           return (
             <MarkerF
               position={{ ...geo }}

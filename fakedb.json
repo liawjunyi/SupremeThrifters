@@ -1,16 +1,13 @@
 [
   {
+    "product_id": 1,
+    "product_name": "vintage tshirt",
+    "product_description": "this is a shirt",
+    "product_img_url": "image_url",
+    "price": "18",
+    "product_category": ["shirt, tshirt, fit"],
     "user_id": 1,
     "username": "john",
-    "product": {
-      "product_id": 1,
-      "product_name": "tshirt",
-      "product_description": "this is a shirt",
-      "product_img_url": "image_url",
-      "price": "18",
-      "currency": "$",
-      "category": ["shirt"]
-    },
     "address": {
       "street": "Bedok North Ave 3",
       "geo": {
@@ -20,17 +17,31 @@
     }
   },
   {
+    "product_id": 2,
+    "product_name": "Joggers",
+    "product_description": "this is a pants",
+    "product_img_url": "image_url",
+    "price": "18",
+    "product_category": ["pants"],
+    "user_id": 1,
+    "username": "john",
+    "address": {
+      "street": "Bedok North Ave 3",
+      "geo": {
+        "lat": 1.3319,
+        "lng": 103.9273
+      }
+    }
+  },
+  {
+    "product_id": 3,
+    "product_name": "Supreme Tee",
+    "product_description": "this is a shirt",
+    "product_img_url": "image_url",
+    "price": "18",
+    "product_category": ["shirt"],
     "user_id": 2,
     "username": "jane",
-    "product": {
-      "product_id": 1,
-      "product_name": "pants",
-      "product_description": "this is a shirt",
-      "product_img_url": "image_url",
-      "price": "35",
-      "currency": "$",
-      "category": ["pants"]
-    },
     "address": {
       "street": "Serangoon Garden Way",
       "geo": {
@@ -40,17 +51,31 @@
     }
   },
   {
+    "product_id": 4,
+    "product_name": "jacket",
+    "product_description": "this is a jacket",
+    "product_img_url": "image_url",
+    "price": "38",
+    "product_category": ["shirt"],
+    "user_id": 2,
+    "username": "jane",
+    "address": {
+      "street": "Serangoon Garden Way",
+      "geo": {
+        "lat": 1.364,
+        "lng": 103.8658
+      }
+    }
+  },
+  {
+    "product_id": 5,
+    "product_name": "Rick Owens Hoodie",
+    "product_description": "this is a sweater",
+    "product_img_url": "image_url",
+    "price": "35",
+    "product_category": ["shirt"],
     "user_id": 3,
     "username": "jim",
-    "product": {
-      "product_id": 1,
-      "product_name": "cock",
-      "product_description": "this is a shirt",
-      "product_img_url": "image_url",
-      "price": "40",
-      "currency": "$",
-      "category": ["others"]
-    },
     "address": {
       "street": "20 Jurong West Street 93",
       "geo": {
