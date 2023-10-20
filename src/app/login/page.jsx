@@ -69,7 +69,7 @@ export default function Home() {
                 setPassword(e.target.value);
               }}
             />
-            <Button color="white" size="small" bold={true} className="mt-3">
+            <Button color="white" size="sm" bold={true} className="mt-3">
               <span className={`${tiltneon.className} text-white`}>
                 Sign Up
               </span>
@@ -132,7 +132,7 @@ export default function Home() {
             <a class="text-button text-sm no-underline mt-[15px]" href="#">
               Forget your Password?
             </a>
-            <Button color="white" size="small" bold={true} className="mt-3">
+            <Button color="white" size="sm" bold={true} className="mt-3">
               <span className={`${tiltneon.className} text-white`}>
                 Sign In
               </span>
@@ -165,7 +165,7 @@ export default function Home() {
               </span>
               <Button
                 color="white"
-                size="small"
+                size="sm"
                 bold={true}
                 className="mt-3"
                 handleChange={() => setActive(false)}
@@ -189,7 +189,7 @@ export default function Home() {
               </span>
               <Button
                 color="white"
-                size="small"
+                size="sm"
                 bold={true}
                 className="mt-3"
                 handleChange={() => setActive(true)}

@@ -17,14 +17,14 @@ const Input = ({
     <>
       {label}
       <input
-        onFocus={() => setfocus("border-2 border-button")}
-        onBlur={() => setfocus("border-2 border-primary")}
         ref={ref}
         value={value}
         onChange={handleChange}
         placeholder={placeholder}
-        className={`flex ${focus} w-full cursor-text rounded-md  ${size} ${className}`}
+        className={`flex ${focus} outline-none w-full cursor-text rounded-md  ${size} ${className}`}
         {...props}
+        onFocus={() => setfocus("border-2 border-secondary")}
+        onBlur={() => setfocus("border-2 border-primary")}
       />
     </>
   );

@@ -39,7 +39,7 @@ const Sidebar = ({ children }) => {
         className={`absolute flex inset-y-0 h-full bg-white z-5`}
         style={{ width: sidebarWidth, minWidth: 350 }}
       >
-        <div className="relative mt-[100px] overflow-scroll w-full">
+        <div className="relative mt-[75px] overflow-scroll w-full">
           {children}
         </div>
         <div

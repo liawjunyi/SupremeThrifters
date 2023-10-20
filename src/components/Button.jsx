@@ -11,9 +11,11 @@ const Button = ({
 }) => {
   bold = bold ? "font-bold" : "font-normal";
   size =
-    size == "small"
+    size == "xs"
+      ? "px-sm py-xs"
+      : size == "sm"
       ? "px-md py-sm"
-      : size == "medium"
+      : size == "md"
       ? "px-md py-lg"
       : "px-lg py-xl";
 
@@ -21,7 +23,7 @@ const Button = ({
     <button
       onClick={handleChange}
       type={type}
-      className={`${bold} ${size} bg-button cursor-pointer uppercase rounded-md text-sm ${className}`}
+      className={`${bold} ${size} hover:bg-secondary hover:text-white bg-primary text-white cursor-pointer uppercase rounded-md text-sm ${className}`}
       {...props}
     >
       {children}

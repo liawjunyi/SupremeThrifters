@@ -36,39 +36,14 @@ function Accordion({ title, image, children, onClick }) {
           ></Image>
         </div>
 
-        <h3>{title}</h3>
+        <div className="text-lg">{title}</div>
       </div>
       <div
         className={`px-5 pt-0 overflow-hidden transition-all transition-[max-height] duration-300 ease-in-out ${
           expanded ? "max-h-96" : "max-h-0"
         }`}
       >
-        <p className="leading-6 font-light pl-9 pb-4 text-justify">
-          {children}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-function AccordionWrapper() {
-  return (
-    <div className="h-screen bg-gradient-to-br from-pink-50 to-indigo-100 grid place-items-center">
-      <div className="w-6/12 mx-auto rounded border">
-        <div className="bg-white p-10 shadow-sm">
-          <h3 className="text-lg font-medium text-gray-800">
-            Several Windows stacked on each other
-          </h3>
-          <p className="text-sm font-light text-gray-600 my-3">
-            The accordion is a graphical control element comprising a vertically
-            stacked list of items such as labels or thumbnails
-          </p>
-          <div className="h-1 w-full mx-auto border-b my-5"></div>
-          <Accordion
-            title="What is term?"
-            content="Our asked sex point her she seems. New plenty she horses parish design you. Stuff sight equal of my woody. Him children bringing goodness suitable she entirely put far daughter."
-          />
-        </div>
+        <p className="leading-6 font-light p-md text-justify">{children}</p>
       </div>
     </div>
   );

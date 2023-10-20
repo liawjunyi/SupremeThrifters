@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -13,7 +14,7 @@ module.exports = {
       md: "1rem",
       lg: "1.17rem",
       xl: "1.5rem",
-      xxl: "2rem",
+      "2xl": "2rem",
     },
 
     borderRadius: {
@@ -51,9 +52,11 @@ module.exports = {
         100: "100",
       },
       colors: {
-        primary: "#666666",
-        secondary: "white",
-        button: "#666666",
+        primary: "#d4ad61",
+        secondary: "#c58c45",
+      },
+      screens: {
+        xs: "435px",
       },
     },
   },

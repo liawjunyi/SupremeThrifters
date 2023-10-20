@@ -38,7 +38,7 @@ export default function Profile() {
                       clip-rule="evenodd"
                     />
                   </svg>
-                  <Button size={"small"}>Change</Button>
+                  <Button size={"sm"}>Change</Button>
                 </div>
               </div>
 
@@ -283,10 +283,10 @@ export default function Profile() {
       </div>
 
       <div className="mt-6 flex items-center justify-center lg:justify-end gap-x-6">
-        <Button size={"small"}>
+        <Button size={"sm"}>
           <Link href="/">Cancel</Link>
         </Button>
-        <Button size={"small"} type={"submit"}>
+        <Button size={"sm"} type={"submit"}>
           <Link href="/">Save</Link>
         </Button>
       </div>

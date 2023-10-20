@@ -1,19 +1,7 @@
 //TESTING//
 
-import records from "../../fakedb.json";
-import {
-  createElement,
-  Fragment,
-  useEffect,
-  useRef,
-  useMemo,
-  useState,
-} from "react";
-import {
-  AutocompleteOptions,
-  AutocompleteState,
-  createAutocomplete,
-} from "@algolia/autocomplete-core";
+import { useEffect, useRef, useMemo, useState } from "react";
+import { createAutocomplete } from "@algolia/autocomplete-core";
 import algoliasearch from "algoliasearch";
 import { getAlgoliaResults } from "@algolia/autocomplete-preset-algolia";
 import Input from "./Input";
@@ -126,7 +114,7 @@ const Autocomplete = (props) => {
           <Input
             ref={inputRef}
             {...autocomplete.getInputProps({
-              placeholder: "Search",
+              placeholder: "Search Products",
               inputElement: inputRef.current,
             })}
           />
