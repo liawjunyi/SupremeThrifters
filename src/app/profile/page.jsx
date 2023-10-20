@@ -6,22 +6,22 @@ export default function Profile() {
   return (
     <form className="m-20 mb-10">
       <div className="space-y-12">
-        <div className="border-b border-gray-300 pb-12 grid grid-cols-12">
-          <div className="col-span-4">
+        <div className="sm:container lg:border-b lg:border-gray-300 lg:pb-12 lg:grid lg:grid-cols-12">
+          <div className="sm: lg:col-span-4">
             <h2 className="text-base font-semibold leading-7 text-gray-900">
               Profile
             </h2>
-            <p className="mt-1 text-sm leading-6 text-gray-600">
+            <p className="lg:mt-1 my-1 text-sm leading-6 text-gray-600">
               This information will be displayed publicly so be careful what you
               share.
             </p>
           </div>
-          <div className="col-span-8 col-start-6 col-end-12">
+          <div className=" lg:col-span-8 lg:col-start-6 lg:col-end-12">
             <div className=" grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="col-span-full">
                 <label
                   for="photo"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  className="my-2 lg:my-0 block text-sm font-medium leading-6 text-gray-900"
                 >
                   Photo
                 </label>
@@ -72,8 +72,8 @@ export default function Profile() {
           </div>
         </div>
 
-        <div className="border-b border-gray-900/10 pb-12 grid grid-cols-12">
-          <div className="col-span-4">
+        <div className="sm:container lg:border-b lg:border-gray-300 lg:pb-12 lg:grid lg:grid-cols-12">
+          <div className="lg:col-span-4">
             <h2 className="text-base font-semibold leading-7 text-gray-900">
               Personal Information
             </h2>
@@ -81,7 +81,7 @@ export default function Profile() {
               Use a permanent address where you can receive mail.
             </p>
           </div>
-          <div className="col-span-8 col-start-6 col-end-12">
+          <div className="lg:col-span-8 lg:col-start-6 lg:col-end-12">
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="sm:col-span-3">
                 <Input label={"First Name"} placeholder={"Real"}></Input>
@@ -100,17 +100,17 @@ export default function Profile() {
 
               <div className="sm:col-span-3">
                 <label
-                  for="country"
+                  for="area"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Area
                 </label>
                 <div className="mt-2">
                   <select
-                    id="country"
-                    name="country"
-                    autocomplete="country-name"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                    id="area"
+                    name="area"
+                    autocomplete="area-name"
+                    className="block w-full rounded-md border-1 py-1.5 text-gray-900  "
                   >
                     <option>North</option>
                     <option>North-East</option>
@@ -146,8 +146,8 @@ export default function Profile() {
           </div>
         </div>
 
-        <div className="border-b border-gray-900/10 pb-12 grid grid-cols-12">
-          <div className="col-span-4">
+        <div className="sm:container lg:border-b lg:border-gray-300 lg:pb-12 lg:grid lg:grid-cols-12">
+          <div className="lg:col-span-4">
             <h2 className="text-base font-semibold leading-7 text-gray-900">
               Notifications
             </h2>
@@ -156,7 +156,7 @@ export default function Profile() {
               what else you want to hear about.
             </p>
           </div>
-          <div className="col-span-8 col-start-6 col-end-12">
+          <div className="lg:col-span-8 col-start-6 col-end-12">
             <div className="mt-10 space-y-10">
               <fieldset>
                 <legend className="text-sm font-semibold leading-6 text-gray-900">
@@ -282,7 +282,7 @@ export default function Profile() {
         </div>
       </div>
 
-      <div className="mt-6 flex items-center justify-end gap-x-6">
+      <div className="mt-6 flex items-center justify-center lg:justify-end gap-x-6">
         <Button size={"small"}>
           <Link href="/">Cancel</Link>
         </Button>
