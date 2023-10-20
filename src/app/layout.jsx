@@ -1,6 +1,6 @@
 import { inter } from "./font";
 import "./globals.css";
-
+import "@algolia/autocomplete-theme-classic";
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
         ></link>
 
         <link rel="stylesheet" type="text/css" href="style.css"></link>
-        
+
         <link
           rel="stylesheet"
           type="text/css"
@@ -25,11 +25,10 @@ export default function RootLayout({ children }) {
           href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&family=Tilt+Neon&display=swap"
           rel="stylesheet"
         ></link>
-
       </head>
-      
+
       <body className={inter.className}>{children}</body>
-      
+
       {/* <script>
         {((g) => {
           var h,

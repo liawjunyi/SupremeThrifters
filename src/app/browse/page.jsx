@@ -8,12 +8,13 @@ import {
 } from "@react-google-maps/api";
 import React, { useState } from "react";
 import ItemCard from "@/components/ItemCard";
-import PlacesAutocomplete from "@/components/PlacesAutocomplete";
+import PlacesAutocomplete from "@/components/Autocomplete";
 import data from "../../../fakedb.json";
 import { getAlgoliaResults } from "@algolia/autocomplete-js";
 import algoliasearch from "algoliasearch";
 import { ProductItem } from "@/components/ProductItem";
 import Search from "@/components/Search";
+import Autocomplete from "@/components/Autocomplete";
 
 export default function Places() {
   const { isLoaded } = useLoadScript({
@@ -32,15 +33,11 @@ function Map() {
   const [activeMarker, setActiveMarker] = useState(null);
   const [hover, setHover] = useState(null);
 
-  const searchClient = algoliasearch(
-    "28OPVE2DNS",
-    "552f6c2e86d06b9d5eaa9ed7f3445326"
-  );
   return (
     <>
       {/* {selected && ( */}
 
-      <div className="absolute top-0 bg-white z-10 w-80 h-full p-6">
+      <div className="absolute top-0 bg-white  w-80 h-full p-6">
         <nav class="lg:text-sm lg:leading-6 relative ">
           <div class="absolute top-0 mt-[76px] flex flex-col p-md flex justify-center w-full">
             {data.map(
@@ -94,7 +91,10 @@ function Map() {
             },
           ]}
         /> */}
-        <Search data={data}></Search>
+        <Autocomplete
+          onSelect={({ item, setQuery }) => console.log(item)}
+        ></Autocomplete>
+        {/* <Search></Search> */}
       </div>
 
       <GoogleMap

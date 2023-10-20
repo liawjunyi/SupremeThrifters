@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 const Input = ({
   handleChange,
+  ref,
   value,
   size,
   type,
@@ -18,6 +19,7 @@ const Input = ({
       <input
         onFocus={() => setfocus("border-2 border-button")}
         onBlur={() => setfocus("border-2 border-primary")}
+        ref={ref}
         value={value}
         onChange={handleChange}
         placeholder={placeholder}
