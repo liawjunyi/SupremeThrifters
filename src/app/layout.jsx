@@ -17,10 +17,8 @@ export default function RootLayout({ children }) {
           type="text/css"
           href="https://cdnjs.cloudfare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
         ></link>
-
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
         <link
           href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&family=Tilt+Neon&display=swap"
           rel="stylesheet"

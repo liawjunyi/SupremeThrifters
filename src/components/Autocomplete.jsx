@@ -18,7 +18,8 @@ import algoliasearch from "algoliasearch";
 import { getAlgoliaResults } from "@algolia/autocomplete-preset-algolia";
 import Input from "./Input";
 import Highlight from "./Highlight";
-
+import image from "../../public/shirt2.jpg";
+import Image from "next/image";
 const searchClient = algoliasearch(
   "28OPVE2DNS",
   "552f6c2e86d06b9d5eaa9ed7f3445326"
@@ -55,7 +56,7 @@ const Autocomplete = (props) => {
                       indexName: "supremeThrifters",
                       query,
                       params: {
-                        hitsPerPage: 5,
+                        hitsPerPage: 10,
                       },
                     },
                   ],
@@ -65,6 +66,7 @@ const Autocomplete = (props) => {
             },
           ];
         },
+        ...props,
       }),
     [props]
   );
@@ -97,12 +99,13 @@ const Autocomplete = (props) => {
   }, [getEnvironmentProps, autocompleteState.isOpen]);
 
   return (
-    <div {...autocomplete.getRootProps({})}>
+    <div {...autocomplete.getRootProps({})} className="z-20">
       <form
         ref={formRef}
         {...autocomplete.getFormProps({ inputElement: inputRef.current })}
       >
-        <div className="aa-InputWrapperPrefix">
+        {/* // SEARCH BUTTON */}
+        {/* <div className="aa-InputWrapperPrefix">
           <label className="aa-Label" {...autocomplete.getLabelProps({})}>
             <button className="aa-SubmitButton" type="submit" title="Submit">
               <svg width="20" height="20" viewBox="0 0 20 20" {...props}>
@@ -118,13 +121,17 @@ const Autocomplete = (props) => {
               </svg>
             </button>
           </label>
-        </div>
+        </div> */}
         <div>
           <Input
             ref={inputRef}
-            {...autocomplete.getInputProps({ inputElement: inputRef.current })}
+            {...autocomplete.getInputProps({
+              placeholder: "Search",
+              inputElement: inputRef.current,
+            })}
           />
         </div>
+        {/* // RESET BUTTON
         <div>
           <button type="reset">
             <svg
@@ -141,7 +148,7 @@ const Autocomplete = (props) => {
               />
             </svg>
           </button>
-        </div>
+        </div> */}
       </form>
 
       {autocompleteState.isOpen && (
@@ -174,12 +181,10 @@ const Autocomplete = (props) => {
                             <div className="aa-ItemWrapper">
                               <div className="aa-ItemContent">
                                 <div className="aa-ItemIcon aa-ItemIcon--picture aa-ItemIcon--alignTop">
-                                  <img
-                                    src={item.product_img_url}
+                                  <Image
+                                    src={image}
                                     alt={item.product_name}
-                                    width="40"
-                                    height="40"
-                                  />
+                                  ></Image>
                                 </div>
                                 <div className="aa-ItemContentBody">
                                   <div className="aa-ItemContentTitle">
@@ -206,62 +211,5 @@ const Autocomplete = (props) => {
     </div>
   );
 };
-
-//   useEffect(() => {
-//     if (!containerRef.current) {
-//       return undefined;
-//     }
-
-//     const search = autocomplete({
-//       container: containerRef.current,
-//       renderer: { createElement, Fragment, render: () => {} },
-//       render({ children }, root) {
-//         if (!panelRootRef.current || rootRef.current !== root) {
-//           rootRef.current = root;
-
-//           panelRootRef.current?.unmount();
-//           panelRootRef.current = createRoot(root);
-//         }
-
-//         panelRootRef.current.render(children);
-//       },
-//       ...props,
-//     });
-
-//     return () => {
-//       search.destroy();
-//     };
-//   }, [props]);
-
-//   const handleSelect = async (e) => {
-//     console.log(e);
-
-//     setSelected({ lat, lng });
-//   };
-//   useEffect(() => {
-//     if (!selected) return;
-//     setCenter(selected);
-//   }, [selected]);
-//   return (
-//     // <Combobox onSelect={handleSelect}>
-
-//     //   <ComboboxPopover className="rounded-md z-20">
-//     //     <ComboboxList>
-//     //       {/* {data &&
-//     //         data.map(({ place_id, description }) => (
-//     //           <ComboboxOption key={place_id} value={description} />
-//     //         ))} */}
-//     //     </ComboboxList>
-//     //   </ComboboxPopover>
-//     // </Combobox>
-//     // <InstantSearch searchClient={searchClient} indexName="supremeThrifters">
-//     //   <SearchBox></SearchBox>
-//     //   <RefinementList attribute="name"></RefinementList>
-//     //   <Configure analytics={false} hitsPerPage={5} />
-//     //   <Hits hitComponent={Hit}></Hits>
-//     // </InstantSearch>
-//     <div id="container" ref={containerRef} />
-//   );
-// };
 
 export default Autocomplete;

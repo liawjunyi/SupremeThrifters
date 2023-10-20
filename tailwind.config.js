@@ -15,18 +15,12 @@ module.exports = {
       xl: "1.5rem",
       xxl: "2rem",
     },
-    padding: {
-      xxs: ".3rem",
-      xs: ".5rem",
-      sm: ".83rem",
-      md: "1rem",
-      lg: "24px",
-      xl: "55px",
-    },
+
     borderRadius: {
       none: "0",
       sm: "10px",
       md: "20px",
+      full: "9999px",
     },
     extend: {
       backgroundImage: {
@@ -40,6 +34,12 @@ module.exports = {
       spacing: {
         "1/10": "10%",
         "1/2": "50%",
+        xxs: ".3rem",
+        xs: ".5rem",
+        sm: ".83rem",
+        md: "1rem",
+        lg: "1.25rem",
+        xl: "55px",
       },
       boxShadow: {
         preset: "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22) ",
