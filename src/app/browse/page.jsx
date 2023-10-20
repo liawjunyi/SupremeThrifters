@@ -17,6 +17,7 @@ import Accordion from "@/components/Accordion";
 import like from "../../../public/like.svg";
 import menu from "../../../public/menu.svg";
 import close from "../../../public/close.svg";
+import recycle from "../../../public/recycle.svg";
 import Image from "next/image";
 import SideMenu from "@/components/SideMenu";
 
@@ -26,7 +27,12 @@ export default function Places() {
     mapIds: ["aa0423f1ef73f4ca"],
     libraries: ["places", "marker"],
   });
-  if (!isLoaded) return <div>Loading...</div>;
+  if (!isLoaded)
+    return (
+      <div className="bg-primary h-screen flex justify-center items-center">
+        <Image src={recycle} />
+      </div>
+    );
   return <Map />;
 }
 
@@ -56,7 +62,7 @@ function Map() {
     <>
       <SideMenu
         className={`transition-opacity duration-500  ${
-          menuActive ? "opacity-100 ease-in " : "opacity-0 ease-out z-0"
+          menuActive ? "opacity-100 ease-in z-20" : "opacity-0 ease-out z-0"
         }`}
       />
 

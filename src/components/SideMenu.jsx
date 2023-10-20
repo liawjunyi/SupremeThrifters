@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const SideMenu = ({ className }) => {
   return (
-    <div className={`absolute h-screen w-screen z-20 ${className}`}>
+    <div className={`absolute h-screen w-screen  ${className}`}>
       <aside className="flex h-screen justify-center items-center bg-primary">
         <nav className="flex flex-col">
           <Link href="/">
