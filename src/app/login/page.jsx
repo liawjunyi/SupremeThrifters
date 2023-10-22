@@ -1,207 +1,224 @@
-"use client";
+"use client"; // DO NOT TOUCH THIS
 
-import { useState } from "react";
-import Button from "@/components/Button";
-import Input from "@/components/Input";
-import { tiltneon } from "../font";
+// OPTION 1 LOGIN (just comment out whichever option u not using)
 
-export default function Home() {
-  const [password, setPassword] = useState("");
-  const [active, setActive] = useState(false);
+import React, { useState } from 'react';
+import '@/app/globals.css';
 
-  return (
-    <div class="flex flex-col justify-center items-center m-1/10 h-full">
-      <div
-        id="container"
-        class={
-          "relative xl:w-4/6 md:w-3/4 sm:w-full h-[480px] rounded-sm shadow-preset"
-        }
-      >
-        <div
-          id="sign-up"
-          class={`absolute top-0 left-0 h-full w-1/2 opacity-0 z-1 transition-all duration-500 ease-in-out ${
-            active ? "translate-x-full opacity-100 z-5" : null
-          }`}
-        >
-          <form
-            class="flex items-center justify-center flex-col h-full bg-white p-[40px]"
-            action="#"
-          >
-            <span class={`${tiltneon.className} text-xxl font-bold`}>
-              Create Account
-            </span>
-            <div class="my-[20px] mx-[0px]">
-              <a
-                href="#"
-                class="inline-flex justify-center items-center border-2 rounded-md mx-[5px] h-[40px] w-[40px]"
-              >
-                <i
-                  class="fa-brands fa-facebook-f"
-                  style={{ color: "#000000" }}
-                ></i>
-              </a>
-              <a
-                href="#"
-                class="inline-flex justify-center items-center border-2 rounded-md mx-[5px] h-[40px] w-[40px]"
-              >
-                <i class="fa-brands fa-google" style={{ color: "#000000" }}></i>
-              </a>
-              <a
-                href="#"
-                class="inline-flex justify-center items-center border-2 rounded-md mx-[5px] h-[40px] w-[40px]"
-              >
-                <i
-                  class="fa-brands fa-linkedin-in"
-                  style={{ color: "#000000" }}
-                ></i>
-              </a>
+export default function Login() {
+    const [isSignUp, setIsSignUp] = useState(false);
+
+    const toggleMode = () => {
+      setIsSignUp(!isSignUp);
+    };
+  
+    return (
+        <div className={`container bg-white min-h-screen flex items-center justify-center ${isSignUp ? 'sign-up-mode' : ''}`}>
+            <div className="forms-container">
+                <div className="signin-signup">
+                    <form className={`sign-in-form ${isSignUp ? 'opacity-0' : 'opacity-100'}`}>
+                        <h2 className="title text-3xl text-gray-700">Sign in</h2>
+                        <div className="input-field max-w-lg bg-gray-200 rounded-full mt-4 px-4 flex items-center">
+                            <i className="fas fa-user text-gray-600"></i>
+                            <input type="text" placeholder="Username" className="pl-4 bg-transparent outline-none text-gray-600" />
+                        </div>
+                        <div className="input-field max-w-lg bg-gray-200 rounded-full mt-4 px-4 flex items-center">
+                            <i className="fas fa-lock text-gray-600"></i>
+                            <input type="password" placeholder="Password" className="pl-4 bg-transparent outline-none text-gray-600" />
+                        </div>
+                        <input type="submit" value="Login" className="btn solid bg-blue-500 text-white py-2 px-4 rounded-full mt-4 cursor-pointer" />
+                        <p className="social-text mt-4 text-gray-600">Or Sign in with social platforms</p>
+                        <div className="social-media flex">
+                            <a href="#" className="social-icon p-2 border border-gray-600 rounded-full mr-2">
+                            <i className="fab fa-facebook-f text-gray-600"></i>
+                            </a>
+                            <a href="#" className="social-icon p-2 border border-gray-600 rounded-full mr-2">
+                            <i className="fab fa-twitter text-gray-600"></i>
+                            </a>
+                            <a href="#" className="social-icon p-2 border border-gray-600 rounded-full mr-2">
+                            <i className="fab fa-google text-gray-600"></i>
+                            </a>
+                            <a href="#" className="social-icon p-2 border border-gray-600 rounded-full">
+                            <i className="fab fa-linkedin-in text-gray-600"></i>
+                            </a>
+                        </div>
+                    </form>
+                    <form className={`sign-up-form ${isSignUp ? 'opacity-100' : 'opacity-0'}`}>
+                        <h2 className="title text-3xl text-gray-700">Sign up</h2>
+                        <div className="input-field max-w-lg bg-gray-200 rounded-full mt-4 px-4 flex items-center">
+                            <i className="fas fa-user text-gray-600"></i>
+                            <input type="text" placeholder="Username" className="pl-4 bg-transparent outline-none text-gray-600" />
+                        </div>
+                        <div className="input-field max-w-lg bg-gray-200 rounded-full mt-4 px-4 flex items-center">
+                            <i className="fas fa-envelope text-gray-600"></i>
+                            <input type="email" placeholder="Email" className="pl-4 bg-transparent outline-none text-gray-600" />
+                        </div>
+                        <div className="input-field max-w-lg bg-gray-200 rounded-full mt-4 px-4 flex items-center">
+                            <i className="fas fa-lock text-gray-600"></i>
+                            <input type="password" placeholder="Password" className="pl-4 bg-transparent outline-none text-gray-600" />
+                        </div>
+                        <input type="submit" className="btn bg-blue-500 text-white py-2 px-4 rounded-full mt-4 cursor-pointer" value="Sign up" />
+                        <p className="social-text mt-4 text-gray-600">Or Sign up with social platforms</p>
+                        <div className="social-media flex">
+                            <a href="#" className="social-icon p-2 border border-gray-600 rounded-full mr-2">
+                            <i className="fab fa-facebook-f text-gray-600"></i>
+                            </a>
+                            <a href="#" className="social-icon p-2 border border-gray-600 rounded-full mr-2">
+                            <i className="fab fa-twitter text-gray-600"></i>
+                            </a>
+                            <a href="#" className="social-icon p-2 border border-gray-600 rounded-full mr-2">
+                            <i className="fab fa-google text-gray-600"></i>
+                            </a>
+                            <a href="#" className="social-icon p-2 border border-gray-600 rounded-full">
+                            <i className="fab fa-linkedin-in text-gray-600"></i>
+                            </a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <span className={`${tiltneon.className} mb-3`}>
-              or use your email for registration
-            </span>
-            <Input placeholder="Name" className="mb-3 mx-3" />
-            <Input placeholder="Email" className="mb-3 mx-3" />
-            <Input
-              placeholder="Password"
-              className="mb-3 mx-3"
-              value={password}
-              handleChange={(e) => {
-                setPassword(e.target.value);
-              }}
-            />
-            <Button color="white" size="sm" bold={true} className="mt-3">
-              <span className={`${tiltneon.className} text-white`}>
-                Sign Up
-              </span>
-            </Button>
-          </form>
+            <div className="panels-container">
+                <div className={`panel left-panel ${isSignUp ? 'hidden' : ''}`}>
+                    <div className="content">
+                    <h3 className="text-2xl text-gray-700">New here ?</h3>
+                    <p className="text-gray-600">
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis, ex ratione. Aliquid!
+                    </p>
+                    <button
+                        className="btn transparent bg-white text-gray-700 py-2 px-4 rounded-full mt-4 cursor-pointer"
+                        onClick={toggleMode}
+                    >
+                        Sign up
+                    </button>
+                    </div>
+                    <img src="../../../public/log.svg" className="image" alt="" />
+                </div>
+                <div className={`panel right-panel ${isSignUp ? '' : 'hidden'}`}>
+                    <div className="content">
+                    <h3 className="text-2xl text-gray-700">One of us ?</h3>
+                    <p className="text-gray-600">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum laboriosam ad deleniti.
+                    </p>
+                    <button
+                        className="btn transparent bg-white text-gray-700 py-2 px-4 rounded-full mt-4 cursor-pointer"
+                        onClick={toggleMode}
+                    >
+                        Sign in
+                    </button>
+                    </div>
+                    <img src="../../../public/register.svg" className="image" alt="" />
+                </div>
+            </div>
         </div>
+    );
+  }
+  
 
-        <div
-          id="sign-in"
-          class={`absolute top-0 left-0 h-full w-1/2 z-2 transition-all duration-500 ease-in-out ${
-            active ? "translate-x-full " : null
-          }`}
-        >
-          <form
-            class="flex items-center justify-center flex-col h-full p-[40px]"
-            action="#"
-          >
-            <span class={`${tiltneon.className} text-xxl font-bold`}>
-              Sign In
-            </span>
-            <div class="my-[20px] mx-[0px]">
-              <a
-                href="#"
-                class="inline-flex justify-center items-center border-2 rounded-md mx-[5px] h-[40px] w-[40px]"
-              >
-                <i
-                  class="fa-brands fa-facebook-f"
-                  style={{ color: "#000000" }}
-                ></i>
-              </a>
-              <a
-                href="#"
-                class="inline-flex justify-center items-center border-2 rounded-md mx-[5px] h-[40px] w-[40px]"
-              >
-                <i class="fa-brands fa-google" style={{ color: "#000000" }}></i>
-              </a>
-              <a
-                href="#"
-                class="inline-flex justify-center items-center border-2 rounded-md mx-[5px] h-[40px] w-[40px]"
-              >
-                <i
-                  class="fa-brands fa-linkedin-in"
-                  style={{ color: "#000000" }}
-                ></i>
-              </a>
-            </div>
-            <span class={`${tiltneon.className} mb-3`}>
-              or use your account
-            </span>
+// Option 2 LOGIN (just comment out whichever option u not using)
 
-            <Input placeholder="Email" className="mb-3 mx-3" />
-            <Input
-              placeholder="Password"
-              className="mb-3 mx-3"
-              value={password}
-              handleChange={(e) => {
-                setPassword(e.target.value);
-              }}
-            />
-            <a class="text-button text-sm no-underline mt-[15px]" href="#">
-              Forget your Password?
-            </a>
-            <Button color="white" size="sm" bold={true} className="mt-3">
-              <span className={`${tiltneon.className} text-white`}>
-                Sign In
-              </span>
-            </Button>
-          </form>
-        </div>
-        <div
-          id="overlay-container"
-          class={`absolute top-0 left-1/2 w-1/2 h-full z-100 overflow-hidden  transition-transform duration-500 ease-in-out ${
-            active ? "-translate-x-full" : null
-          }`}
-        >
-          <div
-            id="overlay"
-            class={`-left-full h-full w-[200%] relative translate-x-0 bg-stone-300 transition-transform duration-500 ease-in-out ${
-              active ? "translate-x-1/2" : null
-            }`}
-          >
-            <div
-              id="overlay-left"
-              class={`absolute flex items-center flex-col justify-center px-[40px] top-0 h-full w-1/2  transition-transform duration-500 ease-in-out ${
-                active ? "translate-x-0" : "-translate-x-1/4"
-              }`}
-            >
-              <span class={`${tiltneon.className} text-xxl font-bold`}>
-                Welcome Back!
-              </span>
-              <span class={`${tiltneon.className}`}>
-                To keep connected with us please login with your personal info
-              </span>
-              <Button
-                color="white"
-                size="sm"
-                bold={true}
-                className="mt-3"
-                handleChange={() => setActive(false)}
-              >
-                <span className={`${tiltneon.className} text-white`}>
-                  Sign In
-                </span>
-              </Button>
-            </div>
-            <div
-              id="overlay-right"
-              class={`absolute flex items-center flex-col justify-center px-[40px] top-0 right-0 h-full w-1/2 translate-x-0 ${
-                active ? "translate-x-1/4" : null
-              }`}
-            >
-              <span class={`${tiltneon.className} text-xxl font-bold`}>
-                Hello, Friend!
-              </span>
-              <span class={`${tiltneon.className}`}>
-                Enter your personal details and start your journey with us
-              </span>
-              <Button
-                color="white"
-                size="sm"
-                bold={true}
-                className="mt-3"
-                handleChange={() => setActive(true)}
-              >
-                <span className={`${tiltneon.className} text-white`}>
-                  Sign Up
-                </span>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+// import React, { useState } from 'react';
+
+// export default function Login() {
+//     const [isSignUpMode, setIsSignUpMode] = useState(false);
+
+//     const handleModeToggle = () => {
+//       setIsSignUpMode((prevMode) => !prevMode);
+//     };
+
+//   return (
+//     <div className="Login bg-gradient-to-r from-blue-400 via-blue-600 to-blue-800 min-h-screen flex items-center justify-center">
+//         <div className={`container mx-auto p-4 ${isSignUpMode ? 'sign-up-mode' : ''}`}>
+//             <div className="panels-container min-h-screen flex">
+//                 <div className={`panel left-panel ${isSignUpMode ? 'hidden' : ''}`}>
+//                     <div className="content text-white text-right">
+//                         <h3 className="text-2xl">New here ?</h3>
+//                         <p className="mt-2">
+//                         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis, ex ratione. Aliquid!
+//                         </p>
+//                         <button
+//                         className="btn transparent text-white mt-4"
+//                         onClick={handleModeToggle}
+//                         >
+//                         Sign up
+//                         </button>
+//                     </div>
+//                     <img
+//                         src="../../../public/log.svg"
+//                         alt="Sign up"
+//                         className="image absolute w-1/2 right-0 transform translate-x-1/2"
+//                     />
+//                 </div>
+//                 <div className={`panel right-panel ${isSignUpMode ? '' : 'hidden'}`}>
+//                     <div className="content text-white text-left">
+//                         <h3 className="text-2xl">One of us ?</h3>
+//                         <p className="mt-2">
+//                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum laboriosam ad deleniti.
+//                         </p>
+//                         <button
+//                         className="btn transparent text-white mt-4"
+//                         onClick={handleModeToggle}
+//                         >
+//                         Sign in
+//                         </button>
+//                     </div>
+//                     <img
+//                         src="../../../public/register.svg"
+//                         alt="Sign in"
+//                         className="image absolute w-1/2 left-0 transform -translate-x-1/2"
+//                     />
+//                 </div>
+//             </div>
+
+//             <div className="forms-container bg-white p-8 rounded-lg shadow-lg max-w-md mx-auto mt-8">
+//                 <div className="signin-signup">
+//                     <form action="#" className={`auth-form ${isSignUpMode ? 'sign-up' : 'sign-in'}`}>
+//                         <h2 className="text-2xl text-gray-700 mb-4">
+//                         {isSignUpMode ? 'Sign up' : 'Sign in'}
+//                         </h2>
+//                         <div className="input-field mb-4">
+//                             <i className="fas fa-user mr-2"></i>
+//                             <input type="text" placeholder="Username" className="w-full bg-gray-200 p-2 rounded" />
+//                         </div>
+//                         {isSignUpMode && (
+//                         <div className="input-field mb-4">
+//                             <i className="fas fa-envelope mr-2"></i>
+//                             <input type="email" placeholder="Email" className="w-full bg-gray-200 p-2 rounded" />
+//                         </div>
+//                         )}
+//                         <div className="input-field mb-4">
+//                             <i className="fas fa-lock mr-2"></i>
+//                             <input
+//                                 type="password"
+//                                 placeholder="Password"
+//                                 className="w-full bg-gray-200 p-2 rounded"
+//                             />
+//                         </div>
+//                         <input
+//                         type="submit"
+//                         value={isSignUpMode ? 'Sign up' : 'Login'}
+//                         className="btn bg-blue-500 text-white font-semibold py-2 px-4 rounded cursor-pointer"
+//                         />
+//                         <p className="social-text text-gray-500 mt-2">
+//                         Or {isSignUpMode ? 'Sign up' : 'Sign in'} with social platforms
+//                         </p>
+//                         <div className="social-media mt-2">
+//                             <a href="#" className="social-icon bg-gray-200 p-2 rounded text-gray-500 mr-2">
+//                                 <i className="fab fa-facebook-f"></i>
+//                             </a>
+//                             <a href="#" className="social-icon bg-gray-200 p-2 rounded text-gray-500 mr-2">
+//                                 <i className="fab fa-twitter"></i>
+//                             </a>
+//                             <a href="#" className="social-icon bg-gray-200 p-2 rounded text-gray-500 mr-2">
+//                                 <i className="fab fa-google"></i>
+//                             </a>
+//                             <a href="#" className="social-icon bg-gray-200 p-2 rounded text-gray-500">
+//                                 <i className="fab fa-linkedin-in"></i>
+//                             </a>
+//                         </div>
+//                     </form>
+//                 </div>
+//             </div>
+//         </div>
+//     </div>
+//   );
+// }
+
