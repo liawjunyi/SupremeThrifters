@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require("tailwindcss/plugin");
 
 module.exports = {
   content: [
@@ -43,8 +44,12 @@ module.exports = {
         xl: "2rem",
       },
       boxShadow: {
-        preset: "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22) ",
+        preset: "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
       },
+      textShadow: {
+        neon: "0 0 7px #fff,0 0 10px #fff,0 0 21px #fff,0 0 42px #0fa,0 0 82px #0fa,0 0 92px #0fa,0 0 102px #0fa,0 0 151px #0fa;",
+      },
+
       zIndex: {
         1: "1",
         2: "2",
@@ -54,11 +59,23 @@ module.exports = {
       colors: {
         primary: "#d4ad61",
         secondary: "#c58c45",
+        neon: "#fff",
       },
       screens: {
         xs: "435px",
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          "text-shadow": (value) => ({
+            textShadow: value,
+          }),
+        },
+        { values: theme("textShadow") }
+      );
+    }),
+  ],
 };
