@@ -1,87 +1,224 @@
 [
   {
     "product_id": 1,
-    "product_name": "vintage tshirt",
-    "product_description": "this is a shirt",
+    "product_name": "Puma T-Shirt",
+    "product_description": "Stylish Puma t-shirt for a sporty and fashionable look.",
     "product_img_url": "image_url",
-    "price": "18",
-    "product_category": ["shirt, tshirt, fit"],
-    "user_id": 1,
-    "username": "john",
-    "address": {
-      "street": "Bedok North Ave 3",
-      "geo": {
-        "lat": 1.3319,
-        "lng": 103.9273
-      }
-    }
+    "price": "29.91",
+    "product_category": ["shirt", "pants", "jacket", "hoodie"],
+    "user_id": 2,
+    "username": "user2",
+    "address": { "street": "Random Street", "geo": {} }
   },
   {
     "product_id": 2,
-    "product_name": "Joggers",
-    "product_description": "this is a pants",
+    "product_name": "Jacket",
+    "product_description": "A trendy jacket to keep you warm during the winter.",
     "product_img_url": "image_url",
-    "price": "18",
-    "product_category": ["pants"],
-    "user_id": 1,
-    "username": "john",
-    "address": {
-      "street": "Bedok North Ave 3",
-      "geo": {
-        "lat": 1.3319,
-        "lng": 103.9273
-      }
-    }
+    "price": "17.89",
+    "product_category": ["shirt", "pants", "jacket", "hoodie"],
+    "user_id": 7,
+    "username": "user7",
+    "address": { "street": "Random Street", "geo": {} }
   },
   {
     "product_id": 3,
-    "product_name": "Supreme Tee",
-    "product_description": "this is a shirt",
+    "product_name": "Denim Jacket",
+    "product_description": "A classic denim jacket that pairs well with any outfit.",
     "product_img_url": "image_url",
-    "price": "18",
-    "product_category": ["shirt"],
-    "user_id": 2,
-    "username": "jane",
-    "address": {
-      "street": "Serangoon Garden Way",
-      "geo": {
-        "lat": 1.364,
-        "lng": 103.8658
-      }
-    }
+    "price": "26.51",
+    "product_category": ["shirt", "pants", "jacket", "hoodie"],
+    "user_id": 19,
+    "username": "user19",
+    "address": { "street": "Random Street", "geo": {} }
   },
   {
     "product_id": 4,
-    "product_name": "jacket",
-    "product_description": "this is a jacket",
+    "product_name": "Brown Trousers",
+    "product_description": "Casual and comfortable trousers for leisure activities.",
     "product_img_url": "image_url",
-    "price": "38",
-    "product_category": ["shirt"],
-    "user_id": 2,
-    "username": "jane",
-    "address": {
-      "street": "Serangoon Garden Way",
-      "geo": {
-        "lat": 1.364,
-        "lng": 103.8658
-      }
-    }
+    "price": "33.43",
+    "product_category": ["shirt", "pants", "jacket", "hoodie"],
+    "user_id": 4,
+    "username": "user4",
+    "address": { "street": "Random Street", "geo": {} }
   },
   {
     "product_id": 5,
-    "product_name": "Rick Owens Hoodie",
-    "product_description": "this is a sweater",
+    "product_name": "Puma T-Shirt",
+    "product_description": "Stylish Puma t-shirt for a sporty and fashionable look.",
     "product_img_url": "image_url",
-    "price": "35",
-    "product_category": ["shirt"],
+    "price": "31.87",
+    "product_category": ["shirt", "pants", "jacket", "hoodie"],
+    "user_id": 6,
+    "username": "user6",
+    "address": { "street": "Random Street", "geo": {} }
+  },
+  {
+    "product_id": 6,
+    "product_name": "Hooded Sweatshirt",
+    "product_description": "A hooded sweatshirt for a relaxed and cozy look.",
+    "product_img_url": "image_url",
+    "price": "28.35",
+    "product_category": ["shirt", "pants", "jacket", "hoodie"],
+    "user_id": 8,
+    "username": "user8",
+    "address": { "street": "Random Street", "geo": {} }
+  },
+  {
+    "product_id": 7,
+    "product_name": "Adidas T-Shirt",
+    "product_description": "An Adidas T-shirt featuring the iconic three stripes.",
+    "product_img_url": "image_url",
+    "price": "17.44",
+    "product_category": ["shirt", "pants", "jacket", "hoodie"],
+    "user_id": 5,
+    "username": "user5",
+    "address": { "street": "Random Street", "geo": {} }
+  },
+  {
+    "product_id": 8,
+    "product_name": "Nike T-Shirt",
+    "product_description": "A comfortable Nike T-shirt for sports and leisure.",
+    "product_img_url": "image_url",
+    "price": "19.71",
+    "product_category": ["shirt", "pants", "jacket", "hoodie"],
+    "user_id": 20,
+    "username": "user20",
+    "address": { "street": "Random Street", "geo": {} }
+  },
+  {
+    "product_id": 9,
+    "product_name": "Plaid Shirt",
+    "product_description": "A trendy plaid shirt for a fashionable and casual look.",
+    "product_img_url": "image_url",
+    "price": "45.65",
+    "product_category": ["shirt", "pants", "jacket", "hoodie"],
     "user_id": 3,
-    "username": "jim",
-    "address": {
-      "street": "20 Jurong West Street 93",
-      "geo": {
-        "lat": 1.338133,
-        "lng": 103.693924
-      }
-    }
+    "username": "user3",
+    "address": { "street": "Random Street", "geo": {} }
+  },
+  {
+    "product_id": 10,
+    "product_name": "Supreme Tee",
+    "product_description": "An authentic Supreme T-shirt with a unique design.",
+    "product_img_url": "image_url",
+    "price": "14.56",
+    "product_category": ["shirt", "pants", "jacket", "hoodie"],
+    "user_id": 11,
+    "username": "user11",
+    "address": { "street": "Random Street", "geo": {} }
+  },
+  {
+    "product_id": 11,
+    "product_name": "Vintage T-Shirt",
+    "product_description": "A classic vintage T-shirt in great condition.",
+    "product_img_url": "image_url",
+    "price": "14.04",
+    "product_category": ["shirt", "pants", "jacket", "hoodie"],
+    "user_id": 9,
+    "username": "user9",
+    "address": { "street": "Random Street", "geo": {} }
+  },
+  {
+    "product_id": 12,
+    "product_name": "Nike T-Shirt",
+    "product_description": "A comfortable Nike T-shirt for sports and leisure.",
+    "product_img_url": "image_url",
+    "price": "12.64",
+    "product_category": ["shirt", "pants", "jacket", "hoodie"],
+    "user_id": 14,
+    "username": "user14",
+    "address": { "street": "Random Street", "geo": {} }
+  },
+  {
+    "product_id": 13,
+    "product_name": "Army Green Cargo Pants",
+    "product_description": "Military-inspired army green cargo pants for a rugged style.",
+    "product_img_url": "image_url",
+    "price": "11.06",
+    "product_category": ["shirt", "pants", "jacket", "hoodie"],
+    "user_id": 13,
+    "username": "user13",
+    "address": { "street": "Random Street", "geo": {} }
+  },
+  {
+    "product_id": 14,
+    "product_name": "Nike T-Shirt",
+    "product_description": "A comfortable Nike T-shirt for sports and leisure.",
+    "product_img_url": "image_url",
+    "price": "37.68",
+    "product_category": ["shirt", "pants", "jacket", "hoodie"],
+    "user_id": 18,
+    "username": "user18",
+    "address": { "street": "Random Street", "geo": {} }
+  },
+  {
+    "product_id": 15,
+    "product_name": "Army Green Cargo Pants",
+    "product_description": "Military-inspired army green cargo pants for a rugged style.",
+    "product_img_url": "image_url",
+    "price": "18.31",
+    "product_category": ["shirt", "pants", "jacket", "hoodie"],
+    "user_id": 16,
+    "username": "user16",
+    "address": { "street": "Random Street", "geo": {} }
+  },
+  {
+    "product_id": 16,
+    "product_name": "Nike T-Shirt",
+    "product_description": "A comfortable Nike T-shirt for sports and leisure.",
+    "product_img_url": "image_url",
+    "price": "27.33",
+    "product_category": ["shirt", "pants", "jacket", "hoodie"],
+    "user_id": 10,
+    "username": "user10",
+    "address": { "street": "Random Street", "geo": {} }
+  },
+  {
+    "product_id": 17,
+    "product_name": "Cotton Black T-Shirt",
+    "product_description": "A black t-shirt that is easy to match any outfit.",
+    "product_img_url": "image_url",
+    "price": "10.64",
+    "product_category": ["shirt", "pants", "jacket", "hoodie"],
+    "user_id": 17,
+    "username": "user17",
+    "address": { "street": "Random Street", "geo": {} }
+  },
+  {
+    "product_id": 18,
+    "product_name": "Jacket",
+    "product_description": "A trendy jacket to keep you warm during the winter.",
+    "product_img_url": "image_url",
+    "price": "49.38",
+    "product_category": ["shirt", "pants", "jacket", "hoodie"],
+    "user_id": 15,
+    "username": "user15",
+    "address": { "street": "Random Street", "geo": {} }
+  },
+  {
+    "product_id": 19,
+    "product_name": "Adidas T-Shirt",
+    "product_description": "An Adidas T-shirt featuring the iconic three stripes.",
+    "product_img_url": "image_url",
+    "price": "10.33",
+    "product_category": ["shirt", "pants", "jacket", "hoodie"],
+    "user_id": 1,
+    "username": "user1",
+    "address": { "street": "Random Street", "geo": {} }
+  },
+  {
+    "product_id": 20,
+    "product_name": "Jacket",
+    "product_description": "A trendy jacket to keep you warm during the winter.",
+    "product_img_url": "image_url",
+    "price": "29.32",
+    "product_category": ["shirt", "pants", "jacket", "hoodie"],
+    "user_id": 12,
+    "username": "user12",
+    "address": { "street": "Random Street", "geo": {} }
   }
 ]
+
+
