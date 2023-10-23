@@ -1,32 +1,36 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import "@reach/combobox/styles.css";
-import shirticon from "../../public/tshirt_solid.svg"
+import shirticon from "../../public/tshirt_solid.svg";
+import Image from "next/image";
+import Link from "next/link";
 
 const Home = () => {
-  let links=[
-    {name: "Home", link: '/'},
-    {name: "Browse", link: '/'},
-    {name: "Reserved", link: '/'},
-    {name: "Profile", link: '/'},
-    {name: "Sign Out", link: '/'},
-  ]
+  let links = [
+    { name: "Home", link: "/" },
+    { name: "Browse", link: "/" },
+    { name: "Reserved", link: "/" },
+    { name: "Profile", link: "/" },
+    { name: "Sign Out", link: "/" },
+  ];
   return (
     <div className="shadow-md w-full fixed top-0 left-0">
       <div className="md:px-10 py-4 px-7  md:flex justify-between items-center">
         {/* {logo} */}
         <div className="flex text-2xl cursor-pointer items-center gap-2">
-          {shirticon}
-          <span className='font-bold'>Supreme Thrifters</span>
+          <Image src={shirticon} />
+          <span className="font-bold">Supreme Thrifters</span>
         </div>
         {/* {Navlinks here} */}
         <ul className="md:flex pl-9 md:pl-0">
-          {
-              links.map(link => 
-              (<li className="font-semibold my-7 md:my-0 md:ml-8">
-                <a href="/">{link.name}</a>
-              </li>))
-          }
+          {links.map((link) => (
+            <Link
+              className="font-semibold my-7 md:my-0 md:ml-8"
+              href={link.link}
+            >
+              {link.name}
+            </Link>
+          ))}
         </ul>
       </div>
     </div>
