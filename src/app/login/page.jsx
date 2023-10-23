@@ -9,109 +9,109 @@ export default function Login() {
     const [isSignUp, setIsSignUp] = useState(false);
 
     const toggleMode = () => {
-      setIsSignUp(!isSignUp);
+        setIsSignUp(!isSignUp);
     };
-  
+
     return (
-        <div className={`container bg-white min-h-screen flex items-center justify-center ${isSignUp ? 'sign-up-mode' : ''}`}>
-            <div className="forms-container">
-                <div className="signin-signup">
-                    <form className={`sign-in-form ${isSignUp ? 'opacity-0' : 'opacity-100'}`}>
-                        <h2 className="title text-3xl text-gray-700">Sign in</h2>
-                        <div className="input-field max-w-lg bg-gray-200 rounded-full mt-4 px-4 flex items-center">
-                            <i className="fas fa-user text-gray-600"></i>
-                            <input type="text" placeholder="Username" className="pl-4 bg-transparent outline-none text-gray-600" />
+        <div className={`container relative w-full bg-white min-h-screen overflow-hidden before:content-[''] before:absolute  before:w-[2000px] before:top-[-10%] before:right-[48%] before:transform before:-translate-y-1/2 before:bg-gradient-to-tl before:from-blue-500 before:via-transparent before:to-blue-300 before:transition before:duration-1800 before:ease-in-out before:rounded-full before:z-[6] flex items-center justify-center ${isSignUp ? 'sign-up-mode' : ''}`}>
+            <div className="forms-container absolute w-full h-full top-0 left-0">
+                <div className="signin-signup absolute top-2/4 -translate-x-2/4 -translate-y-2/4 left-3/4 w-2/4 transition duration-700 ease-in-out grid grid-cols-1 z-[5]">
+                    <form className={`sign-in-form ${isSignUp ? 'opacity-0' : 'opacity-100'} flex items-center justify-center flex-col py-0 px-20 transition-all duration-700 overflow-hidden col-start-1 col-end-2 row-start-1 row-end-2 z-[2]`}>
+                        <h2 className="text-4xl text-neutral-700 mb-2.5">Sign in</h2>
+                        <div className="input-field max-w-sm bg-gray-100 rounded-[55px] h-14 my-2.5 mx-0 flex items-center grid grid-cols-[15] [85] px-1 py-0 relative">
+                            <i className="fas fa-user text-center leading-[55px] text-gray-400 transition duration-500 text-[1.1rem]"></i>
+                            <input type="text" placeholder="Username" className="pl-4 bg-transparent outline-none border-none leading-4 font-semibold text-[1.1rem] text-gray-700 placeholder-gray-300 font-medium" />
                         </div>
-                        <div className="input-field max-w-lg bg-gray-200 rounded-full mt-4 px-4 flex items-center">
-                            <i className="fas fa-lock text-gray-600"></i>
-                            <input type="password" placeholder="Password" className="pl-4 bg-transparent outline-none text-gray-600" />
+                        <div className="input-field max-w-sm bg-gray-100 rounded-[55px] h-14 my-2.5 mx-0 flex items-center grid grid-cols-[15] [85] px-1 py-0 relative">
+                            <i className="fas fa-lock text-center leading-[55px] text-gray-400 transition duration-500 text-[1.1rem]"></i>
+                            <input type="password" placeholder="Password" className="pl-4 bg-transparent outline-none border-none leading-4 font-semibold text-[1.1rem] text-gray-700 placeholder-gray-300 font-medium" />
                         </div>
-                        <input type="submit" value="Login" className="btn solid bg-blue-500 text-white py-2 px-4 rounded-full mt-4 cursor-pointer" />
-                        <p className="social-text mt-4 text-gray-600">Or Sign in with social platforms</p>
-                        <div className="social-media flex">
-                            <a href="#" className="social-icon p-2 border border-gray-600 rounded-full mr-2">
-                            <i className="fab fa-facebook-f text-gray-600"></i>
+                        <input type="submit" value="Login" className="btn solid w-[150px] bg-blue-500 border-none outline-none h-12 rounded-3xl text-white uppercase font-semibold my-2.5 mx-0 cursor-pointer transition duration-500 btn hover:bg-blue-500" />
+                        <p className="social-text px-0 py-7 text-base">Or Sign in with social platforms</p>
+                        <div className="social-media flex justify-center">
+                            <a href="#" className="social-icon h-[46px] w-[46px] flex justify-center items-center mx-1.5 my-0 text-gray-700 rounded-full border border-solid border-gray-700 no-underline leading-4 transition duration-300 hover:text-blue-500 hover:border-blue-500">
+                                <i className="fab fa-facebook-f text-gray-600"></i>
                             </a>
-                            <a href="#" className="social-icon p-2 border border-gray-600 rounded-full mr-2">
-                            <i className="fab fa-twitter text-gray-600"></i>
+                            <a href="#" className="social-icon h-[46px] w-[46px] flex justify-center items-center mx-1.5 my-0 text-gray-700 rounded-full border border-solid border-gray-700 no-underline leading-4 transition duration-300 hover:text-blue-500 hover:border-blue-500">
+                                <i className="fab fa-twitter text-gray-600"></i>
                             </a>
-                            <a href="#" className="social-icon p-2 border border-gray-600 rounded-full mr-2">
-                            <i className="fab fa-google text-gray-600"></i>
+                            <a href="#" className="social-icon h-[46px] w-[46px] flex justify-center items-center mx-1.5 my-0 text-gray-700 rounded-full border border-solid border-gray-700 no-underline leading-4 transition duration-300 hover:text-blue-500 hover:border-blue-500">
+                                <i className="fab fa-google text-gray-600"></i>
                             </a>
                             <a href="#" className="social-icon p-2 border border-gray-600 rounded-full">
-                            <i className="fab fa-linkedin-in text-gray-600"></i>
+                                <i className="fab fa-linkedin-in text-gray-600"></i>
                             </a>
                         </div>
                     </form>
-                    <form className={`sign-up-form ${isSignUp ? 'opacity-100' : 'opacity-0'}`}>
-                        <h2 className="title text-3xl text-gray-700">Sign up</h2>
-                        <div className="input-field max-w-lg bg-gray-200 rounded-full mt-4 px-4 flex items-center">
-                            <i className="fas fa-user text-gray-600"></i>
-                            <input type="text" placeholder="Username" className="pl-4 bg-transparent outline-none text-gray-600" />
+                    <form className={`sign-up-form ${isSignUp ? 'opacity-100' : 'opacity-0'} opacity-0 z-[1]`}>
+                        <h2 className="text-4xl text-neutral-700 mb-2.5">Sign up</h2>
+                        <div className="input-field max-w-sm bg-gray-100 rounded-[55px] h-14 my-2.5 mx-0 flex items-center grid grid-cols-[15] [85] px-1 py-0 relative">
+                            <i className="fas fa-user text-center leading-[55px] text-gray-400 transition duration-500 text-[1.1rem]"></i>
+                            <input type="text" placeholder="Username" className="pl-4 bg-transparent outline-none border-none leading-4 font-semibold text-[1.1rem] text-gray-700 placeholder-gray-300 font-medium" />
                         </div>
-                        <div className="input-field max-w-lg bg-gray-200 rounded-full mt-4 px-4 flex items-center">
-                            <i className="fas fa-envelope text-gray-600"></i>
-                            <input type="email" placeholder="Email" className="pl-4 bg-transparent outline-none text-gray-600" />
+                        <div className="input-field max-w-sm bg-gray-100 rounded-[55px] h-14 my-2.5 mx-0 flex items-center grid grid-cols-[15] [85] px-1 py-0 relative">
+                            <i className="fas fa-envelope text-center leading-[55px] text-gray-400 transition duration-500 text-[1.1rem]"></i>
+                            <input type="email" placeholder="Email" className="pl-4 bg-transparent outline-none border-none leading-4 font-semibold text-[1.1rem] text-gray-700 placeholder-gray-300 font-medium" />
                         </div>
-                        <div className="input-field max-w-lg bg-gray-200 rounded-full mt-4 px-4 flex items-center">
-                            <i className="fas fa-lock text-gray-600"></i>
-                            <input type="password" placeholder="Password" className="pl-4 bg-transparent outline-none text-gray-600" />
+                        <div className="input-field max-w-sm bg-gray-100 rounded-[55px] h-14 my-2.5 mx-0 flex items-center grid grid-cols-[15] [85] px-1 py-0 relative">
+                            <i className="fas fa-lock text-center leading-[55px] text-gray-400 transition duration-500 text-[1.1rem]"></i>
+                            <input type="password" placeholder="Password" className="pl-4 bg-transparent outline-none border-none leading-4 font-semibold text-[1.1rem] text-gray-700 placeholder-gray-300 font-medium" />
                         </div>
-                        <input type="submit" className="btn bg-blue-500 text-white py-2 px-4 rounded-full mt-4 cursor-pointer" value="Sign up" />
-                        <p className="social-text mt-4 text-gray-600">Or Sign up with social platforms</p>
-                        <div className="social-media flex">
-                            <a href="#" className="social-icon p-2 border border-gray-600 rounded-full mr-2">
-                            <i className="fab fa-facebook-f text-gray-600"></i>
+                        <input type="submit" className="btn solid w-[150px] bg-blue-500 border-none outline-none h-12 rounded-3xl text-white uppercase font-semibold my-2.5 mx-0 cursor-pointer transition duration-500 btn hover:bg-blue-500" value="Sign up" />
+                        <p className="social-text px-0 py-7 text-base">Or Sign up with social platforms</p>
+                        <div className="social-media flex justify-center">
+                            <a href="#" className="social-icon h-[46px] w-[46px] flex justify-center items-center mx-1.5 my-0 text-gray-700 rounded-full border border-solid border-gray-700 no-underline leading-4 transition duration-300 hover:text-blue-500 hover:border-blue-500">
+                                <i className="fab fa-facebook-f text-gray-600"></i>
                             </a>
-                            <a href="#" className="social-icon p-2 border border-gray-600 rounded-full mr-2">
-                            <i className="fab fa-twitter text-gray-600"></i>
+                            <a href="#" className="social-icon h-[46px] w-[46px] flex justify-center items-center mx-1.5 my-0 text-gray-700 rounded-full border border-solid border-gray-700 no-underline leading-4 transition duration-300 hover:text-blue-500 hover:border-blue-500">
+                                <i className="fab fa-twitter text-gray-600"></i>
                             </a>
-                            <a href="#" className="social-icon p-2 border border-gray-600 rounded-full mr-2">
-                            <i className="fab fa-google text-gray-600"></i>
+                            <a href="#" className="social-icon h-[46px] w-[46px] flex justify-center items-center mx-1.5 my-0 text-gray-700 rounded-full border border-solid border-gray-700 no-underline leading-4 transition duration-300 hover:text-blue-500 hover:border-blue-500">
+                                <i className="fab fa-google text-gray-600"></i>
                             </a>
                             <a href="#" className="social-icon p-2 border border-gray-600 rounded-full">
-                            <i className="fab fa-linkedin-in text-gray-600"></i>
+                                <i className="fab fa-linkedin-in text-gray-600"></i>
                             </a>
                         </div>
                     </form>
                 </div>
             </div>
-            <div className="panels-container">
-                <div className={`panel left-panel ${isSignUp ? 'hidden' : ''}`}>
+            <div className="panels-container absolute h-full w-full top-0 left-0 grid grid-cols-2">
+                <div className={`panel left-panel flex flex-col items-end justify-around text-center z=[6] pointer-events-all px-12 py-3 pl-[17%] pr-[17%] pb-2 ${isSignUp ? 'hidden' : ''}`}>
                     <div className="content">
-                    <h3 className="text-2xl text-gray-700">New here ?</h3>
-                    <p className="text-gray-600">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis, ex ratione. Aliquid!
-                    </p>
-                    <button
-                        className="btn transparent bg-white text-gray-700 py-2 px-4 rounded-full mt-4 cursor-pointer"
-                        onClick={toggleMode}
-                    >
-                        Sign up
-                    </button>
+                        <h3 className="text-2xl text-gray-700">New here ?</h3>
+                        <p className="text-gray-600">
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis, ex ratione. Aliquid!
+                        </p>
+                        <button
+                            className="btn transparent bg-white text-gray-700 py-2 px-4 rounded-full mt-4 cursor-pointer"
+                            onClick={toggleMode}
+                        >
+                            Sign up
+                        </button>
                     </div>
-                    <img src="../../../public/log.svg" className="image" alt="" />
+                    <img src="../../../public/log.svg" className="image w-full transition-transform duration-1100 ease-in-out delay-400" alt="" />
                 </div>
-                <div className={`panel right-panel ${isSignUp ? '' : 'hidden'}`}>
+                <div className={`panel right-panel flex flex-col items-end justify-around text-center z=[6] pointer-events-none px-12 py-3 pl-[17%] pr-[17%] pb-2 ${isSignUp ? '' : 'hidden'}`}>
                     <div className="content">
-                    <h3 className="text-2xl text-gray-700">One of us ?</h3>
-                    <p className="text-gray-600">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum laboriosam ad deleniti.
-                    </p>
-                    <button
-                        className="btn transparent bg-white text-gray-700 py-2 px-4 rounded-full mt-4 cursor-pointer"
-                        onClick={toggleMode}
-                    >
-                        Sign in
-                    </button>
+                        <h3 className="text-2xl text-gray-700">One of us ?</h3>
+                        <p className="text-gray-600">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum laboriosam ad deleniti.
+                        </p>
+                        <button
+                            className="btn transparent bg-white text-gray-700 py-2 px-4 rounded-full mt-4 cursor-pointer"
+                            onClick={toggleMode}
+                        >
+                            Sign in
+                        </button>
                     </div>
-                    <img src="../../../public/register.svg" className="image" alt="" />
+                    <img src="../../../public/register.svg" className="image w-full transition-transform duration-1100 ease-in-out delay-400" alt="" />
                 </div>
             </div>
         </div>
     );
-  }
-  
+}
+
 
 // Option 2 LOGIN (just comment out whichever option u not using)
 
