@@ -40,7 +40,7 @@ function Map() {
   const [center, setCenter] = useState({ lat: 1.3521, lng: 103.8198 });
   const [map, setMap] = useState(null);
   const [selected, setSelected] = useState(null);
-  const [zoom, setZoom] = useState(10);
+  const [zoom, setZoom] = useState(13);
   const [highlight, setHighlight] = useState(null);
   const [activeMarker, setActiveMarker] = useState(null);
   const [currentLocation, setCurrentLocation] = useState(null);
@@ -87,7 +87,7 @@ function Map() {
                   title={item.product_name}
                   image={image}
                   onClick={() => {
-                    setCenter({ ...item.address.geo });
+                    setCenter(item.address.geo);
                     setZoom(15);
                   }}
                 >
@@ -112,6 +112,7 @@ function Map() {
                           console.log("liked");
                         }}
                         size="sm"
+                        bold={true}
                       >
                         <Image src={like} />
                       </Button>
@@ -154,7 +155,7 @@ function Map() {
           <Autocomplete
             onSelect={({ item, setQuery }) => {
               setSelected([item]);
-              setCenter({ ...item.address.geo });
+              setCenter(item.address.geo);
             }}
             onSubmit={({ state }) => {
               console.log(state.collections[0].items);
@@ -166,7 +167,10 @@ function Map() {
         </div>
         <GoogleMap
           zoom={zoom}
-          onLoad={(map) => setMap(map)}
+          onLoad={(map) => {
+            getCurrentPosition();
+            setMap(map);
+          }}
           onZoomChanged={() => {
             map ? setZoom(map.zoom) : setZoom(null);
           }}
