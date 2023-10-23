@@ -9,9 +9,7 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
           href="https://use.fontawesome.com/releases/v6.4.2/css/all.css"
         ></link>
-
         <link rel="stylesheet" type="text/css" href="style.css"></link>
-
         <link
           rel="stylesheet"
           type="text/css"

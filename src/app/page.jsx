@@ -5,7 +5,7 @@ const Home = () => {
     <>
       <header class="bg-gray-900 text-white py-4">
         <div class="container mx-auto flex justify-between items-center">
-          <h1 class="text-3xl font-semibold">Thrifting Clothing Store</h1>
+          <h1 class="text-3xl font-semibold">Supreme Thrifters</h1>
           <nav class="space-x-4">
             <a href="#" class="text-white">
               Home

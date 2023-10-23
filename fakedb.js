@@ -19,19 +19,18 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// const app = initializeApp(firebaseConfig);
 
-export const db = getFirestore(app);
-const fetch = async () => {
-  console.log(data);
-  data.map(async (d) => {
-    console.log(d);
-    const docRef = await addDoc(collection(db, "listings"), d);
-    console.log(docRef);
-  });
-};
-fetch();
-
+// export const db = getFirestore(app);
+// const fetch = async () => {
+//   console.log(data);
+//   data.map(async (d) => {
+//     console.log(d);
+//     const docRef = await addDoc(collection(db, "listings"), d);
+//     console.log(docRef);
+//   });
+// };
+// fetch();
 
 // "type": "module" into package.json if want to upload dataset
 //delete "type": "module" from package.json otherwise cant npm run dev

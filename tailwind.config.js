@@ -17,7 +17,6 @@ module.exports = {
       xl: "1.5rem",
       "2xl": "2rem",
     },
-
     borderRadius: {
       none: "0",
       sm: "10px",
