@@ -38,7 +38,7 @@ export default function Login() {
                             <a href="#" className="social-icon h-[46px] w-[46px] flex justify-center items-center mx-1.5 my-0 text-gray-700 rounded-full border border-solid border-gray-700 no-underline leading-4 transition duration-300 hover:text-blue-500 hover:border-blue-500">
                                 <i className="fab fa-google text-gray-600"></i>
                             </a>
-                            <a href="#" className="social-icon p-2 border border-gray-600 rounded-full">
+                            <a href="#" className="social-icon social-icon h-[46px] w-[46px] flex justify-center items-center mx-1.5 my-0 text-gray-700 rounded-full border border-solid border-gray-700 no-underline leading-4 transition duration-300 hover:text-blue-500 hover:border-blue-500">
                                 <i className="fab fa-linkedin-in text-gray-600"></i>
                             </a>
                         </div>
