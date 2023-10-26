@@ -5,6 +5,7 @@ const Button = ({
   bold,
   type,
   handleChange,
+  fontColor,
   className,
   children,
   ...props
@@ -23,7 +24,7 @@ const Button = ({
     <button
       onClick={handleChange}
       type={type}
-      className={`${bold} ${size} hover:bg-secondary hover:text-white bg-primary text-white cursor-pointer uppercase rounded-md text-sm ${className}`}
+      className={`${bold} ${size} hover:bg-secondary hover:text-white bg-primary ${fontColor} cursor-pointer uppercase rounded-md text-sm ${className}`}
       {...props}
     >
       {children}
@@ -35,5 +36,7 @@ Button.defaultProps = {
   size: "px-xs py-xs",
   bold: "false",
   type: "button",
+  fontColor: "text-white",
 };
+
 export default Button;

@@ -3,6 +3,7 @@
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import React, { useState } from "react";
+import NavBar from "@/components/NavBar"
 
 export default function Reserved() {
   const products = [
@@ -78,45 +79,30 @@ export default function Reserved() {
   };
   return (
     <>
-      <header class="bg-gray-900 text-white py-4">
-        <div class="container mx-auto flex justify-between items-center">
-          <h1 class="text-3xl font-semibold px-5">Supreme Thrifters</h1>
-          <nav class="space-x-4 px-5">
-            <a href="#" class="text-white">
-              Home
-            </a>
-            <a href="#" class="text-white">
-              Shop
-            </a>
-            <a href="#" class="text-white">
-              About
-            </a>
-            <a href="#" class="text-white">
-              Contact
-            </a>
-          </nav>
-        </div>
-      </header>
+      <NavBar>
+      </NavBar>
 
       <div className="bg-white">
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
           <div className="flex space-x-4">
             <Button
               onClick={() => toggleTab("reserved")}
+              fontColor="text-black"
               className={`${
                 selectedTab === "reserved"
                   ? "bg-black text-white"
-                  : "bg-white text-black"
+                  : "bg-white"
               } px-4 py-2 rounded-md hover:bg-black hover:text-white focus:outline-none`}
             >
               Reserved
             </Button>
             <Button
               onClick={() => toggleTab("liked")}
+              fontColor= "text-black"
               className={`${
                 selectedTab === "liked"
                   ? "bg-black text-white"
-                  : "bg-white text-black"
+                  : "bg-white"
               } px-4 py-2 rounded-md hover:bg-black hover:text-white focus:outline-none`}
             >
               Liked
