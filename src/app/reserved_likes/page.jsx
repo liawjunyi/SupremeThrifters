@@ -106,7 +106,7 @@ export default function Reserved() {
               className={`${
                 selectedTab === "reserved"
                   ? "bg-black text-white"
-                  : "bg-white text-neutral-500"
+                  : "bg-white text-black"
               } px-4 py-2 rounded-md hover:bg-black hover:text-white focus:outline-none`}
             >
               Reserved
@@ -116,7 +116,7 @@ export default function Reserved() {
               className={`${
                 selectedTab === "liked"
                   ? "bg-black text-white"
-                  : "bg-white text-neutral-500"
+                  : "bg-white text-black"
               } px-4 py-2 rounded-md hover:bg-black hover:text-white focus:outline-none`}
             >
               Liked
