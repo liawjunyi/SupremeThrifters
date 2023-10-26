@@ -28,7 +28,7 @@ const SideMenu = ({ className }) => {
           <Link href="/browse">
             <div
               className={`${
-                pathname == "/" && "text-white"
+                pathname == "/browse" && "text-white"
               } text-2xl leading-[4.5rem] text-white pointer-events-none uppercase hover:text-shadow-neon hover:text-neon`}
             >
               Browse
@@ -37,7 +37,7 @@ const SideMenu = ({ className }) => {
           <Link href="/reserved">
             <div
               className={`${
-                pathname == "/" && "text-white"
+                pathname == "/reserved" && "text-white"
               } text-2xl leading-[4.5rem] uppercase hover:text-shadow-neon hover:text-neon`}
             >
               Reserved

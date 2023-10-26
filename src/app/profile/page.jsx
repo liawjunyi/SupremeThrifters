@@ -3,6 +3,115 @@ import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Link from "next/link";
 export default function Profile() {
+  const [userData, setUserData] = useState(null);
+  const [currentPassword, setCurrentPassword] = useState(null);
+  const [newPassword, setNewPassword] = useState(null);
+  const [confirmPassword, setConfirmPassword] = useState(null);
+  const profileRef = useRef(null);
+
+  const addProfilePic = (e) => {
+    const file = e.target.files[0];
+    const imagesRef = ref(storage, `profilePic/${file.name}`);
+    if (userData.profilePic) {
+      setUserData((prev) => {
+        return { ...prev, profilePic: null };
+      });
+      const deleteImageRef = ref(
+        storage,
+        `profilePic/${userData.profilePic.name}`
+      );
+      deleteObject(deleteImageRef);
+      uploadBytes(imagesRef, file)
+        .then(() => getDownloadURL(imagesRef))
+        .then((url) => {
+          setUserData((prev) => {
+            return {
+              ...prev,
+              profilePic: {
+                name: file.name,
+                url: url,
+              },
+            };
+          });
+        });
+    } else {
+      uploadBytes(imagesRef, file)
+        .then(() => getDownloadURL(imagesRef))
+        .then((url) => {
+          setUserData((prev) => {
+            return {
+              ...prev,
+              profilePic: {
+                name: file.name,
+                url: url,
+              },
+            };
+          });
+        });
+    }
+  };
+
+  const removeProfilePic = () => {
+    setUserData((prev) => {
+      return { ...prev, profilePic: null };
+    });
+    const deleteImageRef = ref(
+      storage,
+      `profilePic/${userData.profilePic.name}`
+    );
+    deleteObject(deleteImageRef);
+  };
+  const user = getAuth().currentUser;
+
+  console.log(user);
+  console.log(userData);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    updateDoc(doc(db, "users", user.uid), {
+      username: userData.username,
+      fullname: userData.fullname,
+      subscription: userData.subscription,
+      profilePic: { ...userData.profilePic },
+    }).then(() => alert("successfully saved"));
+
+    if (currentPassword && newPassword && confirmPassword) {
+      const credential = EmailAuthProvider.credential(
+        auth.currentUser.email,
+        currentPassword
+      );
+      reauthenticateWithCredential(auth.currentUser, credential)
+        .then(() => {
+          if (newPassword === confirmPassword) {
+            updatePassword(auth.currentUser, newPassword);
+          } else {
+            throw new Error("passwords do not match");
+          }
+        })
+        .catch((err) => alert(err.message));
+    }
+  };
+
+  const fetchUserData = async () => {
+    const usersRef = collection(db, "users");
+
+    const q = query(usersRef, where("uid", "==", user.uid));
+    console.log(user.uid);
+    const res = await getDocs(q);
+
+    res.forEach((doc) => {
+      console.log(doc);
+      console.log(doc.data());
+      setDbData(doc.data());
+      setUserData(doc.data());
+    });
+  };
+  useEffect(() => {
+    if (user) {
+      fetchUserData();
+    }
+  }, [user]);
   return (
     <form className="m-20 mb-10">
       <div className="space-y-12">

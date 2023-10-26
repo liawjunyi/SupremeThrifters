@@ -4,7 +4,7 @@ import "@reach/combobox/styles.css";
 import shirticon from "../../public/tshirt_solid.svg";
 import Image from "next/image";
 import Link from "next/link";
-
+import { useSession } from "next-auth/react";
 const Home = () => {
   let links = [
     { name: "Home", link: "/" },
@@ -13,6 +13,13 @@ const Home = () => {
     { name: "Profile", link: "/" },
     { name: "Sign Out", link: "/" },
   ];
+
+  const { data: session, status } = useSession();
+  console.log(status);
+  if (status === "authenticated") {
+    return <p>Signed in as {session.user.email}</p>;
+  }
+
   return (
     <div className="shadow-md w-full fixed top-0 left-0">
       <div className="md:px-10 py-4 px-7  md:flex justify-between items-center">
