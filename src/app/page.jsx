@@ -52,7 +52,7 @@ const Home = () => {
           </Button>
         </div>
 
-        <>{showSideMenu ? <SideMenu /> : <Navbar />}</>
+        {showSideMenu ? <SideMenu /> : <Navbar />}
       </div>
     </>
   );
