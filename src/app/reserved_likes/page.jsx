@@ -2,75 +2,54 @@
 
 import Button from "@/components/Button";
 import Card from "@/components/Card";
-import React, { useState } from "react";
-import NavBar from "@/components/NavBar"
+import React, { useEffect, useState } from "react";
+import NavBar from "@/components/NavBar";
+import { collection, query, where, getDocs } from "firebase/firestore"; 
+import { db } from "../../../firebase";
 
 export default function Reserved() {
-  const products = [
-    {
-      id: 1,
-      name: "Basic Tee",
-      href: "#",
-      imageSrc:
-        "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-      imageAlt: "Front of men's Basic Tee in black.",
-      price: "$35",
-      color: "Black",
-    },
-    {
-      id: 1,
-      name: "Basic Tee",
-      href: "#",
-      imageSrc:
-        "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-      imageAlt: "Front of men's Basic Tee in black.",
-      price: "$35",
-      color: "Black",
-    },
-    {
-      id: 1,
-      name: "Basic Tee",
-      href: "#",
-      imageSrc:
-        "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-      imageAlt: "Front of men's Basic Tee in black.",
-      price: "$35",
-      color: "Black",
-    },
-    {
-      id: 1,
-      name: "Basic Tee",
-      href: "#",
-      imageSrc:
-        "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-      imageAlt: "Front of men's Basic Tee in black.",
-      price: "$35",
-      color: "Black",
-    },
-  ];
 
-  const products_likes = [
-    {
-      id: 1,
-      name: "Basic Tee",
-      href: "#",
-      imageSrc:
-        "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-      imageAlt: "Front of men's Basic Tee in black.",
-      price: "$35",
-      color: "Black",
-    },
-    {
-      id: 1,
-      name: "Basic Tee",
-      href: "#",
-      imageSrc:
-        "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-      imageAlt: "Front of men's Basic Tee in black.",
-      price: "$35",
-      color: "Black",
-    },
-  ];
+  const [products_reserved, setProductsReserved] = useState([]);
+  const [products_liked, setProductsLiked] = useState([]);
+
+  const getData_reserved = async () => {
+
+    const q_reserved = query(collection(db, "listings"), where("product_name", "==", "Jacket"));
+
+    const reservedList = []
+    
+    const querySnapshot = await getDocs(q_reserved);
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      reservedList.push(doc.data());
+    });
+
+    setProductsReserved(reservedList);
+  }
+
+  useEffect(() => {
+    getData_reserved();
+  }, []);
+
+  const getData_liked = async() => {
+
+    const q_liked = query(collection(db, "listings"), where("product_name", "==", "Nike T-Shirt"));
+
+    let likedList = []
+
+    const querySnapshot = await getDocs(q_liked);
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      likedList.push(doc.data());
+    });
+
+    setProductsLiked(likedList);
+
+  }
+
+  useEffect(() => {
+    getData_liked();
+  }, []);
 
   const [selectedTab, setSelectedTab] = useState("reserved");
 
@@ -79,20 +58,19 @@ export default function Reserved() {
   };
   return (
     <>
-      <NavBar>
-      </NavBar>
-
       <div className="bg-white">
+        <NavBar></NavBar>
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+
           <div className="flex space-x-4">
             <Button
               onClick={() => toggleTab("reserved")}
               fontColor="text-black"
               className={`${
                 selectedTab === "reserved"
-                  ? "bg-black text-white"
+                  ? "bg-primary text-white"
                   : "bg-white"
-              } px-4 py-2 rounded-md hover:bg-black hover:text-white focus:outline-none`}
+              } px-4 py-2 rounded-md hover:bg-primary hover:text-white focus:outline-none`}
             >
               Reserved
             </Button>
@@ -101,18 +79,19 @@ export default function Reserved() {
               fontColor= "text-black"
               className={`${
                 selectedTab === "liked"
-                  ? "bg-black text-white"
+                  ? "bg-primary text-white"
                   : "bg-white"
-              } px-4 py-2 rounded-md hover:bg-black hover:text-white focus:outline-none`}
+              } px-4 py-2 rounded-md hover:bg-primary hover:text-white focus:outline-none`}
             >
               Liked
             </Button>
           </div>
+
           <div className="tab-content">
             {selectedTab === "reserved" && (
               <div>
-                <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                  {products.map((product) => (
+                <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gap-x-8">
+                  {products_reserved.map((product) => (
                     <div key={product.id} className="group relative">
                       <Card className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                         <img
@@ -129,11 +108,11 @@ export default function Reserved() {
                                 aria-hidden="true"
                                 className="absolute inset-0"
                               />
-                              {product.name}
+                              {product.product_name}
                             </a>
                           </h3>
                           <p className="mt-1 text-sm text-gray-500">
-                            {product.color}
+                            {product.username}
                           </p>
                         </div>
                         <p className="text-sm font-medium text-gray-900">
@@ -148,8 +127,8 @@ export default function Reserved() {
 
             {selectedTab === "liked" && (
               <div>
-                <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                  {products_likes.map((product) => (
+                <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gap-x-8">
+                  {products_liked.map((product) => (
                     <div key={product.id} className="group relative">
                       <Card className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                         <img
@@ -166,11 +145,11 @@ export default function Reserved() {
                                 aria-hidden="true"
                                 className="absolute inset-0"
                               />
-                              {product.name}
+                              {product.product_name}
                             </a>
                           </h3>
                           <p className="mt-1 text-sm text-gray-500">
-                            {product.color}
+                            {product.username}
                           </p>
                         </div>
                         <p className="text-sm font-medium text-gray-900">
@@ -183,6 +162,7 @@ export default function Reserved() {
               </div>
             )}
           </div>
+
         </div>
       </div>
     </>
