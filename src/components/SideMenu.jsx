@@ -20,7 +20,7 @@ const SideMenu = ({ className }) => {
             <div
               className={`${
                 pathname == "/" && "text-white"
-              } text-2xl leading-[4.5rem] uppercase hover:text-shadow-neon hover:text-neon`}
+              } text-2xl leading-[4.5rem] uppercase text-gray-400 hover:text-shadow-neon hover:text-neon`}
             >
               Home
             </div>
@@ -29,7 +29,7 @@ const SideMenu = ({ className }) => {
             <div
               className={`${
                 pathname == "/browse" && "text-white"
-              } text-2xl leading-[4.5rem] pointer-events-none uppercase hover:text-shadow-neon hover:text-neon`}
+              } text-2xl leading-[4.5rem] pointer-events-none uppercase text-gray-400 hover:text-shadow-neon hover:text-neon`}
             >
               Browse
             </div>
@@ -38,7 +38,7 @@ const SideMenu = ({ className }) => {
             <div
               className={`${
                 pathname == "/reserved" && "text-white"
-              } text-2xl leading-[4.5rem] uppercase hover:text-shadow-neon hover:text-neon`}
+              } text-2xl leading-[4.5rem] uppercase text-gray-400 hover:text-shadow-neon hover:text-neon`}
             >
               Reserved
             </div>
@@ -47,7 +47,7 @@ const SideMenu = ({ className }) => {
             <div
               className={`${
                 pathname == "/profile" && "text-white"
-              } text-2xl leading-[4.5rem] uppercase hover:text-shadow-neon hover:text-neon`}
+              } text-2xl leading-[4.5rem] uppercase text-gray-400 hover:text-shadow-neon hover:text-neon`}
             >
               Profile
             </div>
@@ -56,10 +56,10 @@ const SideMenu = ({ className }) => {
             <div
               className={`${
                 pathname == "/login" && "text-white"
-              } text-2xl leading-[4.5rem] uppercase hover:text-shadow-neon hover:text-neon`}
+              } text-2xl leading-[4.5rem] uppercase text-gray-400 hover:text-shadow-neon hover:text-neon`}
             >
               Sign out
-            </div>{" "}
+            </div>
           </Link>
         </nav>
       </aside>

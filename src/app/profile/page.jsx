@@ -2,6 +2,8 @@
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Link from "next/link";
+import { useState, useRef } from "react";
+
 export default function Profile() {
   const [userData, setUserData] = useState(null);
   const [currentPassword, setCurrentPassword] = useState(null);
@@ -61,57 +63,26 @@ export default function Profile() {
     );
     deleteObject(deleteImageRef);
   };
-  const user = getAuth().currentUser;
 
-  console.log(user);
-  console.log(userData);
+  // const fetchUserData = async () => {
+  //   const usersRef = collection(db, "users");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  //   const q = query(usersRef, where("uid", "==", user.uid));
+  //   console.log(user.uid);
+  //   const res = await getDocs(q);
 
-    updateDoc(doc(db, "users", user.uid), {
-      username: userData.username,
-      fullname: userData.fullname,
-      subscription: userData.subscription,
-      profilePic: { ...userData.profilePic },
-    }).then(() => alert("successfully saved"));
-
-    if (currentPassword && newPassword && confirmPassword) {
-      const credential = EmailAuthProvider.credential(
-        auth.currentUser.email,
-        currentPassword
-      );
-      reauthenticateWithCredential(auth.currentUser, credential)
-        .then(() => {
-          if (newPassword === confirmPassword) {
-            updatePassword(auth.currentUser, newPassword);
-          } else {
-            throw new Error("passwords do not match");
-          }
-        })
-        .catch((err) => alert(err.message));
-    }
-  };
-
-  const fetchUserData = async () => {
-    const usersRef = collection(db, "users");
-
-    const q = query(usersRef, where("uid", "==", user.uid));
-    console.log(user.uid);
-    const res = await getDocs(q);
-
-    res.forEach((doc) => {
-      console.log(doc);
-      console.log(doc.data());
-      setDbData(doc.data());
-      setUserData(doc.data());
-    });
-  };
-  useEffect(() => {
-    if (user) {
-      fetchUserData();
-    }
-  }, [user]);
+  //   res.forEach((doc) => {
+  //     console.log(doc);
+  //     console.log(doc.data());
+  //     setDbData(doc.data());
+  //     setUserData(doc.data());
+  //   });
+  // };
+  // useEffect(() => {
+  //   if (user) {
+  //     fetchUserData();
+  //   }
+  // }, [user]);
   return (
     <form className="m-20 mb-10">
       <div className="space-y-12">

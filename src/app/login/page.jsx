@@ -10,22 +10,28 @@ import log from "../../../public/log.svg";
 export default function Login() {
   const [isSignUp, setIsSignUp] = useState(false);
 
-  const toggleMode = () => {
-    setIsSignUp(!isSignUp);
-  };
-
   return (
     <div
-      className={`container relative w-full bg-white min-h-screen overflow-hidden before:content-[''] before:absolute  before:w-[2000px] before:top-[-10%] before:right-[48%] before:transform before:-translate-y-1/2 before:bg-gradient-to-tl before:from-blue-500 before:via-transparent before:to-blue-300 before:transition before:duration-1800 before:ease-in-out before:rounded-full before:z-[6] flex items-center justify-center ${
-        isSignUp ? "sign-up-mode" : ""
+      id="container"
+      className={`before:content-[''] before:transition-all md:before:-translate-y-1/2 before:-translate-x-1/2 before:absolute md:before:w-[2000px] md:before:h-[2000px] before:w-[1500px] before:h-[1500px] md:before:-top-[10%] md:before:left-[initial]  before:left-[30%] before:bg-gradient-to-r before:from-blue-500 before:to-blue-300 before:duration-[1800ms] before:ease-in-out before:rounded-[50%] before:z-[6] relative w-full bg-white md:min-h-screen overflow-hidden min-h-[800px] h-screen ${
+        isSignUp
+          ? "md:before:right-[52%] md:before:translate-x-full before:translate-y-full before:bottom-[32%]"
+          : "md:before:right-[48%] before:bottom-[68%]"
       }`}
     >
-      <div className="forms-container absolute w-full h-full top-0 left-0">
-        <div className="signin-signup absolute top-2/4 -translate-x-2/4 -translate-y-2/4 left-3/4 w-2/4 transition duration-700 ease-in-out grid grid-cols-1 z-[5]">
+      <div id="forms-container" className="absolute w-full h-full top-0 left-0">
+        <div
+          id="signin-signup"
+          className={`absolute md:top-1/2  transition-all -translate-x-1/2 md:-translate-y-1/2  w-1/2 duration-1000 delay-700 ease-in-out grid grid-cols-1 z-[5] ${
+            isSignUp
+              ? "md:left-1/4 left-1/2 top-[5%]"
+              : "md:left-3/4 left-1/2 top-[95%] -translate-y-full"
+          }`}
+        >
           <form
-            className={`sign-in-form ${
-              isSignUp ? "opacity-0" : "opacity-100"
-            } flex items-center justify-center flex-col py-0 px-20 transition-all duration-700 overflow-hidden col-start-1 col-end-2 row-start-1 row-end-2 z-[2]`}
+            className={`flex items-center justify-center flex-col py-0 px-20 transition delay-700 duration-200 overflow-hidden col-start-1 col-end-2 row-start-1 row-end-2 ${
+              isSignUp ? "opacity-0 z-[1]" : "z-[2]"
+            } `}
           >
             <h2 className="text-4xl text-neutral-700 mb-2.5">Sign in</h2>
             <div className="input-field max-w-sm bg-gray-100 rounded-[55px] h-14 my-2.5 mx-0 flex items-center grid grid-cols-[15] [85] px-1 py-0 relative">
@@ -80,9 +86,9 @@ export default function Login() {
             </div>
           </form>
           <form
-            className={`sign-up-form ${
-              isSignUp ? "opacity-100" : "opacity-0"
-            } opacity-0 z-[1]`}
+            className={`flex items-center justify-center flex-col py-0 px-20 transition-all delay-700 duration-200 overflow-hidden col-start-1 col-end-2 row-start-1 row-end-2  ${
+              isSignUp ? "opacity-100 z-[2]" : "opacity-0 z-[1]"
+            }`}
           >
             <h2 className="text-4xl text-neutral-700 mb-2.5">Sign up</h2>
             <div className="input-field max-w-sm bg-gray-100 rounded-[55px] h-14 my-2.5 mx-0 flex items-center grid grid-cols-[15] [85] px-1 py-0 relative">
@@ -146,13 +152,19 @@ export default function Login() {
           </form>
         </div>
       </div>
-      <div className="panels-container absolute h-full w-full top-0 left-0 grid grid-cols-2">
+      <div className="absolute h-full w-full top-0 left-0 grid md:grid-cols-2 max-md:grid-rows-[1fr_2fr_1fr] ">
         <div
-          className={`panel left-panel flex flex-col items-end justify-around text-center z=[6] pointer-events-all px-12 py-3 pl-[17%] pr-[17%] pb-2 ${
-            isSignUp ? "hidden" : ""
+          id="left-panel"
+          className={`flex md:flex-col flex-row md:items-end items-center justify-around text-center z-[6] md:px-12 md:py-3 md:pl-[17%] md:pr-[17%] md:pb-2 px-10 py-[8%] row-start-1 row-end-2 ${
+            isSignUp ? "pointer-events-none" : "pointer-events-all"
           }`}
         >
-          <div className="content">
+          <div
+            id="content"
+            className={`text-white transition ease-in-out duration-1000 delay-700 pr-[15%] ${
+              isSignUp ? "md:-translate-x-[800px] -translate-y-[300px]" : ""
+            }`}
+          >
             <h3 className="text-2xl text-gray-700">New here ?</h3>
             <p className="text-gray-600">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
@@ -160,7 +172,7 @@ export default function Login() {
             </p>
             <button
               className="btn transparent bg-white text-gray-700 py-2 px-4 rounded-full mt-4 cursor-pointer"
-              onClick={toggleMode}
+              onClick={() => setIsSignUp((prev) => !prev)}
             >
               Sign up
             </button>
@@ -169,16 +181,28 @@ export default function Login() {
             src={log}
             width={50}
             height={50}
-            className="image w-full transition-transform duration-1100 ease-in-out delay-400"
+            className={`${
+              isSignUp
+                ? "md:-translate-x-[800px] -translate-y-[300px]"
+                : "translate-x-[0%]"
+            } md:w-full w-[200px] transition-transform md:duration-[1100ms] duration-[900ms] ease-in-out md:delay-400 delay-[600ms]`}
             alt=""
           />
         </div>
         <div
-          className={`panel right-panel flex flex-col items-end justify-around text-center z=[6] pointer-events-none px-12 py-3 pl-[17%] pr-[17%] pb-2 ${
-            isSignUp ? "" : "hidden"
+          id="right-panel"
+          className={`flex md:flex-col flex-row md:items-end items-center justify-around text-center z-[6] md:px-12 md:py-3 md:pl-[17%] md:pr-[17%] md:pb-2 px-10 py-[8%] row-start-3 row-end-4 ${
+            isSignUp ? "pointer-events-all" : "pointer-events-none"
           }`}
         >
-          <div className="content">
+          <div
+            id="content"
+            className={`text-white transition ease-in-out duration-1000 delay-700 pr-[15%] ${
+              isSignUp
+                ? "translate-x-[0%]"
+                : "md:translate-x-[800px] translate-y-[300px]"
+            }`}
+          >
             <h3 className="text-2xl text-gray-700">One of us ?</h3>
             <p className="text-gray-600">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
@@ -186,7 +210,7 @@ export default function Login() {
             </p>
             <button
               className="btn transparent bg-white text-gray-700 py-2 px-4 rounded-full mt-4 cursor-pointer"
-              onClick={toggleMode}
+              onClick={() => setIsSignUp((prev) => !prev)}
             >
               Sign in
             </button>
@@ -195,7 +219,11 @@ export default function Login() {
             src={register}
             width={50}
             height={50}
-            className="image w-full transition-transform duration-1100 ease-in-out delay-400"
+            className={`${
+              isSignUp
+                ? "translate-x-[0%]"
+                : "md:translate-x-[800px] translate-y-[300px]"
+            } md:w-full w-[200px] transition-transform md:duration-[1100ms] duration-[900ms] ease-in-out md:delay-400 delay-[600ms]`}
             alt=""
           />
         </div>
