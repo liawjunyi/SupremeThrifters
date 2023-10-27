@@ -11,6 +11,7 @@ import close from "../../public/close.svg";
 import Image from "next/image";
 import SideMenu from "@/components/SideMenu";
 import Navbar from "@/components/Navbar";
+import Carousel from "@/components/Carousel";
 
 const Home = () => {
   const [menuActive, setMenuActive] = useState(false);
