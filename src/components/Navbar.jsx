@@ -8,7 +8,7 @@ import React, { useState, useEffect } from "react";
 
 const Navbar = () => {
   return (
-    <div className="w-full fixed top-0 left-0 bg-primary overflow-hidden z-1">
+    <div className="w-full fixed top-0 left-0 bg-primary z-1">
       <div className=" py-5 px-20 lg:flex items-center ">
         {/* {logo} */}
 
@@ -18,7 +18,7 @@ const Navbar = () => {
         </div>
 
         {/* {Navlinks here} */}
-        <ul className="hidden  justify-end ml-auto w-3/4  lg:flex pl-9 md:pl-0">
+        <ul className="hidden  justify-end ml-auto w-fit  lg:flex pl-9 md:pl-0">
           <Link
             className="font-semibold my-7 text-lg md:my-0 md:ml-8 text-gray-400 hover:text-neon hover:text-shadow-neon"
             href="/"
