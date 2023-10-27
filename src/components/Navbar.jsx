@@ -8,7 +8,7 @@ import React, { useState, useEffect } from "react";
 
 const Navbar = () => {
   return (
-    <div className="w-full fixed top-0 left-0 bg-primary">
+    <div className="w-full fixed top-0 left-0 bg-primary overflow-hidden z-1">
       <div className=" py-5 px-20 lg:flex items-center ">
         {/* {logo} */}
 

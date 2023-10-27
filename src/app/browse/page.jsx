@@ -7,7 +7,6 @@ import {
   MarkerF,
 } from "@react-google-maps/api";
 import React, { useState } from "react";
-import ItemCard from "@/components/ItemCard";
 import Autocomplete from "@/components/Autocomplete";
 import Sidebar from "@/components/Sidebar";
 import Button from "@/components/Button";
@@ -19,7 +18,7 @@ import menu from "../../../public/menu.svg";
 import close from "../../../public/close.svg";
 import recycle from "../../../public/recycle.svg";
 import Image from "next/image";
-import SideMenu from "@/components/SideMenu";
+import SideMenu from "@/components/Sidemenu";
 
 export default function Places() {
   const { isLoaded } = useLoadScript({
@@ -232,7 +231,7 @@ function Map() {
                   >
                     {activeMarker == user_id && (
                       <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
-                        <ItemCard></ItemCard>
+                        <div>Hi</div>
                       </InfoWindowF>
                     )}
                   </MarkerF>

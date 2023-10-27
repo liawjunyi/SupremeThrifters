@@ -9,8 +9,9 @@ import menu from "../../public/menu.svg";
 import close from "../../public/close.svg";
 
 import Image from "next/image";
-import SideMenu from "@/components/SideMenu";
 import Navbar from "@/components/Navbar";
+import Carousel from "@/components/Carousel";
+import Sidemenu from "@/components/Sidemenu";
 
 const Home = () => {
   const [menuActive, setMenuActive] = useState(false);
@@ -36,7 +37,7 @@ const Home = () => {
   return (
     <>
       <div>
-        <SideMenu
+        <Sidemenu
           className={`transition-opacity duration-500 ${
             menuActive ? "opacity-100 ease-in z-20" : "opacity-0 ease-out z-0"
           }`}
@@ -52,7 +53,10 @@ const Home = () => {
           </Button>
         </div>
 
-        {showSideMenu ? <SideMenu /> : <Navbar />}
+        {showSideMenu ? <Sidemenu /> : <Navbar />}
+
+        <div className="mt-20"></div>
+        <Carousel></Carousel>
       </div>
     </>
   );

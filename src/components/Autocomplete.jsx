@@ -32,7 +32,7 @@ const Autocomplete = (props) => {
         },
         insights: true,
         getSources() {
-          return [
+          return debounced([
             {
               sourceId: "name",
 
@@ -52,7 +52,7 @@ const Autocomplete = (props) => {
               },
               ...props,
             },
-          ];
+          ]);
         },
         ...props,
       }),

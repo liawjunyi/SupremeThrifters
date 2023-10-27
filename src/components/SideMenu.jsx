@@ -5,7 +5,7 @@ import Image from "next/image";
 import bg from "../../public/desert.svg";
 import { usePathname } from "next/navigation";
 
-const SideMenu = ({ className }) => {
+const Sidemenu = ({ className }) => {
   const pathname = usePathname();
   console.log(pathname);
   return (
@@ -67,4 +67,4 @@ const SideMenu = ({ className }) => {
   );
 };
 
-export default SideMenu;
+export default Sidemenu;

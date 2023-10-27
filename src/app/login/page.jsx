@@ -16,13 +16,13 @@ export default function Login() {
       className={`before:content-[''] before:transition-all md:before:-translate-y-1/2 before:-translate-x-1/2 before:absolute md:before:w-[2000px] md:before:h-[2000px] before:w-[1500px] before:h-[1500px] md:before:-top-[10%] md:before:left-[initial]  before:left-[30%] before:bg-gradient-to-r before:from-blue-500 before:to-blue-300 before:duration-[1800ms] before:ease-in-out before:rounded-[50%] before:z-[6] relative w-full bg-white md:min-h-screen overflow-hidden min-h-[800px] h-screen ${
         isSignUp
           ? "md:before:right-[52%] md:before:translate-x-full before:translate-y-full before:bottom-[32%]"
-          : "md:before:right-[48%] before:bottom-[68%]"
+          : "md:before:-right-[19%] before:bottom-[68%]"
       }`}
     >
       <div id="forms-container" className="absolute w-full h-full top-0 left-0">
         <div
           id="signin-signup"
-          className={`absolute md:top-1/2  transition-all -translate-x-1/2 md:-translate-y-1/2  w-1/2 duration-1000 delay-700 ease-in-out grid grid-cols-1 z-[5] ${
+          className={`absolute md:top-1/2 transition-all -translate-x-1/2 md:-translate-y-1/2  w-1/2 duration-1000 delay-700 ease-in-out grid grid-cols-1 z-[5] ${
             isSignUp
               ? "md:left-1/4 left-1/2 top-[5%]"
               : "md:left-3/4 left-1/2 top-[95%] -translate-y-full"
@@ -155,7 +155,7 @@ export default function Login() {
       <div className="absolute h-full w-full top-0 left-0 grid md:grid-cols-2 max-md:grid-rows-[1fr_2fr_1fr] ">
         <div
           id="left-panel"
-          className={`flex md:flex-col flex-row md:items-end items-center justify-around text-center z-[6] md:px-12 md:py-3 md:pl-[17%] md:pr-[17%] md:pb-2 px-10 py-[8%] row-start-1 row-end-2 ${
+          className={`flex md:flex-col flex-row md:items-end items-center justify-around text-center z-[6] md:px-12 md:py-3 md:pl-[17%] md:pr-[17%] md:pb-2 px-10 py-[8%] md:row-start-auto md:row-end-auto row-start-1 row-end-2 ${
             isSignUp ? "pointer-events-none" : "pointer-events-all"
           }`}
         >
@@ -191,7 +191,7 @@ export default function Login() {
         </div>
         <div
           id="right-panel"
-          className={`flex md:flex-col flex-row md:items-end items-center justify-around text-center z-[6] md:px-12 md:py-3 md:pl-[17%] md:pr-[17%] md:pb-2 px-10 py-[8%] row-start-3 row-end-4 ${
+          className={`flex md:flex-col flex-row md:items-end items-center justify-around text-center z-[6] md:px-12 md:py-3 md:pl-[17%] md:pr-[17%] md:pb-2 px-10 py-[8%] md:row-start-auto md:row-end-auto row-start-3 row-end-4 ${
             isSignUp ? "pointer-events-all" : "pointer-events-none"
           }`}
         >
