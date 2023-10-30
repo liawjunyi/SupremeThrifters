@@ -19,6 +19,12 @@ import close from "../../../public/close.svg";
 import recycle from "../../../public/recycle.svg";
 import Image from "next/image";
 import SideMenu from "@/components/Sidemenu";
+import Autocomplete2 from "@/components/Autocomplete2";
+import algoliasearch from "algoliasearch";
+import { getAlgoliaResults } from "@algolia/autocomplete-js";
+import { ProductItem } from "@/components/Productitem";
+import { createQuerySuggestionsPlugin } from "@algolia/autocomplete-plugin-query-suggestions";
+import insightsClient from "search-insights";
 
 export default function Places() {
   const { isLoaded } = useLoadScript({
@@ -26,6 +32,7 @@ export default function Places() {
     mapIds: ["aa0423f1ef73f4ca"],
     libraries: ["places", "marker"],
   });
+
   if (!isLoaded)
     return (
       <div className="bg-primary h-screen flex justify-center items-center">
@@ -44,6 +51,12 @@ function Map() {
   const [activeMarker, setActiveMarker] = useState(null);
   const [currentLocation, setCurrentLocation] = useState(null);
   const [menuActive, setMenuActive] = useState(false);
+
+  const appId = "28OPVE2DNS";
+  const apiKey = "19bda594fe34d920e65766859aa94af9";
+  const searchClient = algoliasearch(appId, apiKey);
+
+  insightsClient("init", { appId, apiKey, useCookie: true });
 
   const getCurrentPosition = () => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -151,7 +164,7 @@ function Map() {
             },
           ]}
         /> */}
-          <Autocomplete
+          {/* <Autocomplete
             onSelect={({ item, setQuery }) => {
               setSelected([item]);
               setCenter(item.address.geo);
@@ -161,6 +174,45 @@ function Map() {
               setSelected(state.collections[0].items);
               setZoom(10);
             }}
+          /> */}
+          <Autocomplete2
+            openOnFocus={true}
+            classNames={{
+              input: "outline-none w-full cursor-text ",
+              inputWrapper: "",
+              form: "rounded-md focus-within:shadow focus-within:shadow-secondary focus-within:border-secondary",
+              detachedSearchButton: "rounded-md",
+            }}
+            onSubmit={({ state }) => {
+              console.log(state.collections[0].items);
+              setSelected(state.collections[0].items);
+              setZoom(10);
+            }}
+            insights={true}
+            getSources={({ query }) => [
+              {
+                sourceId: "product_name",
+                getItems() {
+                  return getAlgoliaResults({
+                    searchClient,
+                    queries: [
+                      {
+                        indexName: "supremeThrifters",
+                        query,
+                        params: {
+                          hitsPerPage: 10,
+                        },
+                      },
+                    ],
+                  });
+                },
+                templates: {
+                  item({ item, components }) {
+                    return <ProductItem hit={item} components={components} />;
+                  },
+                },
+              },
+            ]}
           />
           {/* {(selected || selected) && <Sidebar></Sidebar>} */}
         </div>
