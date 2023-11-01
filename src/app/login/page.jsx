@@ -7,6 +7,18 @@ import "@/app/globals.css";
 import Image from "next/image";
 import register from "../../../public/register.svg";
 import log from "../../../public/log.svg";
+import {
+  getAuth,
+  setPersistence,
+  signInWithEmailAndPassword,
+  browserSessionPersistence,
+  createUserWithEmailAndPassword,
+  browserLocalPersistence,
+  updateProfile,
+} from "firebase/auth";
+
+import { auth } from "../../../firebase";
+import { redirect } from "next/navigation";
 export default function Login() {
   const [isSignUp, setIsSignUp] = useState(false);
   const [username, setUsername] = useState("");
@@ -54,15 +66,17 @@ export default function Login() {
     //     console.log(error);
     // })
 
-    setPersistence(auth, browserLocalPersistence).then(() => {
-      // Existing and future Auth states are now persisted in the current
-      // session only. Closing the window would clear any existing state even
-      // if a user forgets to sign out.
-      // ...
-      // New sign-in will be persisted with session persistence.
-      console.log("LOGGED IN + PERSISTENCE SET");
-      return signInWithEmailAndPassword(auth, email, password);
-    });
+    setPersistence(auth, browserLocalPersistence)
+      .then(() => {
+        // Existing and future Auth states are now persisted in the current
+        // session only. Closing the window would clear any existing state even
+        // if a user forgets to sign out.
+        // ...
+        // New sign-in will be persisted with session persistence.
+        console.log("LOGGED IN + PERSISTENCE SET");
+        return signInWithEmailAndPassword(auth, email, password);
+      })
+      .then(() => redirect("/test"));
   };
   return (
     <div
@@ -86,6 +100,7 @@ export default function Login() {
             className={`flex items-center justify-center flex-col py-0 px-20 transition delay-700 duration-200 overflow-hidden col-start-1 col-end-2 row-start-1 row-end-2 ${
               isSignUp ? "opacity-0 z-[1]" : "z-[2]"
             } `}
+            onSubmit={signIn}
           >
             <h2 className="text-4xl text-neutral-700 mb-2.5">Sign in</h2>
             <div className="input-field max-w-sm bg-gray-100 rounded-[55px] h-14 my-2.5 mx-0 flex items-center grid grid-cols-[15] [85] px-1 py-0 relative">
@@ -94,6 +109,8 @@ export default function Login() {
                 type="text"
                 placeholder="Username"
                 className="pl-4 bg-transparent outline-none border-none leading-4 font-semibold text-[1.1rem] text-gray-700 placeholder-gray-300 font-medium"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="input-field max-w-sm bg-gray-100 rounded-[55px] h-14 my-2.5 mx-0 flex items-center grid grid-cols-[15] [85] px-1 py-0 relative">
@@ -102,6 +119,8 @@ export default function Login() {
                 type="password"
                 placeholder="Password"
                 className="pl-4 bg-transparent outline-none border-none leading-4 font-semibold text-[1.1rem] text-gray-700 placeholder-gray-300 font-medium"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <input
@@ -143,6 +162,7 @@ export default function Login() {
             className={`flex items-center justify-center flex-col py-0 px-20 transition-all delay-700 duration-200 overflow-hidden col-start-1 col-end-2 row-start-1 row-end-2  ${
               isSignUp ? "opacity-100 z-[2]" : "opacity-0 z-[1]"
             }`}
+            onSubmit={signUp}
           >
             <h2 className="text-4xl text-neutral-700 mb-2.5">Sign up</h2>
             <div className="input-field max-w-sm bg-gray-100 rounded-[55px] h-14 my-2.5 mx-0 flex items-center grid grid-cols-[15] [85] px-1 py-0 relative">
@@ -151,6 +171,10 @@ export default function Login() {
                 type="text"
                 placeholder="Username"
                 className="pl-4 bg-transparent outline-none border-none leading-4 font-semibold text-[1.1rem] text-gray-700 placeholder-gray-300 font-medium"
+                value={username}
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                }}
               />
             </div>
             <div className="input-field max-w-sm bg-gray-100 rounded-[55px] h-14 my-2.5 mx-0 flex items-center grid grid-cols-[15] [85] px-1 py-0 relative">
@@ -159,6 +183,8 @@ export default function Login() {
                 type="email"
                 placeholder="Email"
                 className="pl-4 bg-transparent outline-none border-none leading-4 font-semibold text-[1.1rem] text-gray-700 placeholder-gray-300 font-medium"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="input-field max-w-sm bg-gray-100 rounded-[55px] h-14 my-2.5 mx-0 flex items-center grid grid-cols-[15] [85] px-1 py-0 relative">
@@ -167,6 +193,8 @@ export default function Login() {
                 type="password"
                 placeholder="Password"
                 className="pl-4 bg-transparent outline-none border-none leading-4 font-semibold text-[1.1rem] text-gray-700 placeholder-gray-300 font-medium"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <input
