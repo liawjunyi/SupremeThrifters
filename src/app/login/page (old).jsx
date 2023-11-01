@@ -9,6 +9,12 @@ export default function Home() {
   const [password, setPassword] = useState("");
   const [active, setActive] = useState(false);
 
+  const [isSignUp, setIsSignUp] = useState(false);
+
+  const toggleMode = () => {
+    setIsSignUp(!isSignUp);
+  };
+
   return (
     <div class="flex flex-col justify-center items-center m-1/10 h-full">
       <div

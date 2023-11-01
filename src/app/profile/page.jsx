@@ -6,7 +6,7 @@ import { useState, useRef } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {auth} from "../../../firebase";
 import Navbar from "@/components/Navbar";
-
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 export default function Profile() {
   const [userData, setUserData] = useState(null);
@@ -73,18 +73,12 @@ export default function Profile() {
     deleteObject(deleteImageRef);
   };
 
-
-
-
-    
-    
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-    
-        const displayName = user.displayName;
-        const email = user.email;
-        const photoURL = user.photoURL;
-        const uid = user.uid;
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const displayName = user.displayName;
+      const email = user.email;
+      const photoURL = user.photoURL;
+      const uid = user.uid;
 
         setDisplay(displayName);
         setPfp(photoURL);
@@ -98,29 +92,24 @@ export default function Profile() {
       }
     });
 
+  const fetchUserData = async () => {
+    const usersRef = collection(db, "users");
 
+    const q = query(usersRef, where("uid", "==", user.uid));
+    console.log(user.uid);
+    const res = await getDocs(q);
 
-
-
-  // const fetchUserData = async () => {
-  //   const usersRef = collection(db, "users");
-
-  //   const q = query(usersRef, where("uid", "==", user.uid));
-  //   console.log(user.uid);
-  //   const res = await getDocs(q);
-
-  //   res.forEach((doc) => {
-  //     console.log(doc);
-  //     console.log(doc.data());
-  //     setDbData(doc.data());
-  //     setUserData(doc.data());
-  //   });
-  // };
-  // useEffect(() => {
-  //   if (user) {
-  //     fetchUserData();
-  //   }
-  // }, [user]);
+    res.forEach((doc) => {
+      console.log(doc);
+      console.log(doc.data());
+      setUserData(doc.data());
+    });
+  };
+  useEffect(() => {
+    if (user) {
+      fetchUserData();
+    }
+  }, [user]);
   return (
     
     
@@ -154,8 +143,8 @@ export default function Profile() {
                  
                 {
                   isloggedin
-                  ?<img className="rounded-full w-20 h-20"src={pfp} alt="" />
-                  :
+                  ?(<img className="rounded-full w-20 h-20" src={pfp} alt="" />
+  ):(
                        <svg
                  className="h-20 w-20 text-gray-300"
                  viewBox="0 0 24 24"
@@ -168,7 +157,7 @@ export default function Profile() {
                    clip-rule="evenodd"
                  />
                </svg>
-                }
+                )}
                  
                 
 
@@ -374,7 +363,5 @@ export default function Profile() {
         </Button>
       </div>
     </form>
-
-    
   );
 }
