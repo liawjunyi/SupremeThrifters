@@ -4,8 +4,8 @@ import Input from "@/components/Input";
 import Link from "next/link";
 import { useState, useRef } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import {auth} from "../../../firebase";
-
+import { auth } from "../../../firebase";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 export default function Profile() {
   const [userData, setUserData] = useState(null);
@@ -14,9 +14,9 @@ export default function Profile() {
   const [confirmPassword, setConfirmPassword] = useState(null);
   const profileRef = useRef(null);
   const user = auth.currentUser;
-  const [display, setDisplay] = useState("")
-  const [pfp, setPfp] = useState("")
-  const [isloggedin, setIsloggedin] = useState(false)
+  const [display, setDisplay] = useState("");
+  const [pfp, setPfp] = useState("");
+  const [isloggedin, setIsloggedin] = useState(false);
 
   const addProfilePic = (e) => {
     const file = e.target.files[0];
@@ -71,57 +71,42 @@ export default function Profile() {
     deleteObject(deleteImageRef);
   };
 
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const displayName = user.displayName;
+      const email = user.email;
+      const photoURL = user.photoURL;
+      const uid = user.uid;
 
+      setDisplay(displayName);
+      setPfp(photoURL);
+      setIsloggedin(true);
 
+      console.log("username is" + displayName);
+      console.log("Profile pic is " + photoURL);
+      console.log(email);
+    }
+  });
 
-    
-    
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-    
-        const displayName = user.displayName;
-        const email = user.email;
-        const photoURL = user.photoURL;
-        const uid = user.uid;
+  const fetchUserData = async () => {
+    const usersRef = collection(db, "users");
 
-        setDisplay(displayName);
-        setPfp(photoURL);
-        setIsloggedin(true);
+    const q = query(usersRef, where("uid", "==", user.uid));
+    console.log(user.uid);
+    const res = await getDocs(q);
 
-        console.log("username is" + displayName);
-        console.log("Profile pic is " + photoURL);
-        console.log(email);
-
-        
-      }
+    res.forEach((doc) => {
+      console.log(doc);
+      console.log(doc.data());
+      setUserData(doc.data());
     });
-
-
-
-
-
-  // const fetchUserData = async () => {
-  //   const usersRef = collection(db, "users");
-
-  //   const q = query(usersRef, where("uid", "==", user.uid));
-  //   console.log(user.uid);
-  //   const res = await getDocs(q);
-
-  //   res.forEach((doc) => {
-  //     console.log(doc);
-  //     console.log(doc.data());
-  //     setDbData(doc.data());
-  //     setUserData(doc.data());
-  //   });
-  // };
-  // useEffect(() => {
-  //   if (user) {
-  //     fetchUserData();
-  //   }
-  // }, [user]);
+  };
+  useEffect(() => {
+    if (user) {
+      fetchUserData();
+    }
+  }, [user]);
   return (
-    
-    
     <form className="m-20 mb-10">
       <div className="space-y-12">
         <div className="sm:container lg:border-b lg:border-gray-300 lg:pb-12 lg:grid lg:grid-cols-12">
@@ -144,30 +129,22 @@ export default function Profile() {
                   Photo
                 </label>
                 <div className="mt-2 flex items-center gap-x-3">
-                  
-
-                
-                 
-                {
-                  isloggedin
-                  ?<img src={pfp} alt="" />
-                  :
-                       <svg
-                 className="h-20 w-20 text-gray-300"
-                 viewBox="0 0 24 24"
-                 fill="currentColor"
-                 aria-hidden="true"
-               >
-                 <path
-                   fill-rule="evenodd"
-                   d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
-                   clip-rule="evenodd"
-                 />
-               </svg>
-                }
-                 
-                
-
+                  {isloggedin ? (
+                    <img src={pfp} alt="" />
+                  ) : (
+                    <svg
+                      className="h-20 w-20 text-gray-300"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  )}
 
                   {/*  */}
                   <Button size={"sm"}>Change</Button>
@@ -424,7 +401,5 @@ export default function Profile() {
         </Button>
       </div>
     </form>
-
-    
   );
 }

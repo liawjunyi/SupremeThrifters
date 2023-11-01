@@ -17,13 +17,18 @@ import {
   updateProfile,
 } from "firebase/auth";
 
-import { auth } from "../../../firebase";
-import { redirect } from "next/navigation";
+import { auth, db } from "../../../firebase";
+import { useRouter } from "next/navigation";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
+
 export default function Login() {
   const [isSignUp, setIsSignUp] = useState(false);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [profilePic, setProfilePic] = useState("");
   const [password, setPassword] = useState("");
+
+  const { push } = useRouter();
 
   const signUp = (e) => {
     e.preventDefault();
@@ -41,6 +46,15 @@ export default function Login() {
         console.log(userCredential);
         console.log("SIGN UP END ");
         setIsSignUp(false);
+
+        setDoc(doc(db, "users", user.uid), {
+          username: username,
+          profilePic: "",
+          email: user.email,
+          uid: user.uid,
+          reserved: [],
+          likes: [],
+        }).then(() => alert("successfully saved"));
       })
       .catch((error) => {
         console.log(error);
@@ -76,8 +90,9 @@ export default function Login() {
         console.log("LOGGED IN + PERSISTENCE SET");
         return signInWithEmailAndPassword(auth, email, password);
       })
-      .then(() => redirect("/test"));
+      .then(() => push("/"));
   };
+
   return (
     <div
       id="container"
@@ -103,7 +118,7 @@ export default function Login() {
             onSubmit={signIn}
           >
             <h2 className="text-4xl text-neutral-700 mb-2.5">Sign in</h2>
-            <div className="input-field max-w-sm bg-gray-100 rounded-[55px] h-14 my-2.5 mx-0 flex items-center grid grid-cols-[15] [85] px-1 py-0 relative">
+            <div className="input-field max-w-sm bg-gray-100 rounded-[55px] h-14 my-2.5 mx-0 flex items-center pl-5 px-1 py-0 relative">
               <i className="fas fa-user text-center leading-[55px] text-gray-400 transition duration-500 text-[1.1rem]"></i>
               <input
                 type="text"
@@ -113,7 +128,7 @@ export default function Login() {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div className="input-field max-w-sm bg-gray-100 rounded-[55px] h-14 my-2.5 mx-0 flex items-center grid grid-cols-[15] [85] px-1 py-0 relative">
+            <div className="input-field max-w-sm bg-gray-100 rounded-[55px] h-14 my-2.5 mx-0 flex items-center pl-5 px-1 py-0 relative">
               <i className="fas fa-lock text-center leading-[55px] text-gray-400 transition duration-500 text-[1.1rem]"></i>
               <input
                 type="password"
@@ -128,35 +143,6 @@ export default function Login() {
               value="Login"
               className="btn solid w-[150px] bg-blue-500 border-none outline-none h-12 rounded-3xl text-white uppercase font-semibold my-2.5 mx-0 cursor-pointer transition duration-500 btn hover:bg-blue-500"
             />
-            <p className="social-text px-0 py-7 text-base">
-              Or Sign in with social platforms
-            </p>
-            <div className="social-media flex justify-center">
-              <a
-                href="#"
-                className="social-icon h-[46px] w-[46px] flex justify-center items-center mx-1.5 my-0 text-gray-700 rounded-full border border-solid border-gray-700 no-underline leading-4 transition duration-300 hover:text-blue-500 hover:border-blue-500"
-              >
-                <i className="fab fa-facebook-f text-gray-600"></i>
-              </a>
-              <a
-                href="#"
-                className="social-icon h-[46px] w-[46px] flex justify-center items-center mx-1.5 my-0 text-gray-700 rounded-full border border-solid border-gray-700 no-underline leading-4 transition duration-300 hover:text-blue-500 hover:border-blue-500"
-              >
-                <i className="fab fa-twitter text-gray-600"></i>
-              </a>
-              <a
-                href="#"
-                className="social-icon h-[46px] w-[46px] flex justify-center items-center mx-1.5 my-0 text-gray-700 rounded-full border border-solid border-gray-700 no-underline leading-4 transition duration-300 hover:text-blue-500 hover:border-blue-500"
-              >
-                <i className="fab fa-google text-gray-600"></i>
-              </a>
-              <a
-                href="#"
-                className="social-icon p-2 border border-gray-600 rounded-full"
-              >
-                <i className="fab fa-linkedin-in text-gray-600"></i>
-              </a>
-            </div>
           </form>
           <form
             className={`flex items-center justify-center flex-col py-0 px-20 transition-all delay-700 duration-200 overflow-hidden col-start-1 col-end-2 row-start-1 row-end-2  ${
@@ -165,8 +151,8 @@ export default function Login() {
             onSubmit={signUp}
           >
             <h2 className="text-4xl text-neutral-700 mb-2.5">Sign up</h2>
-            <div className="input-field max-w-sm bg-gray-100 rounded-[55px] h-14 my-2.5 mx-0 flex items-center grid grid-cols-[15] [85] px-1 py-0 relative">
-              <i className="fas fa-user text-center leading-[55px] text-gray-400 transition duration-500 text-[1.1rem]"></i>
+            <div className="input-field max-w-sm bg-gray-100 rounded-[55px] h-14 my-2.5 mx-0 flex items-center pl-5 px-1 py-0 relative">
+              <i className="fas fa-lock text-center leading-[55px] text-gray-400 transition duration-500 text-[1.1rem]"></i>
               <input
                 type="text"
                 placeholder="Username"
@@ -177,7 +163,7 @@ export default function Login() {
                 }}
               />
             </div>
-            <div className="input-field max-w-sm bg-gray-100 rounded-[55px] h-14 my-2.5 mx-0 flex items-center grid grid-cols-[15] [85] px-1 py-0 relative">
+            <div className="input-field max-w-sm bg-gray-100 rounded-[55px] h-14 my-2.5 mx-0 flex items-center pl-5 px-1 py-0 relative">
               <i className="fas fa-envelope text-center leading-[55px] text-gray-400 transition duration-500 text-[1.1rem]"></i>
               <input
                 type="email"
@@ -187,7 +173,7 @@ export default function Login() {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div className="input-field max-w-sm bg-gray-100 rounded-[55px] h-14 my-2.5 mx-0 flex items-center grid grid-cols-[15] [85] px-1 py-0 relative">
+            <div className="input-field max-w-sm bg-gray-100 rounded-[55px] h-14 my-2.5 mx-0 flex items-center pl-5 px-1 py-0 relative">
               <i className="fas fa-lock text-center leading-[55px] text-gray-400 transition duration-500 text-[1.1rem]"></i>
               <input
                 type="password"
@@ -202,35 +188,6 @@ export default function Login() {
               className="btn solid w-[150px] bg-blue-500 border-none outline-none h-12 rounded-3xl text-white uppercase font-semibold my-2.5 mx-0 cursor-pointer transition duration-500 btn hover:bg-blue-500"
               value="Sign up"
             />
-            <p className="social-text px-0 py-7 text-base">
-              Or Sign up with social platforms
-            </p>
-            <div className="social-media flex justify-center">
-              <a
-                href="#"
-                className="social-icon h-[46px] w-[46px] flex justify-center items-center mx-1.5 my-0 text-gray-700 rounded-full border border-solid border-gray-700 no-underline leading-4 transition duration-300 hover:text-blue-500 hover:border-blue-500"
-              >
-                <i className="fab fa-facebook-f text-gray-600"></i>
-              </a>
-              <a
-                href="#"
-                className="social-icon h-[46px] w-[46px] flex justify-center items-center mx-1.5 my-0 text-gray-700 rounded-full border border-solid border-gray-700 no-underline leading-4 transition duration-300 hover:text-blue-500 hover:border-blue-500"
-              >
-                <i className="fab fa-twitter text-gray-600"></i>
-              </a>
-              <a
-                href="#"
-                className="social-icon h-[46px] w-[46px] flex justify-center items-center mx-1.5 my-0 text-gray-700 rounded-full border border-solid border-gray-700 no-underline leading-4 transition duration-300 hover:text-blue-500 hover:border-blue-500"
-              >
-                <i className="fab fa-google text-gray-600"></i>
-              </a>
-              <a
-                href="#"
-                className="social-icon p-2 border border-gray-600 rounded-full"
-              >
-                <i className="fab fa-linkedin-in text-gray-600"></i>
-              </a>
-            </div>
           </form>
         </div>
       </div>
