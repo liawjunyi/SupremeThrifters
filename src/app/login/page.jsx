@@ -7,7 +7,7 @@ import "@/app/globals.css";
 import Image from "next/image";
 import register from "../../../public/register.svg";
 import log from "../../../public/log.svg";
-import { getAuth, setPersistence, signInWithEmailAndPassword, browserSessionPersistence, createUserWithEmailAndPassword, browserLocalPersistencel, updateProfile } from "firebase/auth";
+import { getAuth, setPersistence, signInWithEmailAndPassword, browserSessionPersistence, createUserWithEmailAndPassword, browserLocalPersistence, updateProfile } from "firebase/auth";
 
 import { auth } from "../../../firebase";
 import { Nanum_Gothic, Single_Day } from "next/font/google";

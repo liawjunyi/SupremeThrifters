@@ -1,6 +1,6 @@
 "use client";
 
-import shirticon from "../../public/tshirt_solid.svg";
+import logo from "../../public/st_logo.svg";
 import Image from "next/image";
 import Link from "next/link";
 import "@reach/combobox/styles.css";
@@ -13,8 +13,8 @@ const Navbar = () => {
         {/* {logo} */}
 
         <div className="flex text-2xl cursor-pointer justify-center items-center gap-2">
-          <Image src={shirticon} />
-          <span className="font-bold text-gray-400 ">Supreme Thrifters</span>
+          <Image className="w-10 h-10" src={logo} />
+          <span className="hover:text-neon hover:text-shadow-neon font-bold text-gray-400 ">Supreme Thrifters</span>
         </div>
 
         {/* {Navlinks here} */}
