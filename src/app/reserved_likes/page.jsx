@@ -12,30 +12,32 @@ export default function Reserved() {
   const [products_liked, setProductsLiked] = useState([]);
 
   const getData_reserved = async () => {
-    const q_reserved = query(
-      collection(db, "listings"),
-      where("product_name", "==", "Jacket")
+    const q_user = query(
+      collection(db, "usersListing","xZ4iMDqh8fa5I06TI0Zt", "reserved"),
+      // where("user_id", "==", 1)
     );
 
     const reservedList = [];
 
-    const querySnapshot = await getDocs(q_reserved);
+    const querySnapshot = await getDocs(q_user);
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
       reservedList.push(doc.data());
     });
 
     setProductsReserved(reservedList);
+    console.log(reservedList)
   };
-
+  
   useEffect(() => {
     getData_reserved();
   }, []);
 
+
   const getData_liked = async () => {
     const q_liked = query(
-      collection(db, "listings"),
-      where("product_name", "==", "Nike T-Shirt")
+      collection(db, "usersListing","xZ4iMDqh8fa5I06TI0Zt", "liked"),
+      // where("product_name", "==", "Nike T-Shirt")
     );
 
     let likedList = [];
@@ -60,7 +62,7 @@ export default function Reserved() {
   };
   return (
     <div className="bg-white">
-      <Navbar />
+      <Navbar></Navbar>
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <div className="flex space-x-4">
           <Button
@@ -91,8 +93,7 @@ export default function Reserved() {
                   <div key={product.id} className="group relative">
                     <Card className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                       <img
-                        src={product.imageSrc}
-                        alt={product.imageAlt}
+                        src={product.product_img_url}
                         className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                       />
                     </Card>
@@ -128,8 +129,7 @@ export default function Reserved() {
                   <div key={product.id} className="group relative">
                     <Card className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                       <img
-                        src={product.imageSrc}
-                        alt={product.imageAlt}
+                        src={product.product_img_url}
                         className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                       />
                     </Card>
