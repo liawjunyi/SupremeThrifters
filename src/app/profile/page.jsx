@@ -2,10 +2,11 @@
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Link from "next/link";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../../firebase";
+import { auth, db, storage } from "../../../firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 export default function Profile() {
   const [userData, setUserData] = useState(null);
@@ -13,14 +14,18 @@ export default function Profile() {
   const [newPassword, setNewPassword] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(null);
   const profileRef = useRef(null);
+  const auth = getAuth();
   const user = auth.currentUser;
+
   const [display, setDisplay] = useState("");
   const [pfp, setPfp] = useState("");
   const [isloggedin, setIsloggedin] = useState(false);
 
   const addProfilePic = (e) => {
     const file = e.target.files[0];
+
     const imagesRef = ref(storage, `profilePic/${file.name}`);
+
     if (userData.profilePic) {
       setUserData((prev) => {
         return { ...prev, profilePic: null };
@@ -88,19 +93,44 @@ export default function Profile() {
     }
   });
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    updateDoc(doc(db, "users", user.uid), {
+      username: userData.username,
+      profilePic: { ...userData.profilePic },
+    }).then(() => alert("successfully saved"));
+
+    if (currentPassword && newPassword && confirmPassword) {
+      const credential = EmailAuthProvider.credential(
+        auth.currentUser.email,
+        currentPassword
+      );
+      reauthenticateWithCredential(auth.currentUser, credential)
+        .then(() => {
+          if (newPassword === confirmPassword) {
+            updatePassword(auth.currentUser, newPassword);
+          } else {
+            throw new Error("passwords do not match");
+          }
+        })
+        .catch((err) => alert(err.message));
+    }
+  };
+
   const fetchUserData = async () => {
     const usersRef = collection(db, "users");
 
     const q = query(usersRef, where("uid", "==", user.uid));
-    console.log(user.uid);
+
     const res = await getDocs(q);
 
     res.forEach((doc) => {
-      console.log(doc);
       console.log(doc.data());
       setUserData(doc.data());
     });
   };
+
   useEffect(() => {
     if (user) {
       fetchUserData();
@@ -139,15 +169,26 @@ export default function Profile() {
                       aria-hidden="true"
                     >
                       <path
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                       />
                     </svg>
                   )}
 
                   {/*  */}
-                  <Button size={"sm"}>Change</Button>
+                  <Button
+                    size={"sm"}
+                    onClick={() => profileRef.current.click()}
+                  >
+                    Change
+                  </Button>
+                  <input
+                    type="file"
+                    ref={profileRef}
+                    hidden
+                    onChange={addProfilePic}
+                  />
                 </div>
               </div>
 
@@ -156,6 +197,7 @@ export default function Profile() {
                   label={"Username"}
                   placeholder={"RealKrazyWoman"}
                   value={display}
+                  onChange={() => console.log("change username")}
                 ></Input>
               </div>
 
@@ -219,7 +261,7 @@ export default function Profile() {
                   <select
                     id="area"
                     name="area"
-                    autocomplete="area-name"
+                    autoComplete="area-name"
                     className="block w-full rounded-md border-1 py-1.5 text-gray-900  "
                   >
                     <option>North</option>
