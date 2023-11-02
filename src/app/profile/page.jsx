@@ -4,7 +4,8 @@ import Input from "@/components/Input";
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { auth, db, storage } from "../../../firebase";
+import { auth } from "../../../firebase";
+import Navbar from "@/components/Navbar";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
@@ -16,9 +17,9 @@ export default function Profile() {
   const profileRef = useRef(null);
   const auth = getAuth();
   const user = auth.currentUser;
-
   const [display, setDisplay] = useState("");
   const [pfp, setPfp] = useState("");
+  const [email, setEmail] = useState("");
   const [isloggedin, setIsloggedin] = useState(false);
 
   const addProfilePic = (e) => {
@@ -86,7 +87,7 @@ export default function Profile() {
       setDisplay(displayName);
       setPfp(photoURL);
       setIsloggedin(true);
-
+      setEmail(email);
       console.log("username is" + displayName);
       console.log("Profile pic is " + photoURL);
       console.log(email);
@@ -137,9 +138,10 @@ export default function Profile() {
     }
   }, [user]);
   return (
-    <form className="m-20 mb-10">
+    <form className="m-20 mt-40 mb-10">
       <div className="space-y-12">
-        <div className="sm:container lg:border-b lg:border-gray-300 lg:pb-12 lg:grid lg:grid-cols-12">
+        <Navbar></Navbar>
+        <div className="sm:container lg:border-b lg:border-gray-300 lg:pb-12 lg:grid lg:grid-cols-12 ">
           <div className="sm: lg:col-span-4">
             <h2 className="text-base font-semibold leading-7 text-gray-900">
               Profile
@@ -160,7 +162,7 @@ export default function Profile() {
                 </label>
                 <div className="mt-2 flex items-center gap-x-3">
                   {isloggedin ? (
-                    <img src={pfp} alt="" />
+                    <img className="rounded-full w-20 h-20" src={pfp} alt="" />
                   ) : (
                     <svg
                       className="h-20 w-20 text-gray-300"
@@ -169,9 +171,9 @@ export default function Profile() {
                       aria-hidden="true"
                     >
                       <path
-                        fillRule="evenodd"
+                        fill-rule="evenodd"
                         d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
-                        clipRule="evenodd"
+                        clip-rule="evenodd"
                       />
                     </svg>
                   )}
@@ -200,26 +202,6 @@ export default function Profile() {
                   onChange={() => console.log("change username")}
                 ></Input>
               </div>
-
-              <div className="col-span-full">
-                <label
-                  for="about"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  About
-                </label>
-                <div className="mt-2">
-                  <textarea
-                    id="about"
-                    name="about"
-                    rows="3"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  ></textarea>
-                </div>
-                <p className="mt-3 text-sm leading-6 text-gray-600">
-                  Write a few sentences about yourself.
-                </p>
-              </div>
             </div>
           </div>
         </div>
@@ -233,74 +215,38 @@ export default function Profile() {
               Use a permanent address where you can receive mail.
             </p>
           </div>
-          <div className="lg:col-span-8 lg:col-start-6 lg:col-end-12">
-            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div className="sm:col-span-3">
-                <Input label={"First Name"} placeholder={"Real"}></Input>
-              </div>
-
-              <div className="sm:col-span-3">
-                <Input label={"Last Name"} placeholder={"KrazyWoman"}></Input>
+          <div className="lg:col-span-8 lg:col-start-6 lg:col-end-12 border">
+            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 ">
+              <div className="sm:col-span-4">
+                <Input
+                  label={"Name"}
+                  placeholder={"RealKrazyWoman"}
+                  value={display}
+                ></Input>
               </div>
 
               <div className="sm:col-span-4">
                 <Input
                   label={"Email Address"}
                   placeholder={"realkrazywoman@prnk.com"}
+                  value={email}
                 ></Input>
               </div>
 
-              <div className="sm:col-span-3">
-                <label
-                  for="area"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Area
-                </label>
-                <div className="mt-2">
-                  <select
-                    id="area"
-                    name="area"
-                    autoComplete="area-name"
-                    className="block w-full rounded-md border-1 py-1.5 text-gray-900  "
-                  >
-                    <option>North</option>
-                    <option>North-East</option>
-                    <option>North-West</option>
-                    <option>East</option>
-                    <option>South</option>
-                    <option>South-East</option>
-                    <option>South-West</option>
-                    <option>West</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="col-span-full">
+              <div className="sm:col-span-4">
                 <Input
                   label={"Street Address"}
                   placeholder={"Serangoon North Avenue 3"}
+                  value={"Serangoon North Avenue 3"}
                 ></Input>
-              </div>
-
-              <div className="sm:col-span-2 sm:col-start-1">
-                <Input label={"Block"} placeholder={"286"}></Input>
-              </div>
-
-              <div className="sm:col-span-2">
-                <Input label={"Unit Number"} placeholder={"#12-10"}></Input>
-              </div>
-
-              <div className="sm:col-span-2">
-                <Input label={"Postal Code"} placeholder={"550123"}></Input>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="sm:container lg:border-b lg:border-gray-300 lg:pb-12 lg:grid lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <h2 className="text-base font-semibold leading-7 text-gray-900">
+        <div className="sm:container lg:border-b lg:border-gray-300 lg:pb-12 lg:grid lg:grid-cols-12 ">
+          <div className="lg:col-span-4 ">
+            <h2 className="text-base font-semibold leading-7 text-gray-900 ">
               Notifications
             </h2>
             <p className="mt-1 text-sm leading-6 text-gray-600">
@@ -308,7 +254,7 @@ export default function Profile() {
               what else you want to hear about.
             </p>
           </div>
-          <div className="lg:col-span-8 col-start-6 col-end-12">
+          <div className="lg:col-span-8 lg:col-start-6 lg:col-end-12">
             <div className="mt-10 space-y-10">
               <fieldset>
                 <legend className="text-sm font-semibold leading-6 text-gray-900">
@@ -322,6 +268,7 @@ export default function Profile() {
                         name="comments"
                         type="checkbox"
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                        checked
                       ></input>
                     </div>
                     <div className="text-sm leading-6">
@@ -342,6 +289,7 @@ export default function Profile() {
                         id="candidates"
                         name="candidates"
                         type="checkbox"
+                        checked
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                       ></input>
                     </div>
@@ -391,6 +339,7 @@ export default function Profile() {
                       name="push-notifications"
                       type="radio"
                       className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                      checked
                     ></input>
                     <label
                       for="push-everything"
