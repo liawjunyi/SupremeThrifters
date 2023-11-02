@@ -97,7 +97,7 @@ export default function Login() {
   return (
     <div
       id="container"
-      className={`before:content-[''] before:transition-all md:before:-translate-y-1/2 before:-translate-x-1/2 before:absolute md:before:w-[2000px] md:before:h-[2000px] before:w-[1500px] before:h-[1500px] md:before:-top-[10%] md:before:left-[initial]  before:left-[30%] before:bg-gradient-to-r before:from-blue-500 before:to-blue-300 before:duration-[1800ms] before:ease-in-out before:rounded-[50%] before:z-[6] relative w-full bg-white md:min-h-screen overflow-hidden min-h-[800px] h-screen ${
+      className={`before:content-[''] before:transition-all md:before:-translate-y-1/2 before:-translate-x-1/2 before:absolute md:before:w-[2000px] md:before:h-[2000px] before:w-[1500px] before:h-[1500px] md:before:-top-[10%] md:before:left-[initial]  before:left-[30%] before:bg-gradient-to-r before:from-primary before:to-primary before:duration-[1800ms] before:ease-in-out before:rounded-[50%] before:z-[6] relative w-full bg-white md:min-h-screen overflow-hidden min-h-[800px] h-screen ${
         isSignUp
           ? "md:before:right-[52%] md:before:translate-x-full before:translate-y-full before:bottom-[32%]"
           : "md:before:-right-[19%] before:bottom-[68%]"
@@ -121,7 +121,7 @@ export default function Login() {
 
             <div className="justify-center items-center flex gap-5 mb-10 w-full ">
               <Image className="w-10 h-10 lg:w-10 lg:h-10" src={logo} />
-              <span className="font-bold text-[20px] lg:text-[40px] text-gray-400" >Supreme Thrifters</span>
+              <span className="font-bold text-[20px] lg:text-[40px] text-gray-700" >Supreme Thrifters</span>
             </div>
 
 
@@ -161,7 +161,7 @@ export default function Login() {
 
             <div className="justify-center items-center flex gap-5 mb-10 w-full ">
               <Image className="w-10 h-10 lg:w-10 lg:h-10" src={logo} />
-              <span className="font-bold text-[20px] lg:text-[40px] text-gray-400" >Supreme Thrifters</span>
+              <span className="font-bold text-[20px] lg:text-[40px] text-gray-700" >Supreme Thrifters</span>
             </div>
 
             <h2 className="text-4xl text-neutral-700 mb-2.5">Sign up</h2>
@@ -218,8 +218,8 @@ export default function Login() {
               isSignUp ? "md:-translate-x-[800px] -translate-y-[300px]" : ""
             }`}
           >
-            <h3 className="text-2xl text-gray-700">Welcome Back!</h3>
-            <p className="text-gray-600">
+            <h3 className="text-2xl text-white">Welcome Back!</h3>
+            <p className="text-white">
             Please login with your personal info.
             </p>
             <button
@@ -256,8 +256,8 @@ export default function Login() {
             }`}
           >
 
-            <h3 className="text-2xl text-gray-700">Hello, Friend!</h3>
-            <p className="text-gray-600">
+            <h3 className="text-2xl text-white">Welcome to Supreme Thrifters!</h3>
+            <p className="text-white">
             Enter your personal details and sign up with us.
             </p>
       
