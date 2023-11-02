@@ -5,9 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import "@reach/combobox/styles.css";
 import React, { useState, useEffect } from "react";
-import { getAuth, signOut, onAuthStateChanged} from "firebase/auth";
+import {  signOut, onAuthStateChanged} from "firebase/auth";
 import {auth} from "../../firebase"
-import Button from "@/components/Button"
+
 import { data } from "autoprefixer";
 
 const Navbar = () => {
@@ -57,12 +57,6 @@ const Navbar = () => {
             Home
           </Link>
 
-          <Link
-            className="font-semibold my-7 text-lg md:my-0 md:ml-8 text-gray-400 hover:text-neon hover:text-shadow-neon"
-            href="/reserved_likes"
-          >
-            Reserved
-          </Link>
 
           <Link
             className="font-semibold my-7 text-lg md:my-0 md:ml-8 text-gray-400 hover:text-neon hover:text-shadow-neon"
@@ -71,6 +65,14 @@ const Navbar = () => {
             Browse
           </Link>
 
+          <Link
+            className="font-semibold my-7 text-lg md:my-0 md:ml-8 text-gray-400 hover:text-neon hover:text-shadow-neon"
+            href="/reserved_likes"
+          >
+            Reserved
+          </Link>
+
+        
           <Link
             className="font-semibold my-7 text-lg md:my-0 md:ml-8 text-gray-400 hover:text-neon hover:text-shadow-neon"
             href="/profile"
