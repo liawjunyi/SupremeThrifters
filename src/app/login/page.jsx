@@ -7,6 +7,7 @@ import "@/app/globals.css";
 import Image from "next/image";
 import register from "../../../public/register.svg";
 import log from "../../../public/log.svg";
+import logo from "../../../public/st_logo.svg";
 import {
   getAuth,
   setPersistence,
@@ -117,6 +118,13 @@ export default function Login() {
             } `}
             onSubmit={signIn}
           >
+
+            <div className="justify-center items-center flex gap-5 mb-10 w-full ">
+              <Image className="w-10 h-10 lg:w-10 lg:h-10" src={logo} />
+              <span className="font-bold text-[20px] lg:text-[40px] text-gray-400" >Supreme Thrifters</span>
+            </div>
+
+
             <h2 className="text-4xl text-neutral-700 mb-2.5">Sign in</h2>
             <div className="input-field max-w-sm bg-gray-100 rounded-[55px] h-14 my-2.5 mx-0 flex items-center pl-5 px-1 py-0 relative">
               <i className="fas fa-user text-center leading-[55px] text-gray-400 transition duration-500 text-[1.1rem]"></i>
@@ -150,6 +158,12 @@ export default function Login() {
             }`}
             onSubmit={signUp}
           >
+
+            <div className="justify-center items-center flex gap-5 mb-10 w-full ">
+              <Image className="w-10 h-10 lg:w-10 lg:h-10" src={logo} />
+              <span className="font-bold text-[20px] lg:text-[40px] text-gray-400" >Supreme Thrifters</span>
+            </div>
+
             <h2 className="text-4xl text-neutral-700 mb-2.5">Sign up</h2>
             <div className="input-field max-w-sm bg-gray-100 rounded-[55px] h-14 my-2.5 mx-0 flex items-center pl-5 px-1 py-0 relative">
               <i className="fas fa-lock text-center leading-[55px] text-gray-400 transition duration-500 text-[1.1rem]"></i>
@@ -204,10 +218,9 @@ export default function Login() {
               isSignUp ? "md:-translate-x-[800px] -translate-y-[300px]" : ""
             }`}
           >
-            <h3 className="text-2xl text-gray-700">New here ?</h3>
+            <h3 className="text-2xl text-gray-700">Welcome Back!</h3>
             <p className="text-gray-600">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-              ex ratione. Aliquid!
+            Please login with your personal info.
             </p>
             <button
               className="btn transparent bg-white text-gray-700 py-2 px-4 rounded-full mt-4 cursor-pointer"
@@ -242,11 +255,12 @@ export default function Login() {
                 : "md:translate-x-[800px] translate-y-[300px]"
             }`}
           >
-            <h3 className="text-2xl text-gray-700">One of us ?</h3>
+
+            <h3 className="text-2xl text-gray-700">Hello, Friend!</h3>
             <p className="text-gray-600">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              laboriosam ad deleniti.
+            Enter your personal details and sign up with us.
             </p>
+      
             <button
               className="btn transparent bg-white text-gray-700 py-2 px-4 rounded-full mt-4 cursor-pointer"
               onClick={() => setIsSignUp((prev) => !prev)}
