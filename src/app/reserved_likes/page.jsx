@@ -6,6 +6,8 @@ import React, { useEffect, useState } from "react";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../../firebase";
 import Navbar from "@/components/NavBar";
+import like from "../../../public/like.svg";
+import Image from "next/image";
 
 export default function Reserved() {
   const [products_reserved, setProductsReserved] = useState([]);
@@ -116,6 +118,27 @@ export default function Reserved() {
                         {product.price}
                       </p>
                     </div>
+                    <div className="flex justify-between pt-lg">
+                      <Button
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          console.log("reserved");
+                        }}
+                      >
+                        Reserve
+                      </Button>
+                      <Button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          console.log("liked");
+                        }}
+                        size="sm"
+                        bold={true}
+                      >
+                        <Image src={like} />
+                      </Button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -151,6 +174,27 @@ export default function Reserved() {
                       <p className="text-sm font-medium text-gray-900">
                         {product.price}
                       </p>
+                    </div>
+                    <div className="flex justify-between pt-lg">
+                      <Button
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          console.log("reserved");
+                        }}
+                      >
+                        Reserve
+                      </Button>
+                      <Button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          console.log("liked");
+                        }}
+                        size="sm"
+                        bold={true}
+                      >
+                        <Image src={like} />
+                      </Button>
                     </div>
                   </div>
                 ))}
