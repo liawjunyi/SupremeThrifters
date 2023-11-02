@@ -2,7 +2,7 @@
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Link from "next/link";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {auth} from "../../../firebase";
 import Navbar from "@/components/Navbar";

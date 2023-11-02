@@ -13,8 +13,8 @@ const Navbar = () => {
         {/* {logo} */}
 
         <div className="flex text-2xl cursor-pointer justify-center items-center gap-2">
-          <Image className="w-10 h-10" src={logo} />
-          <span className="hover:text-neon hover:text-shadow-neon font-bold text-gray-400 ">Supreme Thrifters</span>
+          <Image className="w-10 h-10 " src={logo} />
+          <Link className="hover:text-neon hover:text-shadow-neon font-bold text-gray-400" href="/">Supreme Thrifters</Link>
         </div>
 
         {/* {Navlinks here} */}
