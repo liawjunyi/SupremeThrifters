@@ -8,6 +8,7 @@ import { db } from "../../../firebase";
 import Navbar from "@/components/NavBar";
 import like from "../../../public/like.svg";
 import Image from "next/image";
+import Navbar_new from "@/components/Navbar_New";
 
 export default function Reserved() {
   const [products_reserved, setProductsReserved] = useState([]);
@@ -63,7 +64,7 @@ export default function Reserved() {
   };
   return (
     <div className="bg-white">
-      <Navbar></Navbar>
+      <Navbar_new></Navbar_new>
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <div className="flex space-x-4">
           <Button
