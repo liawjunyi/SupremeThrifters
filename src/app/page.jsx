@@ -12,6 +12,7 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Carousel from "@/components/Carousel";
 import Sidemenu from "@/components/Sidemenu";
+import Navbar_new from "@/components/Navbar_New";
 
 const Home = () => {
   const [menuActive, setMenuActive] = useState(false);
@@ -37,23 +38,7 @@ const Home = () => {
   return (
     <>
       <div>
-        <Sidemenu
-          className={`transition-opacity duration-500 ${
-            menuActive ? "opacity-100 ease-in z-20" : "opacity-0 ease-out z-0"
-          }`}
-        />
-
-        <div className="lg:hidden absolute top-lg left-sm z-30">
-          <Button
-            className=""
-            size="xs"
-            onClick={() => setMenuActive((prev) => !prev)}
-          >
-            <Image src={menuActive ? close : menu} />
-          </Button>
-        </div>
-
-        {showSideMenu ? <Sidemenu /> : <Navbar />}
+        <Navbar_new></Navbar_new>
 
         <div className="mt-20"></div>
         <Carousel></Carousel>
