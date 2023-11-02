@@ -6,6 +6,9 @@ import React, { useEffect, useState } from "react";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../../firebase";
 import Navbar from "@/components/NavBar";
+import like from "../../../public/like.svg";
+import Image from "next/image";
+import Navbar_new from "@/components/Navbar_New";
 
 export default function Reserved() {
   const [products_reserved, setProductsReserved] = useState([]);
@@ -26,7 +29,6 @@ export default function Reserved() {
     });
 
     setProductsReserved(reservedList);
-    console.log(reservedList)
   };
   
   useEffect(() => {
@@ -62,7 +64,7 @@ export default function Reserved() {
   };
   return (
     <div className="bg-white">
-      <Navbar></Navbar>
+      <Navbar_new></Navbar_new>
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <div className="flex space-x-4">
           <Button
@@ -116,6 +118,27 @@ export default function Reserved() {
                         {product.price}
                       </p>
                     </div>
+                    <div className="flex justify-between pt-lg">
+                      <Button
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          console.log("reserved");
+                        }}
+                      >
+                        Reserve
+                      </Button>
+                      <Button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          console.log("liked");
+                        }}
+                        size="sm"
+                        bold={true}
+                      >
+                        <Image src={like} />
+                      </Button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -151,6 +174,27 @@ export default function Reserved() {
                       <p className="text-sm font-medium text-gray-900">
                         {product.price}
                       </p>
+                    </div>
+                    <div className="flex justify-between pt-lg">
+                      <Button
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          console.log("reserved");
+                        }}
+                      >
+                        Reserve
+                      </Button>
+                      <Button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          console.log("liked");
+                        }}
+                        size="sm"
+                        bold={true}
+                      >
+                        <Image src={like} />
+                      </Button>
                     </div>
                   </div>
                 ))}

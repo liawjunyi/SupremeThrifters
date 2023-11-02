@@ -2,10 +2,11 @@
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Link from "next/link";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import {auth} from "../../../firebase";
+import {auth, db} from "../../../firebase";
 import Navbar from "@/components/Navbar";
+import Navbar_new from "@/components/Navbar_New";
 import { collection, getDocs, query, where } from "firebase/firestore";
 
 export default function Profile() {
@@ -115,7 +116,7 @@ export default function Profile() {
     
     <form className="m-20 mt-40 mb-10">
       <div className="space-y-12">
-        <Navbar></Navbar>
+        <Navbar_new></Navbar_new>
         <div className="sm:container lg:border-b lg:border-gray-300 lg:pb-12 lg:grid lg:grid-cols-12 ">
         
           <div className="sm: lg:col-span-4">

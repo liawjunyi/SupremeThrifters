@@ -15,6 +15,7 @@ import Carousel from "@/components/Carousel";
 import Sidemenu from "@/components/Sidemenu";
 import { db } from "../../firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
+import Navbar_new from "@/components/Navbar_New";
 
 
 
@@ -81,6 +82,7 @@ export default function Home () {
         </div>
 
         {showSideMenu ? <Sidemenu /> : <Navbar />}
+        <Navbar_new></Navbar_new>
 
         <div className="mt-20"></div>
         <Carousel></Carousel>
