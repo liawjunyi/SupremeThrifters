@@ -88,7 +88,7 @@ const Home = () => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero odio
             velit ullam inventore id accusantium consequatur, molestias
             molestiae voluptatibus minima dignissimos doloremque suscipit est
-            ipsam sunt ratione eius nulla perspiciatis.
+            ipsam sunt ratione eius nulla perspiciatis.a
           </p>
         </div>
         <br></br>
