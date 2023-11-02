@@ -28,7 +28,6 @@ export default function Reserved() {
     });
 
     setProductsReserved(reservedList);
-    console.log(reservedList)
   };
   
   useEffect(() => {

@@ -34,10 +34,10 @@ const Sidemenu = ({ className }) => {
               Browse
             </div>
           </Link>
-          <Link href="/reserved">
+          <Link href="/reserved_likes">
             <div
               className={`${
-                pathname == "/reserved" && "text-white"
+                pathname == "/reserved_likes" && "text-white"
               } text-2xl leading-[4.5rem] uppercase text-gray-400 hover:text-shadow-neon hover:text-neon`}
             >
               Reserved
