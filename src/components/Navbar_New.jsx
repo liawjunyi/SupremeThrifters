@@ -37,11 +37,9 @@ const Navbar_new = () => {
         </div>
 
         {showSideMenu ? <Sidemenu /> : <Navbar />}
-
       </div>
     </>
   );
 };
 
 export default Navbar_new;
-

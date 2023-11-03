@@ -16,6 +16,7 @@ import Sidemenu from "@/components/Sidemenu";
 import { db } from "../../firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import Navbar_new from "@/components/Navbar_New";
+import { useRouter } from "next/navigation";
 
 
 
@@ -24,6 +25,7 @@ import Navbar_new from "@/components/Navbar_New";
 
 
 export default function Home () {
+  const { push } = useRouter();
   const [menuActive, setMenuActive] = useState(false);
   const [showSideMenu, setShowSideMenu] = useState(false);
 
@@ -177,10 +179,10 @@ export default function Home () {
 
         {/* New Listings section */}
         <div className="text-center items-center">
-          <h1 className="text-[40px] font-semibold">New Collection</h1>
+          <h1 className="text-[40px] font-semibold">New Listings</h1>
           <hr className="w-52 h-1.5 bg-primary mx-auto"/>
         </div>
-        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gap-x-8 ">
+        <div className="mt-6 mx-11 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gap-x-8">
             {all_listing.slice(0,8).map((product) => (
               <div key={product.id} className="group relative justify-evenly flex">
                 <div>
@@ -188,6 +190,7 @@ export default function Home () {
                     <img
                       src={product.product_img_url}
                       className="h-[300px] w-full object-cover object-center lg:h-[300px] lg:w-full"
+                      // onClick={}
                     />
                     <div className="mt-4 flex">
                     <div>
@@ -204,7 +207,7 @@ export default function Home () {
                         {product.username}
                       </p>
                     </div>
-                    <p className="absolute pl-[245px] text-sm font-medium text-gray-900">
+                    <p className="absolute pl-[240px] text-sm font-medium text-gray-900">
                       {product.price}
                     </p>
                   </div> 
@@ -217,10 +220,10 @@ export default function Home () {
         
         {/* New Listings section */}
         <div className="text-center items-center">
-          <h1 className="text-[40px] font-semibold">Trending</h1>
+          <h1 className="text-[40px] font-semibold">Trendings</h1>
           <hr className="w-52 h-1.5 bg-primary mx-auto"/>
         </div>
-        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gap-x-8 ">
+        <div className="mt-6 mx-11 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gap-x-8 ">
           {all_listing.slice(9,17).map((product) => (
               <div key={product.id} className="group relative justify-evenly flex">
                 <div>
@@ -244,7 +247,7 @@ export default function Home () {
                         {product.username}
                       </p>
                     </div>
-                    <p className="absolute pl-[245px] text-sm font-medium text-gray-900">
+                    <p className="absolute pl-[240px] text-sm font-medium text-gray-900">
                       {product.price}
                     </p>
                   </div> 
