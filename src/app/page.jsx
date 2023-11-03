@@ -17,6 +17,7 @@ import { db } from "../../firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import Navbar_new from "@/components/Navbar_New";
 import { useRouter } from "next/navigation";
+import shirt from "../../public/shirt1.jpg";
 
 
 
@@ -87,7 +88,20 @@ export default function Home () {
         <Navbar_new></Navbar_new>
 
         <div className="mt-20"></div>
+        <div className="bg-primary">
         <Carousel></Carousel>
+        </div>
+        <Card image={shirt} title="Card Title">
+            <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+              Perspiciatis, hic rerum enim accusantium nesciunt quidem provident
+              autem reprehenderit ex quisquam quasi minima nostrum perferendis
+              facilis, aspernatur vitae dicta necessitatibus dolorum.
+            </p>
+            <p class="text-xs text-neutral-500 dark:text-neutral-300">
+              Last updated 3 mins ago
+            </p>
+          </Card>
 
         {/* New Listings section */}
         <div className="text-center items-center">
