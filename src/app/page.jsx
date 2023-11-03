@@ -220,7 +220,7 @@ export default function Home () {
                     </p>
                     <ul className="text-neutral-300 dark:text-neutral-200">
                       <li>8-10% of global greenhouse gas emissions.</li>
-                      <li>an estimated 92 million tons of textile waste created annually.</li>
+                      <li>an estimated 92 million tons of textile waste created annually</li>
                     </ul>
                   </div>
                 </div>
