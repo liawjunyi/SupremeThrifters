@@ -20,7 +20,7 @@ import {
 
 import { auth, db } from "../../../firebase";
 import { useRouter } from "next/navigation";
-import { doc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, setDoc, addDoc } from "firebase/firestore";
 
 export default function Login() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -53,9 +53,11 @@ export default function Login() {
           profilePic: "",
           email: user.email,
           uid: user.uid,
-          reserved: [],
-          likes: [],
-        }).then(() => alert("successfully saved"));
+        
+        }).then(() => {setDoc(doc(db, `users/${user.uid}/reserved`, user.uid), {});
+        setDoc(doc(db, `users/${user.uid}/liked`, user.uid), {})
+      })
+        .then(() => alert("successfully saved"));
       })
       .catch((error) => {
         console.log(error);
