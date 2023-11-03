@@ -3,7 +3,6 @@ import { useState } from "react";
 
 function Accordion({ title, image, children, onClick }) {
   const [expanded, setExpanded] = useState(false);
-  const toggleExpanded = () => setExpanded((current) => !current);
 
   return (
     <div
@@ -11,7 +10,7 @@ function Accordion({ title, image, children, onClick }) {
         expanded ? "bg-indigo-50" : "bg-white"
       }`}
       onClick={() => {
-        toggleExpanded();
+        setExpanded((current) => !current);
         onClick();
       }}
     >

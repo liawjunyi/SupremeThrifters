@@ -183,13 +183,11 @@ function Map() {
               form: "rounded-md focus-within:shadow focus-within:shadow-secondary focus-within:border-secondary",
               detachedSearchButton: "rounded-md",
             }}
-            onSubmit={({ state }) => {
-              console.log(state.collections[0].items);
-              setSelected(state.collections[0].items);
-              setZoom(10);
-            }}
             insights={true}
-            getSources={({ query }) => [
+            onSubmit={({ state }) => {
+              setSelected(state.collections[0].items);
+            }}
+            getSources={({ query, setQuery, refresh, setIsOpen }) => [
               {
                 sourceId: "product_name",
                 getItems() {
@@ -201,6 +199,7 @@ function Map() {
                         query,
                         params: {
                           hitsPerPage: 10,
+                          clickAnalytics: true,
                         },
                       },
                     ],
@@ -208,7 +207,22 @@ function Map() {
                 },
                 templates: {
                   item({ item, components }) {
-                    return <ProductItem hit={item} components={components} />;
+                    return (
+                      <ProductItem
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setQuery(item.product_name);
+                          setSelected([item]);
+                          setIsOpen(false);
+                          refresh();
+                        }}
+                        hit={item}
+                        components={components}
+                      />
+                    );
+                  },
+                  noResults() {
+                    return "No results.";
                   },
                 },
               },
