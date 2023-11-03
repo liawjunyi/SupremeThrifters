@@ -96,7 +96,7 @@ export default function Home () {
               Lorem ipsum, dolor sit amet consectetur adipisicing elit.
               Perspiciatis, hic rerum enim accusantium nesciunt quidem provident
               autem reprehenderit ex quisquam quasi minima nostrum perferendis
-              facilis, aspernatur vitae dicta necessitatibus dolorum..
+              facilis, aspernatur vitae dicta necessitatibus dolorum.
             </p>
             <p class="text-xs text-neutral-500 dark:text-neutral-300">
               Last updated 3 mins ago
