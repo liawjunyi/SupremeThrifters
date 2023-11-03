@@ -6,13 +6,10 @@ import Link from "next/link";
 import "@reach/combobox/styles.css";
 import React, { useState, useEffect } from "react";
 import {  signOut, onAuthStateChanged} from "firebase/auth";
-import {auth} from "../../firebase"
-
+import {auth} from "../../firebase";
 import { data } from "autoprefixer";
 
 const Navbar = () => {
-  
-  
   const [loggedin, setLoggedin] = useState(true);
 
   const currentuser = auth.currentUser;
@@ -34,13 +31,14 @@ const Navbar = () => {
         // console.log(loggedin);
 
     }
-})
+  })
 
 
 
   return (
     <div className="w-full fixed top-0 left-0 bg-primary z-1">
       <div className=" py-5 px-20 lg:flex items-center ">
+
         {/* {logo} */}
 
         <div className="flex text-2xl cursor-pointer justify-center items-center gap-2">
