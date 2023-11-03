@@ -5,20 +5,31 @@ import Card from "@/components/Card";
 import React, { useEffect, useState } from "react";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../../firebase";
-import Navbar from "@/components/NavBar";
+import Navbar_New from "@/components/Navbar_New";
 import like from "../../../public/like.svg";
 import Image from "next/image";
-import Navbar_new from "@/components/Navbar_New";
-
+import Reserved_Button from "@/components/Reserved Button";
 export default function Reserved() {
   const [products_reserved, setProductsReserved] = useState([]);
   const [products_liked, setProductsLiked] = useState([]);
 
+
+  
   const getData_reserved = async () => {
     const q_user = query(
       collection(db, "usersListing","xZ4iMDqh8fa5I06TI0Zt", "reserved"),
       // where("user_id", "==", 1)
     );
+
+
+    
+    const uid = "b1TtsWodQJc20XLpTe2zu4IEGpj2";
+    const reserved_list = collection(db, `users/${uid}/reserved` );
+    const liked_list = collection(db, `users/${uid}/liked` );
+    console.log("Reserved Listings " + reserved_list);
+
+
+
 
     const reservedList = [];
 
@@ -64,7 +75,7 @@ export default function Reserved() {
   };
   return (
     <div className="bg-white">
-      <Navbar_new></Navbar_new>
+      <Navbar_New></Navbar_New>
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <div className="flex space-x-4">
           <Button
@@ -119,7 +130,7 @@ export default function Reserved() {
                       </p>
                     </div>
                     <div className="flex justify-between pt-lg">
-                      <Button
+                      <Reserved_Button
                         size="sm"
                         onClick={(e) => {
                           e.stopPropagation();
@@ -127,7 +138,7 @@ export default function Reserved() {
                         }}
                       >
                         Reserve
-                      </Button>
+                      </Reserved_Button>
                       <Button
                         onClick={(e) => {
                           e.stopPropagation();
