@@ -21,6 +21,7 @@ module.exports = {
       none: "0",
       sm: "10px",
       md: "15px",
+      lg: "20px",
       full: "9999px",
     },
     extend: {
