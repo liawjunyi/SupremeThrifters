@@ -9,6 +9,7 @@ import Card2 from "@/components/Card2";
 
 import menu from "../../public/menu.svg";
 import close from "../../public/close.svg";
+import aboutus from "../../public/aboutus_pic.jpg";
 
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
@@ -196,14 +197,13 @@ export default function Home() {
           <br></br>
         </div> */}
 
-        <div className="container my-24 mx-auto md:px-6">
-          <section className="mb-32">
+        <div className="container my-24 mx-auto md:px-3">
+          <section className="mb-24">
             <div className="block rounded-lg bg-primary shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
               <div className="flex flex-wrap items-center">
                 <div className="hidden shrink-0 grow-0 basis-auto lg:flex lg:w-6/12 xl:w-4/12">
-                  <img
-                    src="https://mdbcdn.b-cdn.net/img/new/ecommerce/vertical/088.jpg"
-                    alt="Trendy Pants and Shoes"
+                  <Image 
+                    src={aboutus} alt="about us pic"
                     className="w-full rounded-t-lg lg:rounded-tr-none lg:rounded-bl-lg"
                   />
                 </div>
@@ -232,12 +232,9 @@ export default function Home() {
                     <p className="text-neutral-300 dark:text-neutral-200">
                       The fashion industry contributes:
                     </p>
-                    <ul className="text-neutral-300 dark:text-neutral-200">
-                      <li>8-10% of global greenhouse gas emissions.</li>
-                      <li>
-                        an estimated 92 million tons of textile waste created
-                        annually
-                      </li>
+                    <ul className="text-neutral-300 dark:text-neutral-200 list-disc pl-8">
+                      <li><span className="font-bold text-white text-lg">8-10%</span> of global greenhouse gas emissions.</li>
+                      <li>an estimated <span className="font-bold text-white text-lg">92 million tons</span>  of textile waste created annually.</li>
                     </ul>
                   </div>
                 </div>
@@ -246,6 +243,12 @@ export default function Home() {
           </section>
         </div>
       </div>
+      <footer
+        className="bg-primary text-center dark:bg-secondary w-full">
+        <div className="text-center text-neutral-300 dark:text-neutral-200">
+          © 2023 Copyright: Supreme Thrifters
+        </div>
+      </footer>
     </>
   );
 }
