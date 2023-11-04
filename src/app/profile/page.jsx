@@ -137,6 +137,7 @@ export default function Profile() {
     }
   }, [user]);
   return (
+    <>
     <form
       className={`${
         menuActive ? "h-screen overflow-hidden" : "m-20 mt-40 mb-10"
@@ -417,5 +418,12 @@ export default function Profile() {
         </Button>
       </div>
     </form>
+    <footer
+      className="bg-primary text-center dark:bg-secondary w-full p-4">
+      <div className="text-center text-neutral-300 dark:text-neutral-200">
+        © 2023 Copyright: Supreme Thrifters
+      </div>
+    </footer>
+    </>
   );
 }
