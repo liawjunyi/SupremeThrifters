@@ -24,7 +24,7 @@ const Navbar = ({ setMenuActive, menuActive }) => {
 
   return (
     <>
-      <div className="w-full fixed top-0 left-0 bg-primary z-1">
+      <div className="w-full fixed right-0 top-0 bg-primary z-1">
         <div className="py-5 md:px-12 flex ">
           {/* {logo} */}
           <div className="md:hidden z-30 w-[50px] ml-2 flex items-center">
@@ -79,7 +79,7 @@ const Navbar = ({ setMenuActive, menuActive }) => {
               )}
             </Button>
           </div>
-          <div className="flex max-md:w-full text-xl md:text-3xl cursor-pointer justify-center md:justify-start items-center gap-2">
+          <div className="flex max-md:w-full text-xl md:text-xl cursor-pointer justify-center md:justify-start items-center gap-2">
             <Image className="w-10 h-10" src={logo} />
             <Link
               className="hover:text-neon hover:text-shadow-neon font-bold text-gray-400"

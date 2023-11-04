@@ -1,16 +1,12 @@
 "use client";
 import "@reach/combobox/styles.css";
-
 import React, { useState, useEffect } from "react";
-
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import Card2 from "@/components/Card2";
-
 import menu from "../../public/menu.svg";
 import close from "../../public/close.svg";
 import aboutus from "../../public/aboutus_pic.jpg";
-
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Carousel from "@/components/Carousel";
@@ -58,27 +54,16 @@ export default function Home() {
   //  }, []);
 
   return (
-    <>
+    <div className={`${menuActive ? "h-screen overflow-hidden" : ""}`}>
+      <Sidemenu
+        className={`transition-opacity duration-500 ${
+          menuActive ? "opacity-100 ease-in z-20" : "opacity-0 ease-out z-0"
+        }`}
+      />
+      <Navbar menuActive={menuActive} setMenuActive={setMenuActive} />
       <div>
-        <Sidemenu
-          className={`transition-opacity duration-500 ${
-            menuActive ? "opacity-100 ease-in z-20" : "opacity-0 ease-out z-0"
-          }`}
-        />
-        <div className="lg:hidden absolute top-lg left-sm z-30">
-          <Button
-            className=""
-            size="xs"
-            onClick={() => setMenuActive((prev) => !prev)}
-          >
-            <Image src={menuActive ? close : menu} />
-          </Button>
-        </div>
-
-        {showSideMenu ? <Sidemenu /> : <Navbar />}
-
         <div className="mt-20"></div>
-        <Carousel></Carousel>
+        <Carousel />
 
         {/* New Listings section */}
         <div className="text-center items-center">
@@ -182,8 +167,17 @@ export default function Home() {
               The fashion industry contributes:
             </p>
             <ul className="text-neutral-300 dark:text-neutral-200 list-disc pl-8">
-              <li><span className="font-bold text-white text-lg">8-10%</span> of global greenhouse gas emissions.</li>
-              <li>an estimated <span className="font-bold text-white text-lg">92 million tons</span>  of textile waste created annually.</li>
+              <li>
+                <span className="font-bold text-white text-lg">8-10%</span> of
+                global greenhouse gas emissions.
+              </li>
+              <li>
+                an estimated{" "}
+                <span className="font-bold text-white text-lg">
+                  92 million tons
+                </span>{" "}
+                of textile waste created annually.
+              </li>
             </ul>
 
             <p class="text-xs text-neutral-500 dark:text-neutral-300">
@@ -193,13 +187,12 @@ export default function Home() {
         </div>
       </div>
 
-      <footer
-        className="bg-primary text-center dark:bg-secondary w-full">
+      <footer className="bg-primary text-center dark:bg-secondary w-full">
         <div className="text-center text-neutral-300 dark:text-neutral-200">
           © 2023 Copyright: Supreme Thrifters
         </div>
       </footer>
-    </>
+    </div>
   );
 }
 
