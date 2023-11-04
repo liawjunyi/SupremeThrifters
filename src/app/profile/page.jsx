@@ -6,7 +6,7 @@ import { useState, useRef, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { auth, db, storage } from "../../../firebase";
 import Navbar from "@/components/Navbar";
-import Navbar_new from "@/components/Navbar_New";
+import Navbar_new from "@/components/NavbarNew";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 

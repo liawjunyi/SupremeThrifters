@@ -29,7 +29,7 @@ const Sidemenu = ({ className }) => {
             <div
               className={`${
                 pathname == "/browse" && "text-white"
-              } text-2xl leading-[4.5rem] pointer-events-none uppercase text-gray-400 hover:text-shadow-neon hover:text-neon`}
+              } text-2xl leading-[4.5rem] uppercase text-gray-400 hover:text-shadow-neon hover:text-neon`}
             >
               Browse
             </div>

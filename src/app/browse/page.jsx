@@ -25,6 +25,9 @@ import { getAlgoliaResults } from "@algolia/autocomplete-js";
 import { ProductItem } from "@/components/Productitem";
 import { createQuerySuggestionsPlugin } from "@algolia/autocomplete-plugin-query-suggestions";
 import insightsClient from "search-insights";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
+import { db } from "../../../firebase";
+import { getAuth } from "firebase/auth";
 
 export default function Places() {
   const { isLoaded } = useLoadScript({
@@ -70,11 +73,25 @@ function Map() {
     });
   };
 
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  const handleLiked = async (product) => {
+    await setDoc(doc(db, `users/${user.uid}/liked`, product.product_name), {
+      product,
+    });
+  };
+
+  const handleReserved = async (product) => {
+    await setDoc(doc(db, `users/${user.uid}/reserved`, product.product_name), {
+      product,
+    });
+  };
   return (
     <>
       <SideMenu
         className={`transition-opacity duration-500  ${
-          menuActive ? "opacity-100 ease-in z-20" : "opacity-0 ease-out z-0"
+          menuActive ? "opacity-100 ease-in z-20" : "opacity-0 ease-out -z-1"
         }`}
       />
 
@@ -113,6 +130,7 @@ function Map() {
                         size="sm"
                         onClick={(e) => {
                           e.stopPropagation();
+                          handleReserved(item);
                           console.log("reserved");
                         }}
                       >
@@ -121,7 +139,8 @@ function Map() {
                       <Button
                         onClick={(e) => {
                           e.stopPropagation();
-                          console.log("liked");
+                          handleLiked(item);
+                          console.log("new like");
                         }}
                         size="sm"
                         bold={true}
