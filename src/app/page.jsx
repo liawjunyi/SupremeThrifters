@@ -79,20 +79,6 @@ export default function Home() {
         <div className="mt-20"></div>
         <Carousel></Carousel>
 
-        <div className="m-4">
-          <Card2 image={shirt} title="Card Title">
-            <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Perspiciatis, hic rerum enim accusantium nesciunt quidem provident
-              autem reprehenderit ex quisquam quasi minima nostrum perferendis
-              facilis, aspernatur vitae dicta necessitatibus dolorum..
-            </p>
-            <p class="text-xs text-neutral-500 dark:text-neutral-300">
-              Last updated 3 mins ago
-            </p>
-          </Card2>
-        </div>
-
         {/* New Listings section */}
         <div className="text-center items-center">
           <h1 className="text-[40px] font-semibold">New Listings</h1>
@@ -195,6 +181,37 @@ export default function Home() {
           </div>
           <br></br>
         </div> */}
+
+
+  <div className="m-4">
+            <Card2 image={shirt} title="About us">
+              <p class="mb-6 text-neutral-300 dark:text-neutral-200 text-lg">
+                      Supreme Thrifter is created to promote thirfting among
+                      youths by making it accessible and convenient for all.
+                      Here you can explore and purchase beloved second-hand
+                      clothings that is nearest to you rather than having to
+                      locate a thrift store which can be very out of the way.
+              </p>
+              <p class="mb-4 text-neutral-300 dark:text-neutral-200 text-xl font-bold">
+                Did you Know?
+              </p>
+              <p className="text-neutral-300 dark:text-neutral-200">
+                      The fashion industry contributes:
+              </p>
+              <ul className="text-neutral-300 dark:text-neutral-200">
+                      <li>
+                        8-10% of global greenhouse gas emissions.
+                      </li>
+                      <li>
+                        An estimated 92 million tons of textile waste created annually
+                      </li>
+              </ul>
+
+              <p class="text-xs text-neutral-500 dark:text-neutral-300">
+                Last updated 3 mins ago
+              </p>
+            </Card2>
+  </div>
 
         <div className="container my-24 mx-auto md:px-6">
           <section className="mb-32">

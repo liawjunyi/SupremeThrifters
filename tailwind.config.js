@@ -16,6 +16,8 @@ module.exports = {
       lg: "1.17rem",  
       xl: "1.5rem",
       "2xl": "2rem",
+      "3xl": "3rem",
+      "7xl": "4.5rem"
     },
     borderRadius: {
       none: "0",
