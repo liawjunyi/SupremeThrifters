@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 
 import Button from "@/components/Button";
 import Card from "@/components/Card";
+import Card2 from "@/components/Card2";
 
 import menu from "../../public/menu.svg";
 import close from "../../public/close.svg";
@@ -17,6 +18,7 @@ import { db } from "../../firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import Navbar_new from "@/components/Navbar_New";
 import { useRouter } from "next/navigation";
+import shirt from "../../public/shirt1.jpg"
 
 
 
@@ -88,6 +90,21 @@ export default function Home () {
 
         <div className="mt-20"></div>
         <Carousel></Carousel>
+
+        <div className="m-4">
+     
+          <Card2 image={shirt} title="Card Title">
+            <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+              Perspiciatis, hic rerum enim accusantium nesciunt quidem provident
+              autem reprehenderit ex quisquam quasi minima nostrum perferendis
+              facilis, aspernatur vitae dicta necessitatibus dolorum..
+            </p>
+            <p class="text-xs text-neutral-500 dark:text-neutral-300">
+              Last updated 3 mins ago
+            </p>
+          </Card2>
+        </div>
 
         {/* New Listings section */}
         <div className="text-center items-center">
@@ -220,7 +237,7 @@ export default function Home () {
                     </p>
                     <ul className="text-neutral-300 dark:text-neutral-200">
                       <li>8-10% of global greenhouse gas emissions.</li>
-                      <li>an estimated 92 million tons of textile waste created annually.</li>
+                      <li>an estimated 92 million tons of textile waste created annually</li>
                     </ul>
                   </div>
                 </div>
