@@ -4,12 +4,17 @@ import Link from "next/link";
 import Image from "next/image";
 import bg from "../../public/desert.svg";
 import { usePathname } from "next/navigation";
+import Button from "./Button";
+import close from "../../public/close.svg";
 
-const Sidemenu = ({ className }) => {
+const Sidemenu = ({ className, onClick }) => {
   const pathname = usePathname();
   console.log(pathname);
   return (
     <div className={`absolute h-screen w-screen  ${className}`}>
+      <Button size="xs" className={"absolute mt-5 ml-2"} onClick={onClick}>
+        <Image src={close}></Image>
+      </Button>
       <aside className="flex h-screen justify-center items-center bg-primary">
         <div className="absolute inset-x-0  mx-auto w-[500px] h-screen pointer-events-none opacity-10">
           <Image src={bg} fill={true}></Image>
