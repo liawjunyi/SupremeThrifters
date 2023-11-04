@@ -54,7 +54,7 @@ export default function Home() {
   //  }, []);
 
   return (
-    <div className={`${menuActive ? "h-screen overflow-hidden" : ""}`}>
+    <div className={`max-w-full ${menuActive ? "h-screen overflow-hidden" : ""}`}>
       <Sidemenu
         className={`transition-opacity duration-500 ${
           menuActive ? "opacity-100 ease-in z-20" : "opacity-0 ease-out z-0"
@@ -62,7 +62,8 @@ export default function Home() {
         onClick={() => setMenuActive((prev) => !prev)}
       />
       <Navbar menuActive={menuActive} setMenuActive={setMenuActive} />
-      <div>
+      
+      <div className="max-w-full ">
         <div className="mt-20"></div>
         <Carousel />
 
@@ -103,6 +104,25 @@ export default function Home() {
                       {product.price}
                     </p>
                   </div>
+                  {/* <div className="mt-4">
+                    <div className="flex">
+                      <h3 className="text-sm text-gray-700">
+                        <a href={product.href}>
+                          <span
+                            aria-hidden="true"
+                            className="absolute inset-0"
+                          />
+                          {product.product_name}
+                        </a>
+                      </h3>
+                      <p className="text-right ml-auto text-sm font-medium text-gray-900">
+                        {product.price}
+                      </p>
+                    </div>
+                    <p className=" mt-1 text-sm text-gray-500">
+                      {product.username}
+                    </p>
+                  </div> */}
                 </Card>
               </div>
             </div>
