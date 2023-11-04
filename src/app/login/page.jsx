@@ -49,7 +49,9 @@ export default function Login() {
 
         setDoc(doc(db, "users", user.uid), {
           username: username,
+          name: "",
           profilePic: "",
+          address: "",
           email: user.email,
           uid: user.uid,
         })

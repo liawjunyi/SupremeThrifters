@@ -6,9 +6,17 @@ import { useState, useRef, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { auth, db, storage } from "../../../firebase";
 import Navbar from "@/components/Navbar";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import Sidemenu from "@/components/SideMenu";
+import { useRouter } from "next/navigation";
 
 export default function Profile() {
   const [userData, setUserData] = useState(null);
@@ -21,6 +29,7 @@ export default function Profile() {
   const [isloggedin, setIsloggedin] = useState(false);
   const [menuActive, setMenuActive] = useState(false);
 
+  const { push } = useRouter();
   const profileRef = useRef(null);
   const auth = getAuth();
   const user = auth.currentUser;
@@ -80,29 +89,26 @@ export default function Profile() {
     deleteObject(deleteImageRef);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
+    updateDoc(doc(db, "users", user.uid), userData)
+      .then(() => alert("successfully saved"))
+      .then(() => push("/"));
 
-    updateDoc(doc(db, "users", user.uid), {
-      username: userData.username,
-      profilePic: { ...userData.profilePic },
-    }).then(() => alert("successfully saved"));
-
-    if (currentPassword && newPassword && confirmPassword) {
-      const credential = EmailAuthProvider.credential(
-        auth.currentUser.email,
-        currentPassword
-      );
-      reauthenticateWithCredential(auth.currentUser, credential)
-        .then(() => {
-          if (newPassword === confirmPassword) {
-            updatePassword(auth.currentUser, newPassword);
-          } else {
-            throw new Error("passwords do not match");
-          }
-        })
-        .catch((err) => alert(err.message));
-    }
+    // if (currentPassword && newPassword && confirmPassword) {
+    //   const credential = EmailAuthProvider.credential(
+    //     auth.currentUser.email,
+    //     currentPassword
+    //   );
+    //   reauthenticateWithCredential(auth.currentUser, credential)
+    //     .then(() => {
+    //       if (newPassword === confirmPassword) {
+    //         updatePassword(auth.currentUser, newPassword);
+    //       } else {
+    //         throw new Error("passwords do not match");
+    //       }
+    //     })
+    //     .catch((err) => alert(err.message));
+    // }
   };
 
   const fetchUserData = async () => {
@@ -198,8 +204,13 @@ export default function Profile() {
               <Input
                 label={"Username"}
                 placeholder={"RealKrazyWoman"}
-                value={display}
-                onChange={() => console.log("change username")}
+                value={userData?.username}
+                onChange={(e) => {
+                  setUserData({
+                    ...userData,
+                    username: e.target.value,
+                  });
+                }}
               ></Input>
             </div>
           </div>
@@ -221,7 +232,13 @@ export default function Profile() {
               <Input
                 label={"Name"}
                 placeholder={"RealKrazyWoman"}
-                value={display}
+                value={userData?.name}
+                onChange={(e) => {
+                  setUserData({
+                    ...userData,
+                    name: e.target.value,
+                  });
+                }}
               ></Input>
             </div>
 
@@ -229,7 +246,13 @@ export default function Profile() {
               <Input
                 label={"Email Address"}
                 placeholder={"realkrazywoman@prnk.com"}
-                value={email}
+                value={userData?.email}
+                onChange={(e) => {
+                  setUserData({
+                    ...userData,
+                    email: e.target.value,
+                  });
+                }}
               ></Input>
             </div>
 
@@ -237,7 +260,13 @@ export default function Profile() {
               <Input
                 label={"Street Address"}
                 placeholder={"Serangoon North Avenue 3"}
-                value={"Serangoon North Avenue 3"}
+                value={userData?.address}
+                onChange={(e) => {
+                  setUserData({
+                    ...userData,
+                    address: e.target.value,
+                  });
+                }}
               ></Input>
             </div>
           </div>
@@ -383,8 +412,8 @@ export default function Profile() {
         <Button size={"sm"}>
           <Link href="/">Cancel</Link>
         </Button>
-        <Button size={"sm"} type={"submit"}>
-          <Link href="/">Save</Link>
+        <Button size={"sm"} onClick={() => handleSubmit()}>
+          Save
         </Button>
       </div>
     </form>
