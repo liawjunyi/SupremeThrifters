@@ -13,7 +13,7 @@ module.exports = {
       xs: ".67rem",
       sm: ".83rem",
       md: "1rem",
-      lg: "1.17rem",
+      lg: "1.17rem",  
       xl: "1.5rem",
       "2xl": "2rem",
     },
@@ -21,6 +21,7 @@ module.exports = {
       none: "0",
       sm: "10px",
       md: "15px",
+      lg: "20px",
       full: "9999px",
     },
     extend: {
