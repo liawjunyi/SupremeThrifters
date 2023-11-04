@@ -6,7 +6,6 @@ import { useState, useRef, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { auth, db, storage } from "../../../firebase";
 import Navbar from "@/components/Navbar";
-import Navbar_new from "@/components/NavbarNew";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
@@ -141,7 +140,7 @@ export default function Profile() {
   return (
     <form className="m-20 mt-40 mb-10">
       <div className="space-y-12">
-        <Navbar_new></Navbar_new>
+        <Navbar />
         <div className="sm:container lg:border-b lg:border-gray-300 lg:pb-12 lg:grid lg:grid-cols-12 ">
           <div className="sm: lg:col-span-4">
             <h2 className="text-base font-semibold leading-7 text-gray-900">
