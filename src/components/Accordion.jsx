@@ -27,7 +27,12 @@ function Accordion({ title, image, children, onClick }) {
               : "min-w-[100px] min-h-[100px] transition duration-500 ease-in-out scale-75"
           } relative `}
         >
-          <Image src={image} className={"w-full h-full"} alt={title}></Image>
+          <Image
+            src={image}
+            fill={true}
+            objectFit="contain"
+            alt={title}
+          ></Image>
         </div>
 
         <div className="text-lg min-w-[125px]">{title}</div>

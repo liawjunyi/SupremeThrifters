@@ -114,7 +114,7 @@ function Map() {
               >
                 <Accordion
                   title={item.product_name}
-                  image={image}
+                  image={item.product_img_url}
                   onClick={() => {
                     setCenter(item.address.geo);
                     setZoom(15);

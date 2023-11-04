@@ -59,6 +59,7 @@ export default function Home() {
         className={`transition-opacity duration-500 ${
           menuActive ? "opacity-100 ease-in z-20" : "opacity-0 ease-out z-0"
         }`}
+        onClick={() => setMenuActive((prev) => !prev)}
       />
       <Navbar menuActive={menuActive} setMenuActive={setMenuActive} />
       <div>
