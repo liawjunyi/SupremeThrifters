@@ -36,6 +36,11 @@ export default function Home() {
     allListings();
   }, []);
 
+  const router = useRouter();
+  const handleNavigation = (item) => {
+    //router.push(`browse/?product_id=${item}`);
+    console.log(`browse/?product_id=${item}`);
+  }
   //  useEffect(() => {
   //     const updateMediaQuery = (e) => {
   //       if (e.matches) {
@@ -78,7 +83,7 @@ export default function Home() {
               key={product.id}
               className="group relative justify-evenly flex"
             >
-              <div>
+              <div onClick={()=>{handleNavigation(product.product_id)}}>
                 <Card className="aspect-h-1 aspect-w-1 w-[300px] overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-90">
                   <img
                     src={product.product_img_url}
@@ -140,7 +145,7 @@ export default function Home() {
               key={product.id}
               className="group relative justify-evenly flex"
             >
-              <div>
+              <div onClick={()=>{handleNavigation(product.product_id)}}>
                 <Card className="aspect-h-1 aspect-w-1 w-[300px] overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-90">
                   <img
                     src={product.product_img_url}
@@ -172,7 +177,7 @@ export default function Home() {
         </div>
 
         {/* About Us Section */}
-        <div className="m-4 mx-8 mb-10 ">
+        <div onClick={()=>{handleNavigation(product.product_id)}} className="m-4 mx-8 mb-10 ">
           <Card2 image={shirt} title="About us">
             <p class="mb-6 text-neutral-300 dark:text-neutral-200 text-lg">
               Supreme Thrifter is created to promote thirfting among youths by
