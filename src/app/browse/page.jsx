@@ -298,6 +298,7 @@ function Map() {
               ({
                 product_name,
                 product_description,
+                price,
                 user_id,
                 address: { geo, street },
               }) => {
@@ -316,7 +317,10 @@ function Map() {
                   >
                     {activeMarker == user_id && (
                       <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
-                        <div>Hi</div>
+                        <div>
+                          <p>{product_name}</p>
+                          <p>${price}</p>
+                        </div>
                       </InfoWindowF>
                     )}
                   </MarkerF>
