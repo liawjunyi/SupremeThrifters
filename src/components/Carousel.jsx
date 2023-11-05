@@ -5,24 +5,28 @@ const Carousel = () => {
   let carousel_slides = [
     {
       Description: "Reduce,Reuse,Recycle",
-      link: "https://msgt.com.sg/wp-content/uploads/2022/12/8f3be47a-f568-4784-a933-d28a902f9d68.sized-1000x1000-1.jpg",
+      // link: "https://cloudinary-marketing-res.cloudinary.com/images/w_1000,c_scale/v1679921049/Image_URL_header/Image_URL_header-png?_i=AA",
+      link: "https://i.pinimg.com/originals/d1/c1/e2/d1c1e2a9b76c5661895564d3f3e15aa1.jpg",
     },
     {
       Description: "Thrift Shop",
-      link: "https://i2f9m2t2.rocketcdn.me/wp-content/uploads/2019/08/where-to-go-thrift-shopping-in-singapore-national-thrift-shop-day-2019-loop-garms.jpg",
+      // link: "https://cdn.pixabay.com/photo/2015/03/10/17/23/youtube-667451_1280.png",
+      link: "https://i.pinimg.com/originals/64/23/d5/6423d541462039805e8ec7db5fef04fb.jpg",
     },
     {
       Description: "Thrift Shop",
-      link: "https://www.epos.com.sg/wp-content/uploads/2022/12/Nonmainstream-Opt-1-1024x683.webp",
+      // link: "https://dcblog.b-cdn.net/wp-content/uploads/2021/02/Full-form-of-URL-1-1024x824.jpg",
+      link: "https://i.pinimg.com/originals/b7/1c/84/b71c845b24b983ae359feff5c9455727.jpg",
     },
     {
       Description: "Thrift Shop",
-      link: "https://www.thisishype.ph/wp-content/uploads/2021/11/0D81E8B5-E042-4DA8-8DA2-9F791A0A68C3-44573-00001F9260D1335F.jpg",
+      // link: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtfeR2gr_Z2U5rNiTKieMXMM9ZY96GbKUQQg&usqp=CAU",
+      link: "https://i.pinimg.com/originals/37/81/80/37818060ae92c0da020fe7626f80f80d.jpg",
 
     },
     {
-      Description: "Thrift Shop",
-      link: "https://www.wealthmastery.sg/wp-content/uploads/2021/01/Screenshot-2021-01-07-at-10.16.08-PM-1024x686.png",
+      Description: "Recommended for You",
+      link: "https://i.pinimg.com/originals/28/a5/5d/28a55d757683ab73fecb4b9ef7168e15.jpg",
 
     },
   ];
@@ -51,13 +55,16 @@ const Carousel = () => {
     setCurrentIndex(newIndex);
   };
   return (
-    <div className="max-w-[1000px] h-[650px] w-full m-auto py-8 px-4 relative group">
+    <div className="max-w-[1350px] h-[650px] w-full m-auto py-8 px-4 relative group">
       <div
         style={{
           backgroundImage: `url(${carousel_slides[currentIndex].link})`,
         }}
         className="w-full h-full rounded-2xl bg-center bg-cover duration-500"
-      ></div>
+      ><div className="absolute inset-0 flex items-center justify-center">
+      <p className="text-[20px] lg:text-[50px] font-bold font-serif text-white  text-center ">Fast fashion doesn't go <br /> well with my outfit.<br /><br />Thrift Now.</p>
+      
+    </div></div>
       <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20text-white cursor-pointer">
         <i
           class="fa-solid fa-circle-arrow-left"
