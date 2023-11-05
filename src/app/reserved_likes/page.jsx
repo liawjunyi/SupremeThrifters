@@ -235,12 +235,12 @@ export default function Reserved() {
           </div>
         </div>
       </div>
-      <footer
+      {/* <footer
         className="bg-primary text-center dark:bg-secondary w-full p-4 fixed bottom-0 left-0">
         <div className="text-center text-neutral-300 dark:text-neutral-200">
           © 2023 Copyright: Supreme Thrifters
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 }
