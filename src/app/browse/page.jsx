@@ -298,11 +298,12 @@ function Map() {
               ({
                 product_name,
                 product_description,
+                price,
                 user_id,
                 address: { geo, street },
               }) => {
                 let icon = {
-                  url: "/tshirt_solid.svg",
+                  url: "/tshirt_solid_yellow.svg",
                   scaledSize: { width: 30, height: 30 },
                 };
 
@@ -316,7 +317,10 @@ function Map() {
                   >
                     {activeMarker == user_id && (
                       <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
-                        <div>Hi</div>
+                        <div>
+                          <p>{product_name}</p>
+                          <p>${price}</p>
+                        </div>
                       </InfoWindowF>
                     )}
                   </MarkerF>

@@ -105,6 +105,9 @@ export default function Reserved() {
           <div className="tab-content">
             {selectedTab === "reserved" && (
               <div>
+                {products_reserved.length === 0 ? (
+                  <h2 className="mt-20 font-bold">You have NO reserved listings!</h2>
+                ) : (
                 <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gap-x-8">
                   {products_reserved.length > 0 &&
                     products_reserved.map((product) => {
@@ -161,11 +164,15 @@ export default function Reserved() {
                       );
                     })}
                 </div>
+              )}
               </div>
             )}
 
             {selectedTab === "liked" && (
               <div>
+                {products_liked.length === 0 ? (
+                  <h2 className="mt-20 font-bold">You have NO liked listings!</h2>
+                ) : (
                 <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gap-x-8">
                   {products_liked &&
                     products_liked.map((product) => {
@@ -222,6 +229,7 @@ export default function Reserved() {
                       );
                     })}
                 </div>
+                )}
               </div>
             )}
           </div>
