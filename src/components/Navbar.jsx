@@ -24,10 +24,10 @@ const Navbar = ({ setMenuActive, menuActive }) => {
 
   return (
     <>
-      <div className="w-full fixed right-0 top-0 bg-primary z-1">
+      <div className="w-full fixed right-0 top-0 bg-primary z-1 ">
         <div className="py-5 md:px-12 flex ">
           {/* {logo} */}
-          <div className="md:hidden z-30 w-[50px] ml-2 flex items-center">
+          <div className="md:hidden z-30 w-[50px] ml-2 flex items-center ">
             <Button
               className=""
               size="xs"
@@ -79,7 +79,7 @@ const Navbar = ({ setMenuActive, menuActive }) => {
               )}
             </Button>
           </div>
-          <div className="flex max-md:w-full text-xl md:text-xl cursor-pointer justify-center md:justify-start items-center gap-2">
+          <div className="flex w-full pl-4 lg:pl-0 text-xl md:text-xl cursor-pointer md:justify-start align-items-center gap-2">
             <Image className="w-10 h-10" src={logo} />
             <Link
               className="hover:text-neon hover:text-shadow-neon font-bold text-gray-400"
@@ -90,7 +90,7 @@ const Navbar = ({ setMenuActive, menuActive }) => {
           </div>
 
           {/* {Navlinks here} */}
-          <ul className="max-md:hidden justify-end ml-auto w-fit md:flex pl-9 md:pl-0">
+          <ul className="max-md:hidden justify-end ml-auto w-[900px] md:flex pl-9 md:pl-0 gap-5">
             <Link
               className="flex items-center font-semibold my-7 text-lg md:my-0 md:mx-3 text-gray-400 hover:text-neon hover:text-shadow-neon"
               href="/"

@@ -60,6 +60,7 @@ export default function Home() {
 
   return (
     <div className={`max-w-full ${menuActive ? "h-screen overflow-hidden" : ""}`}>
+      
       <Sidemenu
         className={`transition-opacity duration-500 ${
           menuActive ? "opacity-100 ease-in z-20" : "opacity-0 ease-out z-0"
@@ -218,7 +219,8 @@ export default function Home() {
           © 2023 Copyright: Supreme Thrifters
         </div>
       </footer>
-    </div>
+      </div>
+    
   );
 }
 

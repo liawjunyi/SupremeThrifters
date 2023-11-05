@@ -140,7 +140,7 @@ export default function Profile() {
     <>
     <form
       className={`${
-        menuActive ? "h-screen overflow-hidden" : "m-20 mt-40 mb-10"
+        menuActive ? "h-screen overflow-hidden" : "m-20 mt-40 mb-10 "
       } `}
     >
       <Sidemenu
@@ -227,7 +227,7 @@ export default function Profile() {
             Use a permanent address where you can receive mail.
           </p>
         </div>
-        <div className="lg:col-span-8 lg:col-start-6 lg:col-end-12 border">
+        <div className="lg:col-span-8 lg:col-start-6 lg:col-end-12">
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 ">
             <div className="sm:col-span-4">
               <Input
