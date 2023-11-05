@@ -302,7 +302,7 @@ function Map() {
                 address: { geo, street },
               }) => {
                 let icon = {
-                  url: "/tshirt_solid.svg",
+                  url: "/tshirt_solid_yellow.svg",
                   scaledSize: { width: 30, height: 30 },
                 };
 
