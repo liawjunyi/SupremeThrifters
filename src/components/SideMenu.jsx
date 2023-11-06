@@ -16,7 +16,7 @@ const Sidemenu = ({ className, onClick }) => {
         <Image src={close}></Image>
       </Button>
       <aside className="flex h-screen justify-center items-center bg-primary">
-        <div className="absolute inset-x-0  mx-auto w-[500px] h-screen pointer-events-none opacity-10">
+        <div className="absolute inset-x-0  mx-auto w-screen h-screen pointer-events-none opacity-10">
           <Image src={bg} fill={true}></Image>
         </div>
 
@@ -24,7 +24,7 @@ const Sidemenu = ({ className, onClick }) => {
           <Link href="/">
             <div
               className={`${
-                pathname == "/" && "text-white"
+                pathname == "/" && "text-shadow-neon text-neon"
               } text-2xl leading-[4.5rem] uppercase text-gray-400 hover:text-shadow-neon hover:text-neon`}
             >
               Home
@@ -33,7 +33,7 @@ const Sidemenu = ({ className, onClick }) => {
           <Link href="/browse">
             <div
               className={`${
-                pathname == "/browse" && "text-white"
+                pathname == "/browse" && "text-shadow-neon text-neon"
               } text-2xl leading-[4.5rem] uppercase text-gray-400 hover:text-shadow-neon hover:text-neon`}
             >
               Browse
@@ -42,7 +42,7 @@ const Sidemenu = ({ className, onClick }) => {
           <Link href="/reserved_likes">
             <div
               className={`${
-                pathname == "/reserved_likes" && "text-white"
+                pathname == "/reserved_likes" && "text-shadow-neon text-neon"
               } text-2xl leading-[4.5rem] uppercase text-gray-400 hover:text-shadow-neon hover:text-neon`}
             >
               Reserved
@@ -51,7 +51,7 @@ const Sidemenu = ({ className, onClick }) => {
           <Link href="/profile">
             <div
               className={`${
-                pathname == "/profile" && "text-white"
+                pathname == "/profile" && "text-shadow-neon text-neon"
               } text-2xl leading-[4.5rem] uppercase text-gray-400 hover:text-shadow-neon hover:text-neon`}
             >
               Profile
@@ -60,7 +60,7 @@ const Sidemenu = ({ className, onClick }) => {
           <Link href="#">
             <div
               className={`${
-                pathname == "/login" && "text-white"
+                pathname == "/login" && "text-shadow-neon text-neon"
               } text-2xl leading-[4.5rem] uppercase text-gray-400 hover:text-shadow-neon hover:text-neon`}
             >
               Sign out
