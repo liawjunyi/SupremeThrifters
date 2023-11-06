@@ -28,6 +28,7 @@ export default function Profile() {
   const [email, setEmail] = useState("");
   const [isloggedin, setIsloggedin] = useState(false);
   const [menuActive, setMenuActive] = useState(false);
+  const [isValid, setIsValid] = useState(false);
 
   const { push } = useRouter();
   const profileRef = useRef(null);
@@ -89,7 +90,16 @@ export default function Profile() {
     deleteObject(deleteImageRef);
   };
 
+  const validateEmail = (email) => {
+    // Use a simple regex pattern to check for a valid email format
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailPattern.test(email);
+  };
+
+  
+
   const handleSubmit = () => {
+
     updateDoc(doc(db, "users", user.uid), userData)
       .then(() => alert("successfully saved"))
       .then(() => push("/"));
@@ -136,6 +146,10 @@ export default function Profile() {
       setEmail(email);
     }
   }, [user]);
+
+
+
+
   return (
     <>
     <form
@@ -251,10 +265,17 @@ export default function Profile() {
                 onChange={(e) => {
                   setUserData({
                     ...userData,
-                    email: e.target.value,
+                    email: e.target.value
                   });
+                  
+                  
                 }}
               ></Input>
+              {(userData?.email && validateEmail(userData.email)) ? (
+                <p style={{ color: 'green' }}>Valid email address</p>
+              ) : (
+                <p style={{ color: 'red' }}>Invalid email address</p>
+              )}
             </div>
 
             <div className="sm:col-span-4">
