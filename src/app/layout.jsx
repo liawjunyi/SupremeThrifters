@@ -1,7 +1,6 @@
 import { inter, tiltneon } from "./font";
 import "./globals.css";
 import "@algolia/autocomplete-theme-classic";
-import NextAuthProvider from "./context/NextAuthProvider";
 
 export default function RootLayout({ children }) {
   return (
@@ -25,9 +24,7 @@ export default function RootLayout({ children }) {
         ></link>
       </head>
 
-      <body className={`${tiltneon.className}`}>
-        <NextAuthProvider>{children}</NextAuthProvider>
-      </body>
+      <body className={`${tiltneon.className}`}>{children}</body>
     </html>
   );
 }

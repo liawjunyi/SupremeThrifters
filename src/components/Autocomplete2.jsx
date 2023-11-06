@@ -1,9 +1,5 @@
-import { autocomplete, getAlgoliaResults } from "@algolia/autocomplete-js";
-import { createQuerySuggestionsPlugin } from "@algolia/autocomplete-plugin-query-suggestions";
-import algoliasearch from "algoliasearch";
-import Input from "./Input";
+import { autocomplete } from "@algolia/autocomplete-js";
 import React, { createElement, Fragment, useEffect, useRef } from "react";
-import { render } from "react-dom";
 import { createRoot } from "react-dom/client";
 
 const Autocomplete2 = (props) => {

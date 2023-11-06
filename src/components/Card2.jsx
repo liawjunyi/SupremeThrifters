@@ -8,7 +8,7 @@ const Card = ({ className, image, title, children }) => {
     >
       <Image
         src={image}
-        className="h-96 w-1/2 rounded-t-lg object-cover md:h-auto md:!rounded-none md:!rounded-l-lg hidden md:block"
+        className="h-96 md:w-1/2 rounded-t-lg object-cover md:h-auto md:!rounded-none md:!rounded-l-lg max-xs:hidden"
       />
       <div class="flex flex-col justify-start p-6">
         <h5 class="mb-2 text-3xl font-bold text-neutral-300 dark:text-neutral-50">

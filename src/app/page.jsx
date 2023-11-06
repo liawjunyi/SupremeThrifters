@@ -1,26 +1,20 @@
 "use client";
 import "@reach/combobox/styles.css";
 import React, { useState, useEffect } from "react";
-import Button from "@/components/Button";
 import Card from "@/components/Card";
 import Card2 from "@/components/Card2";
 import Navbar from "@/components/Navbar";
 import Carousel from "@/components/Carousel";
 import Sidemenu from "@/components/Sidemenu";
 import { db } from "../../firebase";
-import { collection, query, where, getDocs, doc, setDoc, updateDoc } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import shirt from "../../public/shirt1.jpg";
-import like from "../../public/like.svg";
-import { getAuth } from "firebase/auth";
 
 export default function Home() {
-  const auth = getAuth();
-  const user = auth.currentUser;
   const [menuActive, setMenuActive] = useState(false);
-  const [showSideMenu, setShowSideMenu] = useState(false);
   const [all_listing, setAllListings] = useState([]);
-  const [selected, setSelected] = useState(null);
+
   const allListings = async () => {
     const listing = [];
     const querySnapshot = await getDocs(collection(db, "listings"));
@@ -32,18 +26,6 @@ export default function Home() {
     setAllListings(listing);
   };
 
-  const handleLiked = async (product) => {
-    await setDoc(doc(db, `users/${user.uid}/liked`, product.product_name), {
-      product,
-    });
-  };
-
-  const handleReserved = async (product) => {
-    await setDoc(doc(db, `users/${user.uid}/reserved`, product.product_name), {
-      product,
-    });
-  };
-
   useEffect(() => {
     allListings();
   }, []);
@@ -52,7 +34,7 @@ export default function Home() {
   const handleNavigation = (item) => {
     // router.push(`browse?product_id=${item}`);
     console.log(`browse?product_id=${item}`);
-  }
+  };
   //  useEffect(() => {
   //     const updateMediaQuery = (e) => {
   //       if (e.matches) {
@@ -71,8 +53,9 @@ export default function Home() {
   //  }, []);
 
   return (
-    <div className={`max-w-full ${menuActive ? "h-screen overflow-hidden" : ""}`}>
-      
+    <div
+      className={`max-w-full ${menuActive ? "h-screen overflow-hidden" : ""}`}
+    >
       <Sidemenu
         className={`transition-opacity duration-500 ${
           menuActive ? "opacity-100 ease-in z-20" : "opacity-0 ease-out z-0"
@@ -90,7 +73,6 @@ export default function Home() {
           <h1 className="text-[40px] font-semibold">New Listings</h1>
           <hr className="w-52 h-1.5 bg-primary mx-auto" />
         </div>
-        <div className="mt-6 mx-11 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
         <div className="mt-6 mx-11 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
           {all_listing.slice(0, 8).map((product) => (
             <div
@@ -147,33 +129,6 @@ export default function Home() {
                     </p>
                   </div> */}
                 </Card>
-                <div className="flex justify-between pt-lg">
-                            <Button
-                            className="z-0"
-                              size="sm"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                
-                                handleReserved(product);
-                                console.log("reserved");
-                              }}
-                            >
-                              Reserve
-                            </Button>
-                            <Button
-                            className="z-0"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleLiked(product);
-                                console.log("liked");
-                              }}
-                              size="sm"
-                              bold={true}
-                            >
-                              <Image src={like} />
-                            </Button>
-                          </div>
-                          
               </div>
             </div>
           ))}
@@ -184,7 +139,6 @@ export default function Home() {
           <h1 className="text-[40px] font-semibold">Trendings</h1>
           <hr className="w-52 h-1.5 bg-primary mx-auto" />
         </div>
-        <div className="mt-6 mx-11 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 ">
         <div className="mt-6 mx-11 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 ">
           {all_listing.slice(9, 17).map((product) => (
             <div
@@ -221,44 +175,13 @@ export default function Home() {
                     </p>
                   </div>
                 </Card>
-                <div className="flex justify-between pt-lg">
-                            <Button
-                            className="z-0"
-                              size="sm"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                
-                                handleReserved(product);
-                                console.log("reserved");
-                              }}
-                            >
-                              Reserve
-                            </Button>
-                            <Button
-                            className="z-0"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleLiked(product);
-                                console.log("liked");
-                              }}
-                              size="sm"
-                              bold={true}
-                            >
-                              <Image src={like} />
-                            </Button>
-                          </div>
               </div>
             </div>
           ))}
         </div>
 
         {/* About Us Section */}
-        <div
-          onClick={() => {
-            handleNavigation(product.product_id);
-          }}
-          className="m-4 mx-8 mb-10 "
-        >
+        <div className="m-4 mx-8 mb-10 ">
           <Card2 image={shirt} title="About us">
             <p class="mb-6 text-neutral-300 dark:text-neutral-200 text-lg">
               Supreme Thrifter is created to promote thirfting among youths by
@@ -299,8 +222,7 @@ export default function Home() {
           © 2023 Copyright: Supreme Thrifters
         </div>
       </footer>
-      </div>
-    
+    </div>
   );
 }
 

@@ -3,14 +3,13 @@
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import React, { useEffect, useState } from "react";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { db, storage } from "../../../firebase";
+import { collection, query, getDocs } from "firebase/firestore";
+import { db } from "../../../firebase";
 import Navbar from "@/components/Navbar";
 import like from "../../../public/like.svg";
 import Image from "next/image";
 import Sidemenu from "@/components/SideMenu";
 import { getAuth } from "firebase/auth";
-import { getDownloadURL, ref } from "firebase/storage";
 
 export default function Reserved() {
   const [products_reserved, setProductsReserved] = useState([]);

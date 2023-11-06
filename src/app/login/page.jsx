@@ -9,18 +9,15 @@ import register from "../../../public/register.svg";
 import log from "../../../public/log.svg";
 import logo from "../../../public/st_logo.svg";
 import {
-  getAuth,
   setPersistence,
   signInWithEmailAndPassword,
-  browserSessionPersistence,
   createUserWithEmailAndPassword,
   browserLocalPersistence,
   updateProfile,
 } from "firebase/auth";
-
 import { auth, db } from "../../../firebase";
 import { useRouter } from "next/navigation";
-import { doc, setDoc, addDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function Login() {
   const [isSignUp, setIsSignUp] = useState(false);

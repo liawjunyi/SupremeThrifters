@@ -7,11 +7,8 @@ import {
   MarkerF,
 } from "@react-google-maps/api";
 import React, { useState } from "react";
-import Autocomplete from "@/components/Autocomplete";
 import Sidebar from "@/components/Sidebar";
 import Button from "@/components/Button";
-import image from "../../../public/shirt2.jpg";
-import Card from "@/components/Card";
 import Accordion from "@/components/Accordion";
 import like from "../../../public/like.svg";
 import menu from "../../../public/menu.svg";
@@ -23,9 +20,8 @@ import Autocomplete2 from "@/components/Autocomplete2";
 import algoliasearch from "algoliasearch";
 import { getAlgoliaResults } from "@algolia/autocomplete-js";
 import { ProductItem } from "@/components/Productitem";
-import { createQuerySuggestionsPlugin } from "@algolia/autocomplete-plugin-query-suggestions";
 import insightsClient from "search-insights";
-import { doc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase";
 import { getAuth } from "firebase/auth";
 
