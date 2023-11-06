@@ -217,7 +217,7 @@ function Map() {
                         indexName: "supremeThrifters",
                         query,
                         params: {
-                          hitsPerPage: 10,
+                          hitsPerPage: 5,
                           clickAnalytics: true,
                         },
                       },

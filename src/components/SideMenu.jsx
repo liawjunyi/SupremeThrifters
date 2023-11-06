@@ -16,7 +16,7 @@ const Sidemenu = ({ className, onClick }) => {
         <Image src={close}></Image>
       </Button>
       <aside className="flex h-screen justify-center items-center bg-primary">
-        <div className="absolute inset-x-0  mx-auto w-[500px] h-screen pointer-events-none opacity-10">
+        <div className="absolute inset-x-0  mx-auto w-screen h-screen pointer-events-none opacity-10">
           <Image src={bg} fill={true}></Image>
         </div>
 
