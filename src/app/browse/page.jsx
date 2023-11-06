@@ -10,6 +10,7 @@ import React, { useState } from "react";
 import Sidebar from "@/components/Sidebar";
 import Button from "@/components/Button";
 import Accordion from "@/components/Accordion";
+import Card from "@/components/Card";
 import like from "../../../public/like.svg";
 import menu from "../../../public/menu.svg";
 import close from "../../../public/close.svg";
