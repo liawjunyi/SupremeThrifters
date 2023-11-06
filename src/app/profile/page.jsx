@@ -15,7 +15,7 @@ import {
   where,
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import Sidemenu from "@/components/Sidemenu";
+import Sidemenu from "@/components/SideMenu";
 import { useRouter } from "next/navigation";
 
 export default function Profile() {
@@ -96,10 +96,7 @@ export default function Profile() {
     return emailPattern.test(email);
   };
 
-  
-
   const handleSubmit = () => {
-
     updateDoc(doc(db, "users", user.uid), userData)
       .then(() => alert("successfully saved"))
       .then(() => push("/"));
@@ -147,9 +144,6 @@ export default function Profile() {
     }
   }, [user]);
 
-
-
-
   return (
     <>
       <form
@@ -175,7 +169,6 @@ export default function Profile() {
               share.
             </p>
           </div>
-<<<<<<< HEAD
           <div className=" lg:col-span-8 lg:col-start-6 lg:col-end-12">
             <div className=" grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="col-span-full">
@@ -194,124 +187,6 @@ export default function Profile() {
                       viewBox="0 0 24 24"
                       fill="currentColor"
                       aria-hidden="true"
-=======
-        </div>
-      </div>
-
-      <div className="sm:container lg:border-b lg:border-gray-300 lg:pb-12 lg:grid lg:grid-cols-12">
-        <div className="lg:col-span-4">
-          <h2 className="text-base font-semibold leading-7 text-gray-900">
-            Personal Information
-          </h2>
-          <p className="mt-1 text-sm leading-6 text-gray-600">
-            Use a permanent address where you can receive mail.
-          </p>
-        </div>
-        <div className="lg:col-span-8 lg:col-start-6 lg:col-end-12">
-          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 ">
-            <div className="sm:col-span-4">
-              <Input
-                label={"Name"}
-                placeholder={"RealKrazyWoman"}
-                value={userData?.name}
-                onChange={(e) => {
-                  setUserData({
-                    ...userData,
-                    name: e.target.value,
-                  });
-                }}
-              ></Input>
-            </div>
-
-            <div className="sm:col-span-4">
-              <Input
-                label={"Email Address"}
-                placeholder={"realkrazywoman@prnk.com"}
-                value={userData?.email}
-                onChange={(e) => {
-                  setUserData({
-                    ...userData,
-                    email: e.target.value
-                  });
-                  
-                  
-                }}
-              ></Input>
-              {(userData?.email && validateEmail(userData.email)) ? (
-                <p style={{ color: 'green' }}>Valid email address</p>
-              ) : (
-                <p style={{ color: 'red' }}>Invalid email address</p>
-              )}
-            </div>
-
-            <div className="sm:col-span-4">
-              <Input
-                label={"Street Address"}
-                placeholder={"Serangoon North Avenue 3"}
-                value={userData?.address}
-                onChange={(e) => {
-                  setUserData({
-                    ...userData,
-                    address: e.target.value,
-                  });
-                }}
-              ></Input>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="sm:container lg:border-b lg:border-gray-300 lg:pb-12 lg:grid lg:grid-cols-12 ">
-        <div className="lg:col-span-4 ">
-          <h2 className="text-base font-semibold leading-7 text-gray-900 ">
-            Notifications
-          </h2>
-          <p className="mt-1 text-sm leading-6 text-gray-600">
-            We'll always let you know about important changes, but you pick what
-            else you want to hear about.
-          </p>
-        </div>
-        <div className="lg:col-span-8 lg:col-start-6 lg:col-end-12">
-          <div className="mt-10 space-y-10">
-            <fieldset>
-              <legend className="text-sm font-semibold leading-6 text-gray-900">
-                By Text
-              </legend>
-              <div className="mt-6 space-y-6">
-                <div className="relative flex gap-x-3">
-                  <div className="flex h-6 items-center">
-                    <input
-                      id="comments"
-                      name="comments"
-                      type="checkbox"
-                      className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                      checked
-                    ></input>
-                  </div>
-                  <div className="text-sm leading-6">
-                    <label for="comments" className="font-medium text-gray-900">
-                      Listings
-                    </label>
-                    <p className="text-gray-500">
-                      Get notified when someone near you makes a new listing.
-                    </p>
-                  </div>
-                </div>
-                <div className="relative flex gap-x-3">
-                  <div className="flex h-6 items-center">
-                    <input
-                      id="candidates"
-                      name="candidates"
-                      type="checkbox"
-                      checked
-                      className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                    ></input>
-                  </div>
-                  <div className="text-sm leading-6">
-                    <label
-                      for="candidates"
-                      className="font-medium text-gray-900"
->>>>>>> 6a54ccb7c7cc99501bf2c3f369183d34142e25fa
                     >
                       <path
                         fillRule="evenodd"
@@ -391,6 +266,11 @@ export default function Profile() {
                     });
                   }}
                 ></Input>
+                {userData?.email && validateEmail(userData.email) ? (
+                  <p style={{ color: "green" }}>Valid email address</p>
+                ) : (
+                  <p style={{ color: "red" }}>Invalid email address</p>
+                )}
               </div>
 
               <div className="sm:col-span-4">

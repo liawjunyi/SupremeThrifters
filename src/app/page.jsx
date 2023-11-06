@@ -4,10 +4,6 @@ import React, { useState, useEffect } from "react";
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import Card2 from "@/components/Card2";
-import menu from "../../public/menu.svg";
-import close from "../../public/close.svg";
-import aboutus from "../../public/aboutus_pic.jpg";
-import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Carousel from "@/components/Carousel";
 import Sidemenu from "@/components/Sidemenu";
@@ -84,7 +80,7 @@ export default function Home() {
         onClick={() => setMenuActive((prev) => !prev)}
       />
       <Navbar menuActive={menuActive} setMenuActive={setMenuActive} />
-      
+
       <div className="max-w-full ">
         <div className="mt-20"></div>
         <Carousel />
@@ -95,12 +91,17 @@ export default function Home() {
           <hr className="w-52 h-1.5 bg-primary mx-auto" />
         </div>
         <div className="mt-6 mx-11 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+        <div className="mt-6 mx-11 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
           {all_listing.slice(0, 8).map((product) => (
             <div
               key={product.id}
               className="group relative justify-evenly flex"
             >
-              <div onClick={()=>{handleNavigation(product.product_id)}}>
+              <div
+                onClick={() => {
+                  handleNavigation(product.product_id);
+                }}
+              >
                 <Card className="aspect-h-1 aspect-w-1 w-[300px] overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-90">
                   <img
                     src={product.product_img_url}
@@ -184,12 +185,17 @@ export default function Home() {
           <hr className="w-52 h-1.5 bg-primary mx-auto" />
         </div>
         <div className="mt-6 mx-11 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 ">
+        <div className="mt-6 mx-11 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 ">
           {all_listing.slice(9, 17).map((product) => (
             <div
               key={product.id}
               className="group relative justify-evenly flex"
             >
-              <div onClick={()=>{handleNavigation(product.product_id)}}>
+              <div
+                onClick={() => {
+                  handleNavigation(product.product_id);
+                }}
+              >
                 <Card className="aspect-h-1 aspect-w-1 w-[300px] overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-90">
                   <img
                     src={product.product_img_url}
@@ -247,7 +253,12 @@ export default function Home() {
         </div>
 
         {/* About Us Section */}
-        <div onClick={()=>{handleNavigation(product.product_id)}} className="m-4 mx-8 mb-10 ">
+        <div
+          onClick={() => {
+            handleNavigation(product.product_id);
+          }}
+          className="m-4 mx-8 mb-10 "
+        >
           <Card2 image={shirt} title="About us">
             <p class="mb-6 text-neutral-300 dark:text-neutral-200 text-lg">
               Supreme Thrifter is created to promote thirfting among youths by

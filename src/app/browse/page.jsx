@@ -94,13 +94,11 @@ function Map() {
           menuActive ? "opacity-100 ease-in z-20" : "opacity-0 ease-out -z-1"
         }`}
       />
-
       <div className="absolute top-lg left-sm z-30">
         <Button size="xs" onClick={() => setMenuActive((prev) => !prev)}>
           <Image src={menuActive ? close : menu} />
         </Button>
       </div>
-
       <div
         className={`transition-opacity duration-500 ${
           menuActive ? "opacity-0 ease-out" : "opacity-100 ease-in"
@@ -201,6 +199,7 @@ function Map() {
               inputWrapper: "",
               form: "rounded-md focus-within:shadow focus-within:shadow-secondary focus-within:border-secondary",
               detachedSearchButton: "rounded-md",
+              panel: "z-50",
             }}
             insights={true}
             onSubmit={({ state }) => {
