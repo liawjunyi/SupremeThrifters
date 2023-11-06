@@ -206,6 +206,7 @@ export default function Reserved() {
                           </div>
                           <div className="flex justify-between pt-lg">
                             <Button
+                            className="z-1"
                               size="sm"
                               onClick={(e) => {
                                 e.stopPropagation();
@@ -215,6 +216,7 @@ export default function Reserved() {
                               Reserve
                             </Button>
                             <Button
+                            className="z-1"
                               onClick={(e) => {
                                 e.stopPropagation();
                                 console.log("liked");
@@ -235,12 +237,12 @@ export default function Reserved() {
           </div>
         </div>
       </div>
-      {/* <footer
-        className="bg-primary text-center dark:bg-secondary w-full p-4 fixed bottom-0 left-0">
+      <footer
+        className="bg-primary dark:bg-secondary w-full p-4 fixed bottom-0 left-0">
         <div className="text-center text-neutral-300 dark:text-neutral-200">
           © 2023 Copyright: Supreme Thrifters
         </div>
-      </footer> */}
+      </footer>
     </div>
   );
 }
