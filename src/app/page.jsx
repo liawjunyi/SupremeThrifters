@@ -4,10 +4,6 @@ import React, { useState, useEffect } from "react";
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import Card2 from "@/components/Card2";
-import menu from "../../public/menu.svg";
-import close from "../../public/close.svg";
-import aboutus from "../../public/aboutus_pic.jpg";
-import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Carousel from "@/components/Carousel";
 import Sidemenu from "@/components/Sidemenu";
@@ -121,7 +117,7 @@ export default function Home() {
               className="group relative justify-evenly flex"
             >
               <div>
-                <Card className="aspect-h-1 aspect-w-1 w-[300px] overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-90">
+                {/* <Card className="aspect-h-1 aspect-w-1 w-[300px] overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-90">
                   <img
                     src={product.product_img_url}
                     className="h-[300px] w-full object-cover object-center lg:h-[300px] lg:w-full"
@@ -145,7 +141,7 @@ export default function Home() {
                       {product.price}
                     </p>
                   </div>
-                </Card>
+                </Card> */}
               </div>
             </div>
           ))}

@@ -36,6 +36,7 @@ const Page = () => {
         inputWrapper: "",
         form: "rounded-md focus-within:shadow focus-within:shadow-secondary focus-within:border-secondary",
         detachedSearchButton: "rounded-md",
+        panel: "z-50",
       }}
       plugins={[querySuggestionsPlugin]}
       insights={true}
