@@ -156,6 +156,7 @@ export default function Home() {
                                 handleReserved(product);
                                 console.log("reserved");
                               }}
+                              animation="animate-bounce"
                             >
                               Reserve
                             </Button>
@@ -168,6 +169,7 @@ export default function Home() {
                               }}
                               size="sm"
                               bold={true}
+                              animation="animate-bounce"
                             >
                               <Image src={like} />
                             </Button>
@@ -225,6 +227,7 @@ export default function Home() {
                                 handleReserved(product);
                                 console.log("reserved");
                               }}
+                              animation="animate-bounce"
                             >
                               Reserve
                             </Button>
@@ -237,6 +240,7 @@ export default function Home() {
                               }}
                               size="sm"
                               bold={true}
+                              animation="animate-bounce"
                             >
                               <Image src={like} />
                             </Button>
