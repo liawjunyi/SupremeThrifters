@@ -152,6 +152,7 @@ export default function Reserved() {
                                   e.stopPropagation();
                                   console.log("reserved");
                                 }}
+                                animation="animate-bounce"
                               >
                                 Unreserve
                               </Button>
@@ -163,6 +164,7 @@ export default function Reserved() {
                                 }}
                                 size="sm"
                                 bold={true}
+                                animation="animate-bounce"
                               >
                                 <Image src={like} />
                               </Button>
@@ -221,6 +223,7 @@ export default function Reserved() {
                                   e.stopPropagation();
                                   console.log("reserved");
                                 }}
+                                animation="animate-bounce"
                               >
                                 Reserve
                               </Button>
@@ -232,6 +235,7 @@ export default function Reserved() {
                                 }}
                                 size="sm"
                                 bold={true}
+                                animation="animate-bounce"
                               >
                                 <Image src={likeFilled} />
                               </Button>
