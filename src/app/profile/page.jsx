@@ -19,7 +19,7 @@ import Sidemenu from "@/components/SideMenu";
 import { useRouter } from "next/navigation";
 
 export default function Profile() {
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState("");
   const [currentPassword, setCurrentPassword] = useState(null);
   const [newPassword, setNewPassword] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(null);
@@ -37,47 +37,65 @@ export default function Profile() {
 
   const addProfilePic = (e) => {
     const file = e.target.files[0];
-
     const imagesRef = ref(storage, `profilePic/${file.name}`);
+    console.log(userData);
 
     if (userData.profilePic) {
       setUserData((prev) => {
-        return { ...prev, profilePic: null };
+        return { ...prev, profilePic: "" };
       });
       const deleteImageRef = ref(
         storage,
         `profilePic/${userData.profilePic.name}`
       );
-      deleteObject(deleteImageRef);
+
       uploadBytes(imagesRef, file)
-        .then(() => getDownloadURL(imagesRef))
+        .then(() => getDownloadURL(imagesRef)) // Get the download URL
         .then((url) => {
           setUserData((prev) => {
             return {
               ...prev,
               profilePic: {
                 name: file.name,
-                url: url,
+                url: url, // Store the URL in the state
               },
             };
           });
+          updateProfilePicInFirestore(url); // Update the Firestore document with the new URL
         });
     } else {
       uploadBytes(imagesRef, file)
-        .then(() => getDownloadURL(imagesRef))
+        .then(() => getDownloadURL(imagesRef)) // Get the download URL
         .then((url) => {
           setUserData((prev) => {
             return {
               ...prev,
               profilePic: {
                 name: file.name,
-                url: url,
+                url: url, // Store the URL in the state
               },
             };
           });
+          updateProfilePicInFirestore(url); // Update the Firestore document with the new URL
         });
     }
-  };
+};
+
+  const updateProfilePicInFirestore = (newProfilePicURL) => {
+    const userDocRef = doc(db, "users", user.uid);
+
+    // Update only the 'profilePic' field in the Firestore document
+    const updateData = {
+        profilePic: newProfilePicURL,
+    };
+
+    updateDoc(userDocRef, updateData)
+        .then(() => alert("Profile picture updated successfully"))
+        .then(() => push("/"))
+        .catch((error) => {
+            console.error("Error updating profile picture:", error);
+        });
+};
 
   const removeProfilePic = () => {
     setUserData((prev) => {
@@ -92,7 +110,7 @@ export default function Profile() {
 
   const validateEmail = (email) => {
     // Use a simple regex pattern to check for a valid email format
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{3}$/;
     return emailPattern.test(email);
   };
 
@@ -180,7 +198,7 @@ export default function Profile() {
                 </label>
                 <div className="mt-2 flex items-center gap-x-3">
                   {isloggedin ? (
-                    <img className="rounded-full w-20 h-20" src={pfp} alt="" />
+                    <img className="rounded-full w-20 h-20" src={userData.profilePic} alt="" />
                   ) : (
                     <svg
                       className="h-20 w-20 text-gray-300"
