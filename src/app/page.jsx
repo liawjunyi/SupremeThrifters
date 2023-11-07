@@ -65,6 +65,42 @@ export default function Home() {
     }
   };
 
+  const observeElement = () => {
+    const options = {
+      root: null, // Use the viewport as the root
+      rootMargin: '0px', // No margin
+      threshold: 0.5, // Trigger when 50% of the element is visible
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      // Callback function when intersection occurs
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Do something when the target element is in the viewport
+          // entry.target.style.visibility = 'visible';
+          entry.target.style.opacity = 1;
+          
+          console.log('Element is in the viewport!');
+        } else {
+          entry.target.style.opacity = 0;
+        }
+      });
+    }, options);
+
+    const target = document.getElementById('about-us'); // Replace with your target element's ID
+      if (target) {
+        observer.observe(target);
+      }
+      return observer;
+    };
+
+    useEffect(() => {
+      const observer = observeElement();
+      return () => {
+        observer.disconnect();
+      };
+    }, []); // Empty dependency array to run the effect only once
+
   //const handleReserved = async (product) => {
     // if(user != null){
     //   await setDoc(doc(db, users/${user.uid}/reserved, product.product_name), {
@@ -293,7 +329,8 @@ export default function Home() {
           onClick={() => {
             handleNavigation(product.product_id);
           }}
-          className="m-4 mx-8 mb-10 "
+          className="m-4 mx-8 mb-10 opacity-0 transition-opacity duration-1000 ease-linear"
+          id="about-us"
         >
           <Card2 image={shirt} title="About us">
             <p class="mb-6 text-neutral-300 dark:text-neutral-200 text-lg">

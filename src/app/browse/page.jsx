@@ -104,9 +104,6 @@ function Map() {
   const search = searchParams.get('product_id');
   console.log(search);
 
-
-
-
   return (
     <>
       <SideMenu
