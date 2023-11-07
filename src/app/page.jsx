@@ -25,6 +25,7 @@ import { useRouter } from "next/navigation";
 import shirt from "../../public/shirt1.jpg";
 import like from "../../public/like.svg";
 import { getAuth } from "firebase/auth";
+import Modal from "@/components/Modal";
 
 export default function Home() {
   const auth = getAuth();
@@ -139,6 +140,10 @@ export default function Home() {
   //       mediaQuery.removeEventListener("change", updateMediaQuery);
   //     };
   //  }, []);
+
+  const [showMyModal, setShowMyModal] = useState(false)
+
+  const handleOnClose = () => setShowMyModal(false);
 
   return (
     <div className={`w-full ${menuActive ? "h-screen overflow-hidden" : ""}`}>
@@ -326,12 +331,16 @@ export default function Home() {
 
         {/* About Us Section */}
         <div
-          onClick={() => {
-            handleNavigation(product.product_id);
-          }}
+          
           className="m-4 mx-8 mb-10 opacity-0 transition-opacity duration-1000 ease-linear"
           id="about-us"
         >
+          {/* <Button onClick={() => setShowMyModal(true)}>
+            Click here
+          </Button> */}
+          <Modal onClose={handleOnClose} visible={showMyModal}>
+
+          </Modal>
           <Card2 image={shirt} title="About us">
             <p class="mb-6 text-neutral-300 dark:text-neutral-200 text-lg">
               Supreme Thrifter is created to promote thirfting among youths by
@@ -363,6 +372,15 @@ export default function Home() {
             <p class="text-xs text-neutral-500 dark:text-neutral-300">
               Last updated 3 mins ago
             </p>
+            <a
+              onClick={() => setShowMyModal(true)}
+              className="whitespace-nowrap"
+            >
+              Click here to find out how thrifting aligns with the UN sustainability goals!
+            </a>
+            {/* <a onClick={() => setShowMyModal(true)}>
+              here
+            </a> */}
           </Card2>
         </div>
       </div>
