@@ -164,7 +164,6 @@ export default function Home() {
                     size="sm"
                     onClick={(e) => {
                       e.stopPropagation();
-                      
                       handleReserved(product);
                       console.log("reserved");
                     }}
@@ -239,10 +238,8 @@ export default function Home() {
                     size="sm"
                     onClick={(e) => {
                       e.stopPropagation();
-                      
                       handleReserved(product);
                       console.log("reserved");
-                      animation="animate-bounce"
                     }}
                     animation="animate-bounce"
                   >
