@@ -44,18 +44,39 @@ export default function Home() {
   };
 
   const handleLiked = async (product) => {
-    await setDoc(doc(db, `users/${user.uid}/liked`, product.product_name), {
-      product,
-    });
-    alert(`you liked ${product.product_name}`);
+    if (user != null) {
+      await setDoc(doc(db, `users/${user.uid}/liked`, product.product_name), {
+        product,
+      });
+      alert(`you liked ${product.product_name}`);
+    } else {
+      router.push("/login")
+    };
   };
 
   const handleReserved = async (product) => {
-    await setDoc(doc(db, `users/${user.uid}/reserved`, product.product_name), {
-      product,
-    });
-    alert(`you reserved ${product.product_name}`);
+    if (user != null) {
+      await setDoc(doc(db, `users/${user.uid}/reserved`, product.product_name), {
+        product,
+      });
+      alert(`you reserved ${product.product_name}`);
+    } else {
+      router.push("/login")
+    }
   };
+
+  //const handleReserved = async (product) => {
+    // if(user != null){
+    //   await setDoc(doc(db, users/${user.uid}/reserved, product.product_name), {
+    //     product,
+    //   });
+    // }
+  
+    // else{
+    //   push("/login")
+    // }
+    // };
+
 
   useEffect(() => {
     allListings();
