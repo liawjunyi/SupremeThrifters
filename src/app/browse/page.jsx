@@ -26,7 +26,8 @@ import insightsClient from "search-insights";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase";
 import { getAuth } from "firebase/auth";
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams } from "next/navigation";
+import index from "instantsearch.js/es/widgets/index/index";
 
 export default function Places() {
   const { isLoaded } = useLoadScript({
@@ -61,7 +62,7 @@ function Map() {
 
   insightsClient("init", { appId, apiKey, useCookie: true });
 
-  const getCurrentPosition = () => {
+  const getCurrentPosition = async () => {
     navigator.geolocation.getCurrentPosition((position) => {
       const geo = {
         lat: position.coords.latitude,
@@ -91,6 +92,9 @@ function Map() {
   const searchParams = useSearchParams();
   const search = searchParams.get('product_id');
   console.log(search);
+
+
+
 
   return (
     <>
@@ -152,6 +156,7 @@ function Map() {
                           handleReserved(item);
                           console.log("reserved");
                         }}
+                        animation="animate-bounce"
                       >
                         Reserve
                       </Button>
@@ -163,6 +168,7 @@ function Map() {
                         }}
                         size="sm"
                         bold={true}
+                        animation="animate-bounce"
                       >
                         <Image src={like} />
                       </Button>
@@ -273,8 +279,8 @@ function Map() {
         </div>
         <GoogleMap
           zoom={zoom}
-          onLoad={(map) => {
-            getCurrentPosition();
+          onLoad={async (map) => {
+            await getCurrentPosition();
             setMap(map);
           }}
           onZoomChanged={() => {

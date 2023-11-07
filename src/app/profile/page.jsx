@@ -163,19 +163,14 @@ export default function Profile() {
   }, [user]);
 
   return (
-    <>
-      <form
-        className={`${
-          menuActive ? "h-screen overflow-hidden" : "m-20 mt-40 mb-10 "
-        } `}
-      >
-        <Sidemenu
-          className={`transition-opacity duration-500 ${
-            menuActive ? "opacity-100 ease-in z-20" : "opacity-0 ease-out -z-1"
-          }`}
-          onClick={() => setMenuActive((prev) => !prev)}
-        />
-
+    <div className={`${menuActive ? "h-screen overflow-hidden" : ""} `}>
+      <Sidemenu
+        className={`transition-opacity duration-500 ${
+          menuActive ? "opacity-100 ease-in z-20" : "opacity-0 ease-out -z-1  "
+        }`}
+        onClick={() => setMenuActive((prev) => !prev)}
+      />
+      <form className="m-20 mt-40 mb-10">
         <Navbar menuActive={menuActive} setMenuActive={setMenuActive} />
         <div className="sm:container lg:border-b lg:border-gray-300 lg:pb-12 lg:grid lg:grid-cols-12 ">
           <div className="sm: lg:col-span-4">
@@ -460,6 +455,6 @@ export default function Profile() {
           © 2023 Copyright: Supreme Thrifters
         </div>
       </footer>
-    </>
+    </div>
   );
 }
