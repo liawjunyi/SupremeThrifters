@@ -121,7 +121,9 @@ const Navbar = ({ setMenuActive, menuActive }) => {
             </div>
           </Link>
 
-          <Link
+
+          {loggedin ? (
+              <Link
               className="flex items-center font-semibold my-7 text-lg md:my-0 md:mx-3 text-gray-400 hover:text-neon hover:text-shadow-neon"
               href="/reserved_likes"
             >
@@ -133,8 +135,20 @@ const Navbar = ({ setMenuActive, menuActive }) => {
               Reserved
             </div>
           </Link>
+            ) : (
+              <Link
+                className="flex items-center font-semibold text-lg my-7 md:my-0 md:mx-3 text-gray-400 hover:text-neon hover:text-shadow-neon"
+                href="/login"
+              >
+                Reserved
+              </Link>
+            )}
 
-            <Link
+          
+
+            
+          {loggedin ? (
+              <Link
               className="flex items-center font-semibold my-7 text-lg md:my-0 md:mx-3 text-gray-400 hover:text-neon hover:text-shadow-neon"
               href="/profile"
             >
@@ -146,6 +160,14 @@ const Navbar = ({ setMenuActive, menuActive }) => {
               Profile
               </div>
             </Link>
+            ) : (
+              <Link
+                className="flex items-center font-semibold text-lg my-7 md:my-0 md:mx-3 text-gray-400 hover:text-neon hover:text-shadow-neon"
+                href="/login"
+              >
+                Profile
+              </Link>
+            )}
 
             {loggedin ? (
               <Link
