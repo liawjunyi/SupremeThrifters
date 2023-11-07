@@ -13,10 +13,11 @@ import Carousel from "@/components/Carousel";
 import Sidemenu from "@/components/Sidemenu";
 import { db } from "../../firebase";
 import { collection, query, where, getDocs, doc, setDoc, updateDoc } from "firebase/firestore";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import shirt from "../../public/shirt1.jpg";
 import like from "../../public/like.svg";
 import { getAuth } from "firebase/auth";
+
 
 export default function Home() {
   const auth = getAuth();
@@ -25,6 +26,7 @@ export default function Home() {
   const [showSideMenu, setShowSideMenu] = useState(false);
   const [all_listing, setAllListings] = useState([]);
   const [selected, setSelected] = useState(null);
+  const {push} = useRouter();
   const allListings = async () => {
     const listing = [];
     const querySnapshot = await getDocs(collection(db, "listings"));
@@ -37,15 +39,26 @@ export default function Home() {
   };
 
   const handleLiked = async (product) => {
+    if(user != null){
     await setDoc(doc(db, `users/${user.uid}/liked`, product.product_name), {
       product,
-    });
+    });}
+
+    else{
+      push("/login")
+    }
   };
 
   const handleReserved = async (product) => {
+    if(user != null){
     await setDoc(doc(db, `users/${user.uid}/reserved`, product.product_name), {
       product,
     });
+  }
+
+  else{
+    push("/login")
+  }
   };
 
   useEffect(() => {
