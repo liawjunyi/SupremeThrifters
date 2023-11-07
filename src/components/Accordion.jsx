@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { useState } from "react";
-import shirt_skeleton from "../../public/shirt_skeleton.jpeg";
 
 function Accordion({ title, image, children, onClick }) {
   const [expanded, setExpanded] = useState(false);

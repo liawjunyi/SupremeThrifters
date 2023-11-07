@@ -15,6 +15,7 @@ import like from "../../../public/like.svg";
 import menu from "../../../public/menu.svg";
 import close from "../../../public/close.svg";
 import recycle from "../../../public/recycle.svg";
+import results from "../../../public/results.svg";
 import Image from "next/image";
 import SideMenu from "@/components/Sidemenu";
 import Autocomplete2 from "@/components/Autocomplete2";
@@ -51,6 +52,7 @@ function Map() {
   const [activeMarker, setActiveMarker] = useState(null);
   const [currentLocation, setCurrentLocation] = useState(null);
   const [menuActive, setMenuActive] = useState(false);
+  const [sideBar, setSideBar] = useState(false);
 
   const appId = "28OPVE2DNS";
   const apiKey = "19bda594fe34d920e65766859aa94af9";
@@ -101,8 +103,24 @@ function Map() {
           menuActive ? "opacity-0 ease-out" : "opacity-100 ease-in"
         }`}
       >
-        {selected && (
-          <Sidebar>
+        {!sideBar && (
+          <Button
+            size="xs"
+            className={"absolute top-[100px] left-sm z-30"}
+            onClick={() => setSideBar(true)}
+          >
+            <Image src={results} />
+          </Button>
+        )}
+        {!selected && sideBar && (
+          <Sidebar onClose={() => setSideBar(false)}>
+            <div className="p-sm">
+              Search for your favorite items in the searchbox
+            </div>
+          </Sidebar>
+        )}
+        {selected && sideBar && (
+          <Sidebar onClose={() => setSideBar(false)}>
             {selected.map((item) => (
               <Card
                 className={"m-md border border-gray-200 rounded-md shadow "}
@@ -196,13 +214,14 @@ function Map() {
             classNames={{
               input: "outline-none w-full cursor-text ",
               inputWrapper: "",
-              form: "rounded-md focus-within:shadow focus-within:shadow-secondary focus-within:border-secondary",
-              detachedSearchButton: "rounded-md",
+              form: "!rounded-md !focus-within:shadow !focus-within:shadow-secondary !focus-within:border-secondary",
+              detachedSearchButton: "!rounded-md",
               panel: "z-50",
             }}
             insights={true}
             onSubmit={({ state }) => {
               setSelected(state.collections[0].items);
+              setSideBar(true);
             }}
             getSources={({ query, setQuery, refresh, setIsOpen }) => [
               {
@@ -215,7 +234,7 @@ function Map() {
                         indexName: "supremeThrifters",
                         query,
                         params: {
-                          hitsPerPage: 5,
+                          hitsPerPage: 10,
                           clickAnalytics: true,
                         },
                       },
@@ -230,6 +249,7 @@ function Map() {
                           e.stopPropagation();
                           setQuery(item.product_name);
                           setSelected([item]);
+                          setSideBar(true);
                           setIsOpen(false);
                           refresh();
                         }}
@@ -264,14 +284,14 @@ function Map() {
             <MarkerF
               position={{ ...currentLocation }}
               icon={{
-                url: "/man-location.svg",
+                url: "/man.svg",
               }}
               animation={2}
             ></MarkerF>
           )}
           <Button
             size="md"
-            className="absolute right-xl bottom-xl z-5"
+            className="absolute right-xl bottom-xl "
             onClick={() => getCurrentPosition()}
           >
             <svg

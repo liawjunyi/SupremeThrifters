@@ -7,12 +7,15 @@ import "@reach/combobox/styles.css";
 import React, { useState, useEffect } from "react";
 import { signOut, getAuth } from "firebase/auth";
 import Button from "./Button";
+import { usePathname } from "next/navigation";
 
 const Navbar = ({ setMenuActive, menuActive }) => {
   const [loggedin, setLoggedin] = useState(true);
-
+  const pathname = usePathname();
+  console.log(pathname);
   const auth = getAuth();
   const user = auth.currentUser;
+  
 
   useEffect(() => {
     if (user) {
@@ -91,32 +94,57 @@ const Navbar = ({ setMenuActive, menuActive }) => {
 
           {/* {Navlinks here} */}
           <ul className="max-md:hidden justify-end ml-auto w-[900px] md:flex pl-9 md:pl-0 gap-5">
-            <Link
+          <Link
               className="flex items-center font-semibold my-7 text-lg md:my-0 md:mx-3 text-gray-400 hover:text-neon hover:text-shadow-neon"
               href="/"
             >
+            <div
+              className={`${
+                pathname == "/" && "text-shadow-neon text-neon"
+              } text-gray-400 hover:text-shadow-neon hover:text-neon`}
+            >
               Home
-            </Link>
+            </div>
+          </Link>
 
+            
             <Link
               className="flex items-center font-semibold my-7 text-lg md:my-0 md:mx-3 text-gray-400 hover:text-neon hover:text-shadow-neon"
               href="/browse"
             >
+            <div
+              className={`${
+                pathname == "/browse" && "text-shadow-neon text-neon"
+              } text-gray-400 hover:text-shadow-neon hover:text-neon`}
+            >
               Browse
-            </Link>
+            </div>
+          </Link>
 
-            <Link
+          <Link
               className="flex items-center font-semibold my-7 text-lg md:my-0 md:mx-3 text-gray-400 hover:text-neon hover:text-shadow-neon"
               href="/reserved_likes"
             >
+            <div
+              className={`${
+                pathname == "/reserved_likes" && "text-shadow-neon text-neon"
+              } text-gray-400 hover:text-shadow-neon hover:text-neon`}
+            >
               Reserved
-            </Link>
+            </div>
+          </Link>
 
             <Link
               className="flex items-center font-semibold my-7 text-lg md:my-0 md:mx-3 text-gray-400 hover:text-neon hover:text-shadow-neon"
               href="/profile"
             >
+              <div
+              className={`${
+                pathname == "/profile" && "text-shadow-neon text-neon"
+              } text-gray-400 hover:text-shadow-neon hover:text-neon`}
+            >
               Profile
+              </div>
             </Link>
 
             {loggedin ? (

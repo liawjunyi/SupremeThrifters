@@ -11,7 +11,7 @@ const Sidemenu = ({ className, onClick }) => {
   const pathname = usePathname();
   console.log(pathname);
   return (
-    <div className={`absolute h-screen w-screen  ${className}`}>
+    <div className={`absolute h-screen w-full ${className}`}>
       <Button size="xs" className={"absolute mt-5 ml-2"} onClick={onClick}>
         <Image src={close}></Image>
       </Button>
