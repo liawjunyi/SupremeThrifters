@@ -156,6 +156,7 @@ function Map() {
                           handleReserved(item);
                           console.log("reserved");
                         }}
+                        animation="animate-bounce"
                       >
                         Reserve
                       </Button>
@@ -167,6 +168,7 @@ function Map() {
                         }}
                         size="sm"
                         bold={true}
+                        animation="animate-bounce"
                       >
                         <Image src={like} />
                       </Button>
