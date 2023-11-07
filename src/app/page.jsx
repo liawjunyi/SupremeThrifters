@@ -159,33 +159,33 @@ export default function Home() {
                   </div> */}
                 </Card>
                 <div className="flex justify-between">
-                            <Button
-                            className="z-0"
-                              size="sm"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                
-                                handleReserved(product);
-                                console.log("reserved");
-                              }}
-                              animation="animate-bounce"
-                            >
-                              Reserve
-                            </Button>
-                            <Button
-                            className="z-0"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleLiked(product);
-                                console.log("liked");
-                              }}
-                              size="sm"
-                              bold={true}
-                              animation="animate-bounce"
-                            >
-                              <Image src={like} />
-                            </Button>
-                          </div>
+                  <Button
+                    className="z-0"
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      
+                      handleReserved(product);
+                      console.log("reserved");
+                    }}
+                    animation="animate-bounce"
+                  >
+                    Reserve
+                  </Button>
+                  <Button
+                    className="z-0"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleLiked(product);
+                      console.log("liked");
+                    }}
+                    size="sm"
+                    bold={true}
+                    animation="animate-bounce"
+                  >
+                    <Image src={like} />
+                  </Button>
+                </div>
                           
               </div>
             </div>
@@ -234,33 +234,34 @@ export default function Home() {
                   </div>
                 </Card>
                 <div className="flex justify-between">
-                            <Button
-                            className="z-0"
-                              size="sm"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                
-                                handleReserved(product);
-                                console.log("reserved");
-                              }}
-                              animation="animate-bounce"
-                            >
-                              Reserve
-                            </Button>
-                            <Button
-                            className="z-0"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleLiked(product);
-                                console.log("liked");
-                              }}
-                              size="sm"
-                              bold={true}
-                              animation="animate-bounce"
-                            >
-                              <Image src={like} />
-                            </Button>
-                          </div>
+                  <Button
+                    className="z-0"
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      
+                      handleReserved(product);
+                      console.log("reserved");
+                      animation="animate-bounce"
+                    }}
+                    animation="animate-bounce"
+                  >
+                    Reserve
+                  </Button>
+                  <Button
+                    className="z-0"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleLiked(product);
+                      console.log("liked");
+                    }}
+                    size="sm"
+                    bold={true}
+                    animation="animate-bounce"
+                  >
+                    <Image src={like} />
+                  </Button>
+                </div>
               </div>
             </div>
           ))}
