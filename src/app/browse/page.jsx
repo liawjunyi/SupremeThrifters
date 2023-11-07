@@ -26,6 +26,8 @@ import insightsClient from "search-insights";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase";
 import { getAuth } from "firebase/auth";
+import { useSearchParams } from "next/navigation";
+import index from "instantsearch.js/es/widgets/index/index";
 
 export default function Places() {
   const { isLoaded } = useLoadScript({
@@ -86,6 +88,14 @@ function Map() {
       product,
     });
   };
+
+  const searchParams = useSearchParams();
+  const search = searchParams.get('product_id');
+  console.log(search);
+
+
+
+
   return (
     <>
       <SideMenu
