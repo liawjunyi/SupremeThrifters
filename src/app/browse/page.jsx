@@ -194,8 +194,8 @@ function Map() {
             classNames={{
               input: "outline-none w-full cursor-text ",
               inputWrapper: "",
-              form: "rounded-md focus-within:shadow focus-within:shadow-secondary focus-within:border-secondary",
-              detachedSearchButton: "rounded-md",
+              form: "!rounded-md !focus-within:shadow !focus-within:shadow-secondary !focus-within:border-secondary",
+              detachedSearchButton: "!rounded-md",
               panel: "z-50",
             }}
             insights={true}
@@ -262,7 +262,7 @@ function Map() {
             <MarkerF
               position={{ ...currentLocation }}
               icon={{
-                url: "/man-location.svg",
+                url: "/man.svg",
               }}
               animation={2}
             ></MarkerF>
