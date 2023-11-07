@@ -64,7 +64,7 @@ export default function Home() {
   const router = useRouter();
   const handleNavigation = (item) => {
     router.push(`browse?product_id=${item}`);
-    // console.log(`browse?product_id=${item}`);
+    console.log(`browse?product_id=${item}`);
   };
   //  useEffect(() => {
   //     const updateMediaQuery = (e) => {
