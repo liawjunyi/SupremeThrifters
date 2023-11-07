@@ -4,40 +4,10 @@ import { useState } from "react";
 import Button from "./Button";
 
 const Sidebar = ({ children, onClose }) => {
-  const sidebarRef = useRef(null);
-  const [isResizing, setIsResizing] = useState(false);
-  const [sidebarWidth, setSidebarWidth] = useState(350);
-
-  const startResizing = useCallback(() => {
-    setIsResizing(true);
-  }, []);
-
-  const stopResizing = useCallback(() => {
-    setIsResizing(false);
-  });
-
-  const resize = useCallback((mouseMoveEvent) => {
-    if (isResizing) {
-      setSidebarWidth(
-        mouseMoveEvent.clientX - sidebarRef.current.getBoundingClientRect().left
-      );
-    }
-  });
-
-  useEffect(() => {
-    window.addEventListener("mousemove", resize);
-    window.addEventListener("mouseup", stopResizing);
-    return () => {
-      window.removeEventListener("mousemove", resize);
-      window.removeEventListener("mouseup", stopResizing);
-    };
-  }, [resize, stopResizing]);
-
   return (
     <>
       <div
-        ref={sidebarRef}
-        className={`absolute top-20 bottom-10 right-4 rounded-md left-4 flex bg-white z-5 `}
+        className={`absolute top-20 bottom-10 max-md:right-4 rounded-md left-4 flex bg-white z-5 max-w-lg`}
       >
         <div className="relative w-full overflow-scroll ">
           <div className="p-sm w-fit cursor-pointer " onClick={onClose}>
@@ -56,10 +26,6 @@ const Sidebar = ({ children, onClose }) => {
           </div>
           {children}
         </div>
-        <div
-          className="relative grow-0 shrink-0 basis-2 resize-x cursor-col-resize justify-self-end  hover:w-[3px] hover:bg-black"
-          onMouseDown={startResizing}
-        ></div>
       </div>
     </>
   );
