@@ -62,7 +62,7 @@ function Map() {
 
   insightsClient("init", { appId, apiKey, useCookie: true });
 
-  const getCurrentPosition = () => {
+  const getCurrentPosition = async () => {
     navigator.geolocation.getCurrentPosition((position) => {
       const geo = {
         lat: position.coords.latitude,
@@ -277,8 +277,8 @@ function Map() {
         </div>
         <GoogleMap
           zoom={zoom}
-          onLoad={(map) => {
-            getCurrentPosition();
+          onLoad={async (map) => {
+            await getCurrentPosition();
             setMap(map);
           }}
           onZoomChanged={() => {
