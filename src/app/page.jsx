@@ -445,9 +445,8 @@ export default function Home() {
 
           <Modal onClose={handleOnClose} visible={showMyModal}></Modal>
           <Card2 image={shirt} title="About us">
-
             <p class="mb-6 text-neutral-300 dark:text-neutral-200 text-lg">
-              Supreme Thrifter is created to promote thirfting among youths by
+              Supreme Thrifter is created to promote thrifting among youths by
               making it accessible and convenient for all. Here you can explore
               and purchase beloved second-hand clothings that is nearest to you
               rather than having to locate a thrift store which can be very out
@@ -475,7 +474,7 @@ export default function Home() {
 
             <a
               onClick={() => setShowMyModal(true)}
-              className="mb-0 whitespace-normal hidden lg:block text-neutral-300 dark:text-neutral-200 list-disc animate-bounce"
+              className="mb-0 whitespace-normal hidden lg:block text-neutral-300 dark:text-neutral-200 list-disc "
             >
               Click here to find out how thrifting aligns with the UN
               sustainability goals!
