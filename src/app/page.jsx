@@ -3,9 +3,6 @@ import React, { useState, useEffect } from "react";
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import Card2 from "@/components/Card2";
-import menu from "../../public/menu.svg";
-import close from "../../public/close.svg";
-import aboutus from "../../public/aboutus_pic.jpg";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Carousel from "@/components/Carousel";
@@ -13,12 +10,9 @@ import Sidemenu from "@/components/Sidemenu";
 import { db } from "../../firebase";
 import {
   collection,
-  query,
-  where,
   getDocs,
   doc,
   setDoc,
-  updateDoc,
 } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import shirt from "../../public/shirt1.jpg";
@@ -32,7 +26,6 @@ export default function Home() {
   const user = auth.currentUser;
   const [menuActive, setMenuActive] = useState(false);
   const [all_listing, setAllListings] = useState([]);
-  const [selected, setSelected] = useState(null);
   const allListings = async () => {
     const listing = [];
     const querySnapshot = await getDocs(collection(db, "listings"));
@@ -104,17 +97,7 @@ export default function Home() {
     };
   }, []); // Empty dependency array to run the effect only once
 
-  //const handleReserved = async (product) => {
-  // if(user != null){
-  //   await setDoc(doc(db, users/${user.uid}/reserved, product.product_name), {
-  //     product,
-  //   });
-  // }
 
-  // else{
-  //   push("/login")
-  // }
-  // };
 
   useEffect(() => {
     allListings();
@@ -125,22 +108,7 @@ export default function Home() {
     router.push(`browse?product_id=${item}`);
     console.log(`browse?product_id=${item}`);
   };
-  //  useEffect(() => {
-  //     const updateMediaQuery = (e) => {
-  //       if (e.matches) {
-  //         setShowSideMenu(true);
-  //       } else {
-  //         setShowSideMenu(false);
-  //       }
-  //     };
 
-  //     const mediaQuery = window.matchMedia("(max-width: 992px)"); //smaller than 992px replace with SideMenu
-  //     mediaQuery.addEventListener("change", updateMediaQuery);
-
-  //     return () => {
-  //       mediaQuery.removeEventListener("change", updateMediaQuery);
-  //     };
-  //  }, []);
 
   const [showMyModal, setShowMyModal] = useState(false);
 
@@ -180,7 +148,7 @@ export default function Home() {
                   <img
                     src={product.product_img_url}
                     className="h-[300px] w-full object-cover object-center lg:h-[300px] lg:w-full"
-                    // onClick={}
+              
                   />
                   <div className="mt-4 flex">
                     <div>
@@ -201,25 +169,7 @@ export default function Home() {
                       {product.price}
                     </p>
                   </div>
-                  {/* <div className="mt-4">
-                    <div className="flex">
-                      <h3 className="text-sm text-gray-700">
-                        <a href={product.href}>
-                          <span
-                            aria-hidden="true"
-                            className="absolute inset-0"
-                          />
-                          {product.product_name}
-                        </a>
-                      </h3>
-                      <p className="text-right ml-auto text-sm font-medium text-gray-900">
-                        {product.price}
-                      </p>
-                    </div>
-                    <p className=" mt-1 text-sm text-gray-500">
-                      {product.username}
-                    </p>
-                  </div> */}
+                
                 </Card>
                 <div className="flex justify-between">
                   <Button
@@ -331,9 +281,7 @@ export default function Home() {
           className="m-4 mx-8 mb-10 opacity-0 transition-opacity duration-1000 ease-linear"
           id="about-us"
         >
-          {/* <Button onClick={() => setShowMyModal(true)}>
-            Click here
-          </Button> */}
+         
           <Modal onClose={handleOnClose} visible={showMyModal}></Modal>
           <Card2 image={shirt} title="About us">
             <p class="mb-6 text-neutral-300 dark:text-neutral-200 text-lg">
@@ -373,9 +321,7 @@ export default function Home() {
               Click here to find out how thrifting aligns with the UN
               sustainability goals!
             </a>
-            {/* <a onClick={() => setShowMyModal(true)}>
-              here
-            </a> */}
+          
           </Card2>
         </div>
       </div>
@@ -389,39 +335,3 @@ export default function Home() {
   );
 }
 
-// export default Home;
-
-// "use client"
-// import React, { useState, useEffect } from "react";
-// import "@reach/combobox/styles.css";
-// import SideMenu from "@/components/SideMenu";
-// import Navbar from "@/components/Navbar";
-
-// const Home = () => {
-//  const [showSideMenu, setShowSideMenu] = useState(false);
-
-//   useEffect(() => {
-//     const updateMediaQuery = (e) => {
-//       if (e.matches) {
-//         setShowSideMenu(true);
-//       } else {
-//         setShowSideMenu(false);
-//       }
-//     };
-
-//     const mediaQuery = window.matchMedia("(max-width: 992px)");
-//     mediaQuery.addEventListener("change", updateMediaQuery);
-
-//     return () => {
-//       mediaQuery.removeEventListener("change", updateMediaQuery);
-//     };
-//  }, []);
-
-//  return (
-// <>
-//   {showSideMenu ? <SideMenu /> : <Navbar />}
-// </>
-//  );
-// };
-
-// export default Home;

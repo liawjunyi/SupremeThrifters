@@ -27,7 +27,6 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase";
 import { getAuth } from "firebase/auth";
 import { useSearchParams } from "next/navigation";
-import index from "instantsearch.js/es/widgets/index/index";
 import { useRouter } from "next/navigation";
 export default function Places() {
   const { isLoaded } = useLoadScript({
@@ -82,7 +81,7 @@ function Map() {
       await setDoc(doc(db, `users/${user.uid}/liked`, product.product_name), {
         product,
       });
-      alert(`you liked ${product.product_name}`);
+      alert(`You have liked ${product.product_name}`);
     } else {
       router.push("/login");
     }
@@ -96,7 +95,7 @@ function Map() {
           product,
         }
       );
-      alert(`you reserved ${product.product_name}`);
+      alert(`You have reserved ${product.product_name}`);
     } else {
       router.push("/login");
     }
