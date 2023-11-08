@@ -222,7 +222,7 @@ export default function Login() {
 
             <Button
               size="xs"
-              className={"my-3 bg-white text-primary"}
+              className={"my-3 !bg-white !text-primary"}
               onClick={() => setIsSignUp((prev) => !prev)}
             >
               Sign Up
@@ -262,7 +262,7 @@ export default function Login() {
             </p>
             <Button
               size="xs"
-              className={"my-3 bg-white text-primary"}
+              className={"my-3 !bg-white !text-primary"}
               onClick={() => setIsSignUp((prev) => !prev)}
             >
               Sign in
