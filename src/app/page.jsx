@@ -21,7 +21,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { useRouter } from "next/navigation";
-import shirt from "../../public/clothing.avif";
+import shirt from "../../public/shirt1.jpg";
 import like from "../../public/like.svg";
 import { getAuth } from "firebase/auth";
 import Modal from "@/components/Modal";
@@ -31,7 +31,6 @@ export default function Home() {
   const auth = getAuth();
   const user = auth.currentUser;
   const [menuActive, setMenuActive] = useState(false);
-  const [showSideMenu, setShowSideMenu] = useState(false);
   const [all_listing, setAllListings] = useState([]);
   const [selected, setSelected] = useState(null);
   const allListings = async () => {
@@ -123,71 +122,9 @@ export default function Home() {
 
   const router = useRouter();
   const handleNavigation = (item) => {
-    // router.push(`browse?product_id=${item}`);
+    router.push(`browse?product_id=${item}`);
     console.log(`browse?product_id=${item}`);
   };
-  const [isVisibleNewListings, setIsVisibleNewListings] = useState(false);
-  const [isVisibleProduct, setIsVisibleProduct] = useState(
-    Array(8).fill(false)
-  );
-  const [isVisibleTrending, setIsVisibleTrending] = useState(false);
-  const [isVisibleTrendingProduct, setIsVisibleTrendingProduct] = useState(
-    Array(8).fill(false)
-  );
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const newListingElement = document.getElementById("new-listings-section");
-      const trendingElement = document.getElementById("trending-section");
-      const productElements = document.querySelectorAll(".product-item");
-      const trendingProductElements = document.querySelectorAll(
-        ".trending-product-item"
-      );
-
-      if (newListingElement) {
-        const rect = newListingElement.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        const isScrolled = rect.top < windowHeight;
-
-        if (isScrolled) {
-          setIsVisibleNewListings(true);
-          productElements.forEach((element, index) => {
-            setTimeout(() => {
-              setIsVisibleProduct((prev) => {
-                const updatedVisibility = [...prev];
-                updatedVisibility[index] = true;
-                return updatedVisibility;
-              });
-            }, 300 * (index + 1)); // Adjust the delay time as needed for staggered animations
-          });
-        }
-      }
-
-      if (trendingElement) {
-        const rect = trendingElement.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        const isScrolled = rect.top < windowHeight;
-
-        if (isScrolled) {
-          setIsVisibleTrending(true);
-          trendingProductElements.forEach((element, index) => {
-            setTimeout(() => {
-              setIsVisibleTrendingProduct((prev) => {
-                const updatedVisibility = [...prev];
-                updatedVisibility[index] = true;
-                return updatedVisibility;
-              });
-            }, 300 * (index + 1)); // Adjust the delay time as needed for staggered animations
-          });
-
-          window.removeEventListener("scroll", handleScroll);
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
   //  useEffect(() => {
   //     const updateMediaQuery = (e) => {
   //       if (e.matches) {
@@ -210,9 +147,7 @@ export default function Home() {
   const handleOnClose = () => setShowMyModal(false);
 
   return (
-    <div
-      className={`max-w-full ${menuActive ? "h-screen overflow-hidden" : ""}`}
-    >
+    <div className={`w-full ${menuActive ? "h-screen overflow-hidden" : ""}`}>
       <Sidemenu
         className={`transition-opacity duration-500 ${
           menuActive ? "opacity-100 ease-in z-20" : "opacity-0 ease-out z-0"
@@ -226,36 +161,15 @@ export default function Home() {
         <Carousel />
 
         {/* New Listings section */}
-        <div
-          id="new-listings-section"
-          className="text-center items-center mt-6 mb-6 mx-11"
-        >
-          <h1
-            className={`text-[40px] font-semibold ${
-              isVisibleNewListings
-                ? "opacity-100 animate-fade-in-left duration-3000"
-                : "opacity-0"
-            }`}
-          >
-            New Listings
-          </h1>
-          <hr
-            className={`w-52 h-1.5 bg-primary mx-auto ${
-              isVisibleNewListings
-                ? "opacity-100 animate-fade-in-left duration-3000"
-                : "opacity-0"
-            }`}
-          />
+        <div className="text-center items-center">
+          <h1 className="text-[40px] font-semibold">New Listings</h1>
+          <hr className="w-52 h-1.5 bg-primary mx-auto" />
         </div>
         <div className="mt-6 mb-6 mx-11 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-          {all_listing.slice(0, 8).map((product, index) => (
+          {all_listing.slice(0, 8).map((product) => (
             <div
               key={product.id}
-              className={`product-item group relative justify-evenly flex transition-all transform ${
-                isVisibleProduct[index]
-                  ? "opacity-100 animate-fade-in-left duration-3000"
-                  : "opacity-0"
-              }`}
+              className="group relative justify-evenly flex"
             >
               <div
                 onClick={() => {
@@ -340,36 +254,15 @@ export default function Home() {
         </div>
 
         {/* New Listings section */}
-        <div
-          id="trending-section"
-          className="text-center items-center mt-6 mb-6 mx-11"
-        >
-          <h1
-            className={`text-[40px] font-semibold ${
-              isVisibleTrending
-                ? "opacity-100 animate-fade-in-left duration-3000"
-                : "opacity-0"
-            }`}
-          >
-            Trending
-          </h1>
-          <hr
-            className={`w-52 h-1.5 bg-primary mx-auto ${
-              isVisibleTrending
-                ? "opacity-100 animate-fade-in-left duration-3000"
-                : "opacity-0"
-            }`}
-          />
+        <div className="text-center items-center">
+          <h1 className="text-[40px] font-semibold">Trendings</h1>
+          <hr className="w-52 h-1.5 bg-primary mx-auto" />
         </div>
-        <div className="mt-6 mb-6 mx-11 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-          {all_listing.slice(9, 17).map((product, index) => (
+        <div className="mt-6 mb-6 mx-11 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 ">
+          {all_listing.slice(9, 17).map((product) => (
             <div
               key={product.id}
-              className={`trending-product-item group relative justify-evenly flex transition-all transform ${
-                isVisibleTrendingProduct[index]
-                  ? "opacity-100 animate-fade-in-left duration-3000"
-                  : "opacity-0"
-              }`}
+              className="group relative justify-evenly flex"
             >
               <div
                 onClick={() => {
@@ -434,7 +327,6 @@ export default function Home() {
         </div>
 
         {/* About Us Section */}
-
         <div
           className="m-4 mx-8 mb-10 opacity-0 transition-opacity duration-1000 ease-linear"
           id="about-us"
@@ -442,11 +334,10 @@ export default function Home() {
           {/* <Button onClick={() => setShowMyModal(true)}>
             Click here
           </Button> */}
-
           <Modal onClose={handleOnClose} visible={showMyModal}></Modal>
           <Card2 image={shirt} title="About us">
             <p class="mb-6 text-neutral-300 dark:text-neutral-200 text-lg">
-              Supreme Thrifter is created to promote thrifting among youths by
+              Supreme Thrifter is created to promote thirfting among youths by
               making it accessible and convenient for all. Here you can explore
               and purchase beloved second-hand clothings that is nearest to you
               rather than having to locate a thrift store which can be very out
@@ -458,7 +349,7 @@ export default function Home() {
             <p className="text-neutral-300 dark:text-neutral-200">
               The fashion industry contributes:
             </p>
-            <ul className="text-neutral-300 dark:text-neutral-200 list-disc pl-8 mb-3">
+            <ul className="text-neutral-300 dark:text-neutral-200 list-disc pl-8">
               <li>
                 <span className="font-bold text-white text-lg">8-10%</span> of
                 global greenhouse gas emissions.
@@ -472,13 +363,19 @@ export default function Home() {
               </li>
             </ul>
 
+            <p class="text-xs text-neutral-500 dark:text-neutral-300">
+              Last updated 3 mins ago
+            </p>
             <a
               onClick={() => setShowMyModal(true)}
-              className="mb-0 whitespace-normal hidden lg:block text-neutral-300 dark:text-neutral-200 list-disc "
+              className="whitespace-nowrap"
             >
               Click here to find out how thrifting aligns with the UN
               sustainability goals!
             </a>
+            {/* <a onClick={() => setShowMyModal(true)}>
+              here
+            </a> */}
           </Card2>
         </div>
       </div>

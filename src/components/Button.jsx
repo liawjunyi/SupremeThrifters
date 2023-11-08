@@ -33,6 +33,7 @@ const Button = ({
       setShowConfetti(false);
     }, 3000);
   };
+  
 
   return (
     <button
@@ -56,7 +57,7 @@ Button.defaultProps = {
   type: "button",
   fontColor: "text-white",
   animation: "none",
-  confetti: false,
+  confetti: false
 };
 
 export default Button;
