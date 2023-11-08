@@ -1,5 +1,4 @@
 "use client";
-import "@reach/combobox/styles.css";
 import React, { useState, useEffect } from "react";
 import Button from "@/components/Button";
 import Card from "@/components/Card";
@@ -17,6 +16,7 @@ import { useRouter } from "next/navigation";
 import shirt from "../../public/shirt1.jpg";
 import like from "../../public/like.svg";
 import { getAuth } from "firebase/auth";
+import Modal from "@/components/Modal";
 
 export default function Home() {
   const auth = getAuth();
@@ -37,16 +37,78 @@ export default function Home() {
   };
 
   const handleLiked = async (product) => {
-    await setDoc(doc(db, `users/${user.uid}/liked`, product.product_name), {
-      product,
-    });
+    if (user != null) {
+      await setDoc(doc(db, `users/${user.uid}/liked`, product.product_name), {
+        product,
+      });
+      alert(`you liked ${product.product_name}`);
+    } else {
+      router.push("/login");
+    }
   };
 
   const handleReserved = async (product) => {
-    await setDoc(doc(db, `users/${user.uid}/reserved`, product.product_name), {
-      product,
-    });
+    if (user != null) {
+      await setDoc(
+        doc(db, `users/${user.uid}/reserved`, product.product_name),
+        {
+          product,
+        }
+      );
+      alert(`you reserved ${product.product_name}`);
+    } else {
+      router.push("/login");
+    }
   };
+
+  const observeElement = () => {
+    const options = {
+      root: null, // Use the viewport as the root
+      rootMargin: "0px", // No margin
+      threshold: 0.5, // Trigger when 50% of the element is visible
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      // Callback function when intersection occurs
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Do something when the target element is in the viewport
+          // entry.target.style.visibility = 'visible';
+          entry.target.style.opacity = 1;
+
+          console.log("Element is in the viewport!");
+        } else {
+          entry.target.style.opacity = 0;
+        }
+      });
+    }, options);
+
+    const target = document.getElementById("about-us"); // Replace with your target element's ID
+    if (target) {
+      observer.observe(target);
+    }
+    return observer;
+
+  };
+
+  useEffect(() => {
+    const observer = observeElement();
+    return () => {
+      observer.disconnect();
+    };
+  }, []); // Empty dependency array to run the effect only once
+
+  //const handleReserved = async (product) => {
+  // if(user != null){
+  //   await setDoc(doc(db, users/${user.uid}/reserved, product.product_name), {
+  //     product,
+  //   });
+  // }
+
+  // else{
+  //   push("/login")
+  // }
+  // };
 
   useEffect(() => {
     allListings();
@@ -130,6 +192,10 @@ export default function Home() {
   //     };
   //  }, []);
 
+  const [showMyModal, setShowMyModal] = useState(false);
+
+  const handleOnClose = () => setShowMyModal(false);
+
   return (
     <div className={`max-w-full ${menuActive ? "h-screen overflow-hidden" : ""}`}>
       
@@ -205,32 +271,33 @@ export default function Home() {
                   </div> */}
                 </Card>
                 <div className="flex justify-between">
-                            <Button
-                            className="z-0"
-                              size="sm"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                
-                                handleReserved(product);
-                                console.log("reserved");
-                              }}
-                            >
-                              Reserve
-                            </Button>
-                            <Button
-                            className="z-0"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleLiked(product);
-                                console.log("liked");
-                              }}
-                              size="sm"
-                              bold={true}
-                            >
-                              <Image src={like} />
-                            </Button>
-                          </div>
-                          
+
+                  <Button
+                    className="z-0"
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleReserved(product);
+                      console.log("reserved");
+                    }}
+                    animation="animate-bounce"
+                  >
+                    Reserve
+                  </Button>
+                  <Button
+                    className="z-0"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleLiked(product);
+                      console.log("liked");
+                    }}
+                    size="sm"
+                    bold={true}
+                    animation="animate-bounce"
+                  >
+                    <Image src={like} />
+                  </Button>
+                </div>
               </div>
             </div>
           ))}
@@ -276,38 +343,48 @@ export default function Home() {
                   </div>
                 </Card>
                 <div className="flex justify-between">
-                            <Button
-                            className="z-0"
-                              size="sm"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                
-                                handleReserved(product);
-                                console.log("reserved");
-                              }}
-                            >
-                              Reserve
-                            </Button>
-                            <Button
-                            className="z-0"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleLiked(product);
-                                console.log("liked");
-                              }}
-                              size="sm"
-                              bold={true}
-                            >
-                              <Image src={like} />
-                            </Button>
-                          </div>
+                  <Button
+                    className="z-0"
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleReserved(product);
+                      console.log("reserved");
+                    }}
+                    animation="animate-bounce"
+                  >
+                    Reserve
+                  </Button>
+                  <Button
+                    className="z-0"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleLiked(product);
+                      console.log("liked");
+                    }}
+                    size="sm"
+                    bold={true}
+                    animation="animate-bounce"
+                  >
+                    <Image src={like} />
+                  </Button>
+                </div>
+
               </div>
             </div>
           ))}
         </div>
 
         {/* About Us Section */}
-        <div onClick={()=>{handleNavigation(product.product_id)}} className="m-4 mx-8 mb-10 ">
+
+        <div
+          className="m-4 mx-8 mb-10 opacity-0 transition-opacity duration-1000 ease-linear"
+          id="about-us"
+        >
+          {/* <Button onClick={() => setShowMyModal(true)}>
+            Click here
+          </Button> */}
+          <Modal onClose={handleOnClose} visible={showMyModal}></Modal>
           <Card2 image={shirt} title="About us">
             <p class="mb-6 text-neutral-300 dark:text-neutral-200 text-lg">
               Supreme Thrifter is created to promote thirfting among youths by
@@ -339,6 +416,16 @@ export default function Home() {
             <p class="text-xs text-neutral-500 dark:text-neutral-300">
               Last updated 3 mins ago
             </p>
+            <a
+              onClick={() => setShowMyModal(true)}
+              className="whitespace-nowrap"
+            >
+              Click here to find out how thrifting aligns with the UN
+              sustainability goals!
+            </a>
+            {/* <a onClick={() => setShowMyModal(true)}>
+              here
+            </a> */}
           </Card2>
         </div>
       </div>

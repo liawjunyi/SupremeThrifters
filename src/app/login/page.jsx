@@ -131,7 +131,7 @@ export default function Login() {
               <i className="fas fa-user text-center leading-[55px] text-gray-400 transition duration-500 text-[1.1rem]"></i>
               <input
                 type="text"
-                placeholder="Username"
+                placeholder="Email"
                 className="pl-4 bg-transparent outline-none border-none leading-4 font-semibold text-[1.1rem] text-gray-700 placeholder-gray-300 font-medium"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
