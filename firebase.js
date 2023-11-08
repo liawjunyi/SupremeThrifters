@@ -1,7 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { addDoc, collection, getFirestore } from "firebase/firestore";
-import data from "fakedb.json";
+import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 
@@ -28,12 +27,3 @@ const auth = getAuth(app);
 const storage = getStorage(app);
 
 export { db, auth, storage };
-// const fetch = async () => {
-//   console.log(data);
-//   data.map(async (d) => {
-//     console.log(d);
-//     const docRef = await addDoc(collection(db, "listings"), d);
-//     console.log(docRef);
-//   });
-// };
-// fetch();
