@@ -353,7 +353,7 @@ function Map() {
                     onMouseOver={() => setHighlight(true)}
                     animation={2}
                     onClick={() => setActiveMarker(user_id)}
-                    key={item.product_id}
+                    key={user_id}
                   >
                     {activeMarker == user_id && (
                       <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
