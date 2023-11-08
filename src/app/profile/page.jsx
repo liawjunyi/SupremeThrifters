@@ -20,15 +20,11 @@ import { useRouter } from "next/navigation";
 
 export default function Profile() {
   const [userData, setUserData] = useState("");
-  const [currentPassword, setCurrentPassword] = useState(null);
-  const [newPassword, setNewPassword] = useState(null);
-  const [confirmPassword, setConfirmPassword] = useState(null);
   const [display, setDisplay] = useState("");
   const [pfp, setPfp] = useState("");
   const [email, setEmail] = useState("");
   const [isloggedin, setIsloggedin] = useState(false);
   const [menuActive, setMenuActive] = useState(false);
-  const [isValid, setIsValid] = useState(false);
 
   const { push } = useRouter();
   const profileRef = useRef(null);
@@ -313,7 +309,7 @@ export default function Profile() {
               Notifications
             </h2>
             <p className="mt-1 text-sm leading-6 text-gray-600">
-              We'll always let you know about important changes, but you pick
+              We will always let you know about important changes, but you pick
               what else you want to hear about.
             </p>
           </div>
