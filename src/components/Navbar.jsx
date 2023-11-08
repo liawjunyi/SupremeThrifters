@@ -85,7 +85,7 @@ const Navbar = ({ setMenuActive, menuActive }) => {
           <div className="flex w-full pl-4 lg:pl-0 text-xl md:text-xl cursor-pointer md:justify-start align-items-center gap-2">
             <Image className="w-10 h-10" src={logo} />
             <Link
-              className="hover:text-neon hover:text-shadow-neon font-bold text-gray-400"
+              className="hover:text-neon hover:text-shadow-neon font-bold text-gray-400 "
               href="/"
             >
               Supreme Thrifters

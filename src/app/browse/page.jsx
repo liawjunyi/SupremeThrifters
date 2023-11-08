@@ -28,13 +28,14 @@ import { db } from "../../../firebase";
 import { getAuth } from "firebase/auth";
 import { useSearchParams } from "next/navigation";
 import index from "instantsearch.js/es/widgets/index/index";
-
+import { useRouter } from "next/navigation";
 export default function Places() {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyB7VnhdFUqZiSbJ_em-PsgI6zxrfcgeOnw",
     mapIds: ["aa0423f1ef73f4ca"],
     libraries: ["places", "marker"],
   });
+  
 
   if (!isLoaded)
     return (
@@ -76,25 +77,32 @@ function Map() {
 
   const auth = getAuth();
   const user = auth.currentUser;
-
+  const router = useRouter();
   const handleLiked = async (product) => {
-    await setDoc(doc(db, `users/${user.uid}/liked`, product.product_name), {
-      product,
-    });
+    if (user != null) {
+      await setDoc(doc(db, `users/${user.uid}/liked`, product.product_name), {
+        product,
+      });
+      alert(`you liked ${product.product_name}`);
+    } else {
+      router.push("/login")
+    };
   };
 
   const handleReserved = async (product) => {
-    await setDoc(doc(db, `users/${user.uid}/reserved`, product.product_name), {
-      product,
-    });
+    if (user != null) {
+      await setDoc(doc(db, `users/${user.uid}/reserved`, product.product_name), {
+        product,
+      });
+      alert(`you reserved ${product.product_name}`);
+    } else {
+      router.push("/login")
+    }
   };
 
   const searchParams = useSearchParams();
   const search = searchParams.get('product_id');
   console.log(search);
-
-
-
 
   return (
     <>
