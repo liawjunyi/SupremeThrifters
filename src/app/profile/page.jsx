@@ -40,7 +40,10 @@ export default function Profile() {
       setUserData((prev) => {
         return { ...prev, profilePic: "" };
       });
-      
+      const deleteImageRef = ref(
+        storage,
+        `profilePic/${userData.profilePic.name}`
+      );
 
       uploadBytes(imagesRef, file)
         .then(() => getDownloadURL(imagesRef)) // Get the download URL
@@ -190,7 +193,13 @@ export default function Profile() {
                   Photo
                 </label>
                 <div className="mt-2 flex items-center gap-x-3">
-                  { (!isloggedin || userData.profilePic === "" )?  (
+                  {isloggedin ? (
+                    <img
+                      className="rounded-full w-20 h-20"
+                      src={userData.profilePic}
+                      alt=""
+                    />
+                  ) : (
                     <svg
                       className="h-20 w-20 text-gray-300"
                       viewBox="0 0 24 24"
@@ -203,14 +212,7 @@ export default function Profile() {
                         clipRule="evenodd"
                       />
                     </svg>
-                  ):(
-                    <img
-                      className="rounded-full w-20 h-20"
-                      src={userData?.profilePic}
-                      alt="Upload "
-                    />
-                  ) 
-                }
+                  )}
 
                   {/*  */}
                   <Button
