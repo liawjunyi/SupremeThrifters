@@ -12,43 +12,47 @@ import Image from "next/image";
 import Sidemenu from "@/components/Sidemenu";
 import { getAuth } from "firebase/auth";
 import { getDownloadURL, ref } from "firebase/storage";
+import Confetti from "react-confetti";
 
 export default function Reserved() {
   const [products_reserved, setProductsReserved] = useState([]);
   const [products_liked, setProductsLiked] = useState([]);
   const [menuActive, setMenuActive] = useState(false);
+  const [selectedTab, setSelectedTab] = useState("reserved");
 
   const auth = getAuth();
   const user = auth.currentUser;
 
+  // Getting all the listings that is RESERVED by a user
   const getData_reserved = async (uid) => {
+    // Geting the reserved collection from firebase of the user that is logged in
     const q_user = query(
       collection(db, "users", uid, "reserved")
-      // where("user_id", "==", 1)
     );
 
     const reservedList = [];
-
+    
+    // Pushing the listings from the firebase reserved collection into the reserved list
     const querySnapshot = await getDocs(q_user);
     querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
       reservedList.push(doc.data());
     });
 
     setProductsReserved(reservedList);
   };
 
+  // Getting all the listing that is LIKED by user
   const getData_liked = async (uid) => {
+    // Geting the liked collection from firebase of the user that is logged in
     const q_liked = query(
       collection(db, "users", uid, "liked")
-      // where("product_name", "==", "Nike T-Shirt")
     );
 
     let likedList = [];
-
+    
+    // Pushing the listings from the firebase reserved collection into the reserved list
     const querySnapshot = await getDocs(q_liked);
     querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
       likedList.push(doc.data());
       console.log(doc.data());
     });
@@ -64,8 +68,7 @@ export default function Reserved() {
     }
   }, [user]);
 
-  const [selectedTab, setSelectedTab] = useState("reserved");
-
+  // To check if the tab have been toggled (between reserved and liked)
   const toggleTab = (tab) => {
     setSelectedTab(tab);
   };
@@ -82,7 +85,10 @@ export default function Reserved() {
 
         <Navbar menuActive={menuActive} setMenuActive={setMenuActive} />
         <div className="mx-auto max-w-2xl px-4 py-16 mt-8 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+
+          {/* The tab button to toggle between Reserved and Liked */}
           <div className="flex space-x-4">
+            {/* The Reserved Tab Button */}
             <Button
               onClick={() => toggleTab("reserved")}
               fontColor="text-black"
@@ -94,6 +100,8 @@ export default function Reserved() {
             >
               Reserved
             </Button>
+
+            {/* The Liked Tab Button */}
             <Button
               onClick={() => toggleTab("liked")}
               fontColor="text-black"
@@ -106,13 +114,19 @@ export default function Reserved() {
           </div>
 
           <div className="tab-content">
+            
+            {/* If the Reserved Tab is selected */}
             {selectedTab === "reserved" && (
+              
+              // Listings that the user has Reserved
               <div>
+                {/* If there are no listing Reserved */}
                 {products_reserved.length === 0 ? (
                   <h2 className="mt-20 font-bold">
                     You have NO reserved listings!
                   </h2>
                 ) : (
+                  // Div of all the Reserved listing Cards
                   <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gap-x-8">
                     {products_reserved.length > 0 &&
                       products_reserved.map((product) => {
@@ -153,6 +167,7 @@ export default function Reserved() {
                                   console.log("reserved");
                                 }}
                                 animation="animate-bounce"
+                                confetti={true}
                               >
                                 Unreserve
                               </Button>
@@ -165,6 +180,7 @@ export default function Reserved() {
                                 size="sm"
                                 bold={true}
                                 animation="animate-bounce"
+                                confetti={true}
                               >
                                 <Image src={like} />
                               </Button>
@@ -172,12 +188,15 @@ export default function Reserved() {
                           </div>
                         );
                       })}
-                  </div>
+                  </div> // End of the Reserved Listings
                 )}
-              </div>
+              </div> // End of the Main Div for Reserved Listings
             )}
 
+            {/* If the Liked Tab is selected */}
             {selectedTab === "liked" && (
+
+              // Listings that the user has Reserved
               <div>
                 {products_liked.length === 0 ? (
                   <h2 className="mt-20 font-bold">
@@ -224,6 +243,7 @@ export default function Reserved() {
                                   console.log("reserved");
                                 }}
                                 animation="animate-bounce"
+                                confetti={true}
                               >
                                 Reserve
                               </Button>
@@ -236,6 +256,7 @@ export default function Reserved() {
                                 size="sm"
                                 bold={true}
                                 animation="animate-bounce"
+                                confetti={true}
                               >
                                 <Image src={likeFilled} />
                               </Button>
