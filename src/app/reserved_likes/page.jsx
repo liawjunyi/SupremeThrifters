@@ -76,14 +76,17 @@ export default function Reserved() {
   return (
     <div className="min-h-screen flex flex-col">
       <div className={`${menuActive ? "h-screen overflow-hidden" : ""}`}>
+        {/* Use of Sidemenu Component */}
         <Sidemenu
           className={`transition-opacity duration-500 ${
             menuActive ? "opacity-100 ease-in z-20" : "opacity-0 ease-out -z-1"
           }`}
           onClick={() => setMenuActive((prev) => !prev)}
         />
-
+        {/* Use of Navbar Component */}
         <Navbar menuActive={menuActive} setMenuActive={setMenuActive} />
+
+        {/* Main Div for Reserved and Liked Tabs */}
         <div className="mx-auto max-w-2xl px-4 py-16 mt-8 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
 
           {/* The tab button to toggle between Reserved and Liked */}
@@ -128,17 +131,20 @@ export default function Reserved() {
                 ) : (
                   // Div of all the Reserved listing Cards
                   <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gap-x-8">
+                    {/* If there are listings in Reserved */}
                     {products_reserved.length > 0 &&
                       products_reserved.map((product) => {
                         product = product.product;
                         return (
                           <div key={product?.id} className="group relative">
+                            {/* Showing image of listing */}
                             <Card className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                               <img
                                 src={product?.product_img_url}
                                 className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                               />
                             </Card>
+                            {/* Details of Listing */}
                             <div className="mt-4 flex justify-between">
                               <div>
                                 <h3 className="text-sm text-gray-700">
@@ -170,7 +176,6 @@ export default function Reserved() {
                                   console.log("reserved");
                                 }}
                                 animation="animate-bounce"
-                                confetti={true}
                               >
                                 Unreserve
                               </Button>
@@ -184,7 +189,6 @@ export default function Reserved() {
                                 size="sm"
                                 bold={true}
                                 animation="animate-bounce"
-                                confetti={true}
                               >
                                 <Image src={like} />
                               </Button>
@@ -200,25 +204,30 @@ export default function Reserved() {
             {/* If the Liked Tab is selected */}
             {selectedTab === "liked" && (
 
-              // Listings that the user has Reserved
+              // Listings that the user has Liked
               <div>
+                {/* If there are no listing Liked */}
                 {products_liked.length === 0 ? (
                   <h2 className="mt-20 font-bold">
                     You have NO liked listings!
                   </h2>
                 ) : (
+                  // Div of all the Liked listing Cards
                   <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gap-x-8">
+                    {/* If there are listings in Liked */}
                     {products_liked &&
                       products_liked.map((product) => {
                         product = product.product;
                         return (
                           <div key={product?.id} className="group relative">
+                            {/* Showing Image of Listing */}
                             <Card className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                               <img
                                 src={product?.product_img_url}
                                 className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                               />
                             </Card>
+                            {/* Details of Listing */}
                             <div className="mt-4 flex justify-between">
                               <div>
                                 <h3 className="text-sm text-gray-700">
@@ -246,7 +255,6 @@ export default function Reserved() {
                                   e.stopPropagation();
                                   console.log("reserved");
                                 }}
-                                confetti={true}
                                 animation="animate-bounce"
                               >
                                 Reserve
@@ -260,7 +268,6 @@ export default function Reserved() {
                                 size="sm"
                                 bold={true}
                                 animation="animate-bounce"
-                                confetti={true}
                               >
                                 <Image src={likeFilled} />
                               </Button>
@@ -268,19 +275,13 @@ export default function Reserved() {
                           </div>
                         );
                       })}
-                  </div>
+                  </div> // End of the Liked Listings
                 )}
-              </div>
+              </div> // End of the Main Div for Liked Listings
             )}
-          </div>
-        </div>
+          </div> 
+        </div> 
       </div>
-      {/* <footer
-        className="bg-primary text-center dark:bg-secondary w-full p-4 fixed bottom-0 left-0">
-        <div className="text-center text-neutral-300 dark:text-neutral-200">
-          © 2023 Copyright: Supreme Thrifters
-        </div>
-      </footer> */}
     </div>
   );
 }
