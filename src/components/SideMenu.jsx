@@ -1,13 +1,33 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 import Link from "next/link";
 import Image from "next/image";
 import bg from "../../public/desert.svg";
 import { usePathname } from "next/navigation";
 import Button from "./Button";
 import close from "../../public/close.svg";
+import { signOut, getAuth } from "firebase/auth";
+
+
+
 
 const Sidemenu = ({ className, onClick }) => {
+
+
+
+  const [loggedin, setLoggedin] = useState(true);
+
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  useEffect(() => {
+    if (user) {
+      setLoggedin(true);
+    } else {
+      setLoggedin(false);
+    }
+  }, [user]);
   const pathname = usePathname();
   console.log(pathname);
   return (
@@ -57,15 +77,35 @@ const Sidemenu = ({ className, onClick }) => {
               Profile
             </div>
           </Link>
-          <Link href="#">
-            <div
+
+          {loggedin ? (
+              <Link
               className={`${
-                pathname == "/login" && "text-shadow-neon text-neon"
+                pathname == "/profile" && "text-shadow-neon text-neon"
               } text-2xl leading-[4.5rem] uppercase text-gray-400 hover:text-shadow-neon hover:text-neon`}
-            >
-              Sign out
-            </div>
-          </Link>
+                onClick={() => {
+                  signOut(auth);
+                  setLoggedin(false);
+                  console.log("signin status" + loggedin);
+                }}
+                href="/"
+              >
+                Sign Out
+              </Link>
+            ) : (
+              <Link
+              className={`${
+                pathname == "/profile" && "text-shadow-neon text-neon"
+              } text-2xl leading-[4.5rem] uppercase text-gray-400 hover:text-shadow-neon hover:text-neon`}                href="/login"
+              >
+                Login
+              </Link>
+            )}
+
+
+
+
+
         </nav>
       </aside>
     </div>
