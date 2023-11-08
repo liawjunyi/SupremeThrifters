@@ -117,7 +117,7 @@ export default function Profile() {
   const handleSubmit = () => {
     updateDoc(doc(db, "users", user.uid), userData)
       .then(() => alert("successfully saved"))
-      .then(() => push("/"));
+      .then(() => push("/profile"));
 
     // if (currentPassword && newPassword && confirmPassword) {
     //   const credential = EmailAuthProvider.credential(
@@ -443,7 +443,7 @@ export default function Profile() {
 
         <div className="mt-6 flex items-center justify-center lg:justify-end gap-x-6">
           <Button size={"sm"}>
-            <Link href="/">Cancel</Link>
+            <Link href="/profile">Cancel</Link>
           </Button>
           <Button size={"sm"} onClick={() => handleSubmit()}>
             Save
