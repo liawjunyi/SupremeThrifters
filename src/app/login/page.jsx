@@ -1,7 +1,5 @@
 "use client"; // DO NOT TOUCH THIS
 
-// OPTION 1 LOGIN (just comment out whichever option u not using)
-
 import React, { useState } from "react";
 import "@/app/globals.css";
 import Image from "next/image";
@@ -18,12 +16,12 @@ import {
 import { auth, db } from "../../../firebase";
 import { useRouter } from "next/navigation";
 import { doc, setDoc } from "firebase/firestore";
+import Button from "@/components/Button";
 
 export default function Login() {
   const [isSignUp, setIsSignUp] = useState(false);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [profilePic, setProfilePic] = useState("");
   const [password, setPassword] = useState("");
 
   const { push } = useRouter();
@@ -65,22 +63,6 @@ export default function Login() {
 
   const signIn = (e) => {
     e.preventDefault(); //prevents the page from being reloaded
-    // signInWithEmailAndPassword(auth, email, password)
-    // .then((userCredential) => {
-
-    //     // console.log(userCredential);
-    //     console.log(auth.currentUser + "LOGGED IN");
-
-    //     console.log(userCredential);
-
-    //     // setPersistence(auth, browserSessionPersistence); // setting authentication state persistent for SESSION only
-    //     // setPersistence(auth, browserLocalPersistence); // setting authentication state persistent LOCALLY which means that user stays logged in even after the tab is closed
-
-    // })
-    // .catch((error) => {
-
-    //     console.log(error);
-    // })
 
     setPersistence(auth, browserLocalPersistence)
       .then(() => {
@@ -147,11 +129,9 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <input
-              type="submit"
-              value="Login"
-              className="btn solid w-[150px] bg-blue-500 border-none outline-none h-12 rounded-3xl text-white uppercase font-semibold my-2.5 mx-0 cursor-pointer transition duration-500 btn hover:bg-blue-500"
-            />
+            <Button size="xs" type="submit" className={"my-3"}>
+              Sign In
+            </Button>
           </form>
           <form
             className={`flex items-center justify-center flex-col py-0 px-20 transition-all delay-700 duration-200 overflow-hidden col-start-1 col-end-2 row-start-1 row-end-2  ${
@@ -199,11 +179,9 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <input
-              type="submit"
-              className="btn solid w-[150px] bg-blue-500 border-none outline-none h-12 rounded-3xl text-white uppercase font-semibold my-2.5 mx-0 cursor-pointer transition duration-500 btn hover:bg-blue-500"
-              value="Sign up"
-            />
+            <Button size="xs" type="submit" className={"my-3"}>
+              Sign Up
+            </Button>
           </form>
         </div>
       </div>
@@ -222,12 +200,14 @@ export default function Login() {
           >
             <h3 className="text-2xl text-white">Welcome Back!</h3>
             <p className="text-white">Please login with your personal info.</p>
-            <button
-              className="btn transparent bg-white text-gray-700 py-2 px-4 rounded-full mt-4 cursor-pointer"
+
+            <Button
+              size="xs"
+              className={"my-3 !bg-white !text-primary"}
               onClick={() => setIsSignUp((prev) => !prev)}
             >
-              Sign up
-            </button>
+              Sign Up
+            </Button>
           </div>
           <Image
             src={log}
@@ -261,13 +241,13 @@ export default function Login() {
             <p className="text-white">
               Enter your personal details and sign up with us.
             </p>
-
-            <button
-              className="btn transparent bg-white text-gray-700 py-2 px-4 rounded-full mt-4 cursor-pointer"
+            <Button
+              size="xs"
+              className={"my-3 !bg-white !text-primary"}
               onClick={() => setIsSignUp((prev) => !prev)}
             >
               Sign in
-            </button>
+            </Button>
           </div>
           <Image
             src={register}
@@ -285,112 +265,3 @@ export default function Login() {
     </div>
   );
 }
-
-// Option 2 LOGIN (just comment out whichever option u not using)
-
-// import React, { useState } from 'react';
-
-// export default function Login() {
-//     const [isSignUpMode, setIsSignUpMode] = useState(false);
-
-//     const handleModeToggle = () => {
-//       setIsSignUpMode((prevMode) => !prevMode);
-//     };
-
-//   return (
-//     <div className="Login bg-gradient-to-r from-blue-400 via-blue-600 to-blue-800 min-h-screen flex items-center justify-center">
-//         <div className={`container mx-auto p-4 ${isSignUpMode ? 'sign-up-mode' : ''}`}>
-//             <div className="panels-container min-h-screen flex">
-//                 <div className={`panel left-panel ${isSignUpMode ? 'hidden' : ''}`}>
-//                     <div className="content text-white text-right">
-//                         <h3 className="text-2xl">New here ?</h3>
-//                         <p className="mt-2">
-//                         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis, ex ratione. Aliquid!
-//                         </p>
-//                         <button
-//                         className="btn transparent text-white mt-4"
-//                         onClick={handleModeToggle}
-//                         >
-//                         Sign up
-//                         </button>
-//                     </div>
-//                     <img
-//                         src="../../../public/log.svg"
-//                         alt="Sign up"
-//                         className="image absolute w-1/2 right-0 transform translate-x-1/2"
-//                     />
-//                 </div>
-//                 <div className={`panel right-panel ${isSignUpMode ? '' : 'hidden'}`}>
-//                     <div className="content text-white text-left">
-//                         <h3 className="text-2xl">One of us ?</h3>
-//                         <p className="mt-2">
-//                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum laboriosam ad deleniti.
-//                         </p>
-//                         <button
-//                         className="btn transparent text-white mt-4"
-//                         onClick={handleModeToggle}
-//                         >
-//                         Sign in
-//                         </button>
-//                     </div>
-//                     <img
-//                         src="../../../public/register.svg"
-//                         alt="Sign in"
-//                         className="image absolute w-1/2 left-0 transform -translate-x-1/2"
-//                     />
-//                 </div>
-//             </div>
-
-//             <div className="forms-container bg-white p-8 rounded-lg shadow-lg max-w-md mx-auto mt-8">
-//                 <div className="signin-signup">
-//                     <form action="#" className={`auth-form ${isSignUpMode ? 'sign-up' : 'sign-in'}`}>
-//                         <h2 className="text-2xl text-gray-700 mb-4">
-//                         {isSignUpMode ? 'Sign up' : 'Sign in'}
-//                         </h2>
-//                         <div className="input-field mb-4">
-//                             <i className="fas fa-user mr-2"></i>
-//                             <input type="text" placeholder="Username" className="w-full bg-gray-200 p-2 rounded" />
-//                         </div>
-//                         {isSignUpMode && (
-//                         <div className="input-field mb-4">
-//                             <i className="fas fa-envelope mr-2"></i>
-//                             <input type="email" placeholder="Email" className="w-full bg-gray-200 p-2 rounded" />
-//                         </div>
-//                         )}
-//                         <div className="input-field mb-4">
-//                             <i className="fas fa-lock mr-2"></i>
-//                             <input
-//                                 type="password"
-//                                 placeholder="Password"
-//                                 className="w-full bg-gray-200 p-2 rounded"
-//                             />
-//                         </div>
-//                         <input
-//                         type="submit"
-//                         value={isSignUpMode ? 'Sign up' : 'Login'}
-//                         className="btn bg-blue-500 text-white font-semibold py-2 px-4 rounded cursor-pointer"
-//                         />
-//                         <p className="social-text text-gray-500 mt-2">
-//                         Or {isSignUpMode ? 'Sign up' : 'Sign in'} with social platforms
-//                         </p>
-//                         <div className="social-media mt-2">
-//                             <a href="#" className="social-icon bg-gray-200 p-2 rounded text-gray-500 mr-2">
-//                                 <i className="fab fa-facebook-f"></i>
-//                             </a>
-//                             <a href="#" className="social-icon bg-gray-200 p-2 rounded text-gray-500 mr-2">
-//                                 <i className="fab fa-twitter"></i>
-//                             </a>
-//                             <a href="#" className="social-icon bg-gray-200 p-2 rounded text-gray-500 mr-2">
-//                                 <i className="fab fa-google"></i>
-//                             </a>
-//                             <a href="#" className="social-icon bg-gray-200 p-2 rounded text-gray-500">
-//                                 <i className="fab fa-linkedin-in"></i>
-//                             </a>
-//                         </div>
-//                     </form>
-//                 </div>
-//             </div>
-//         </div>
-//     </div>
-//   );
-// }

@@ -33,14 +33,9 @@ const Button = ({
       setShowConfetti(false);
     }, 3000);
   };
-  
 
   return (
     <button
-      onClick={(e) => {
-        handleChange(e);
-        toggleConfetti(); // Toggle confetti when button is clicked
-      }}
       type={type}
       className={`${bold} ${size} hover:${animation} hover:bg-secondary hover:text-white bg-primary ${fontColor} cursor-pointer uppercase rounded-md text-sm ${className}`}
       {...props}
@@ -57,7 +52,7 @@ Button.defaultProps = {
   type: "button",
   fontColor: "text-white",
   animation: "none",
-  confetti: false
+  confetti: false,
 };
 
 export default Button;

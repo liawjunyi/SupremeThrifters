@@ -159,6 +159,9 @@ export default function Reserved() {
                                 <p className="mt-1 text-sm text-gray-500">
                                   {product?.username}
                                 </p>
+                                <p className="mt-1 text-sm text-gray-500">
+                                  Contact Number: 9876 5432
+                                </p>
                               </div>
                               <p className="text-sm font-medium text-gray-900">
                                 {product?.price}

@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import Card2 from "@/components/Card2";
-import kid from "../../public/kid.avif";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Carousel from "@/components/Carousel";
@@ -11,7 +10,7 @@ import Sidemenu from "@/components/Sidemenu";
 import { db } from "../../firebase";
 import { collection, getDocs, doc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
-import shirt from "../../public/shirt1.jpg";
+import shirt from "../../public/clothing.avif";
 import like from "../../public/like.svg";
 import { getAuth } from "firebase/auth";
 import Modal from "@/components/Modal";
@@ -20,7 +19,9 @@ export default function Home() {
   const auth = getAuth();
   const user = auth.currentUser;
   const [menuActive, setMenuActive] = useState(false);
+  const [showSideMenu, setShowSideMenu] = useState(false);
   const [all_listing, setAllListings] = useState([]);
+  const [selected, setSelected] = useState(null);
   const allListings = async () => {
     const listing = [];
     const querySnapshot = await getDocs(collection(db, "listings"));
@@ -38,14 +39,8 @@ export default function Home() {
         product,
       });
       alert(`you liked ${product.product_name}`);
-      if (user != null) {
-        await setDoc(doc(db, `users/${user.uid}/liked`, product.product_name), {
-          product,
-        });
-        alert(`you liked ${product.product_name}`);
-      } else {
-        router.push("/login");
-      }
+    } else {
+      router.push("/login");
     }
   };
 
@@ -58,6 +53,8 @@ export default function Home() {
         }
       );
       alert(`you reserved ${product.product_name}`);
+    } else {
+      router.push("/login");
     }
   };
 
@@ -103,16 +100,80 @@ export default function Home() {
 
   const router = useRouter();
   const handleNavigation = (item) => {
-    router.push(`browse?product_id=${item}`);
+    // router.push(`browse?product_id=${item}`);
     console.log(`browse?product_id=${item}`);
   };
+  const [isVisibleNewListings, setIsVisibleNewListings] = useState(false);
+  const [isVisibleProduct, setIsVisibleProduct] = useState(
+    Array(8).fill(false)
+  );
+  const [isVisibleTrending, setIsVisibleTrending] = useState(false);
+  const [isVisibleTrendingProduct, setIsVisibleTrendingProduct] = useState(
+    Array(8).fill(false)
+  );
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const newListingElement = document.getElementById("new-listings-section");
+      const trendingElement = document.getElementById("trending-section");
+      const productElements = document.querySelectorAll(".product-item");
+      const trendingProductElements = document.querySelectorAll(
+        ".trending-product-item"
+      );
+
+      if (newListingElement) {
+        const rect = newListingElement.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const isScrolled = rect.top < windowHeight;
+
+        if (isScrolled) {
+          setIsVisibleNewListings(true);
+          productElements.forEach((element, index) => {
+            setTimeout(() => {
+              setIsVisibleProduct((prev) => {
+                const updatedVisibility = [...prev];
+                updatedVisibility[index] = true;
+                return updatedVisibility;
+              });
+            }, 300 * (index + 1)); // Adjust the delay time as needed for staggered animations
+          });
+        }
+      }
+
+      if (trendingElement) {
+        const rect = trendingElement.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const isScrolled = rect.top < windowHeight;
+
+        if (isScrolled) {
+          setIsVisibleTrending(true);
+          trendingProductElements.forEach((element, index) => {
+            setTimeout(() => {
+              setIsVisibleTrendingProduct((prev) => {
+                const updatedVisibility = [...prev];
+                updatedVisibility[index] = true;
+                return updatedVisibility;
+              });
+            }, 300 * (index + 1)); // Adjust the delay time as needed for staggered animations
+          });
+
+          window.removeEventListener("scroll", handleScroll);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const [showMyModal, setShowMyModal] = useState(false);
 
   const handleOnClose = () => setShowMyModal(false);
 
   return (
-    <div className={`w-full ${menuActive ? "h-screen overflow-hidden" : ""}`}>
+    <div
+      className={`max-w-full ${menuActive ? "h-screen overflow-hidden" : ""}`}
+    >
       <Sidemenu
         className={`transition-opacity duration-500 ${
           menuActive ? "opacity-100 ease-in z-20" : "opacity-0 ease-out z-0"
@@ -126,15 +187,36 @@ export default function Home() {
         <Carousel />
 
         {/* New Listings section */}
-        <div className="text-center items-center">
-          <h1 className="text-[40px] font-semibold">New Listings</h1>
-          <hr className="w-52 h-1.5 bg-primary mx-auto" />
+        <div
+          id="new-listings-section"
+          className="text-center items-center mt-6 mb-6 mx-11"
+        >
+          <h1
+            className={`text-[40px] font-semibold ${
+              isVisibleNewListings
+                ? "opacity-100 animate-fade-in-left duration-3000"
+                : "opacity-0"
+            }`}
+          >
+            New Listings
+          </h1>
+          <hr
+            className={`w-52 h-1.5 bg-primary mx-auto ${
+              isVisibleNewListings
+                ? "opacity-100 animate-fade-in-left duration-3000"
+                : "opacity-0"
+            }`}
+          />
         </div>
         <div className="mt-6 mb-6 mx-11 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-          {all_listing.slice(0, 8).map((product) => (
+          {all_listing.slice(0, 8).map((product, index) => (
             <div
               key={product.id}
-              className="group relative justify-evenly flex"
+              className={`product-item group relative justify-evenly flex transition-all transform ${
+                isVisibleProduct[index]
+                  ? "opacity-100 animate-fade-in-left duration-3000"
+                  : "opacity-0"
+              }`}
             >
               <div
                 onClick={() => {
@@ -145,6 +227,7 @@ export default function Home() {
                   <img
                     src={product.product_img_url}
                     className="h-[300px] w-full object-cover object-center lg:h-[300px] lg:w-full"
+                    // onClick={}
                   />
                   <div className="mt-4 flex">
                     <div>
@@ -199,15 +282,36 @@ export default function Home() {
         </div>
 
         {/* New Listings section */}
-        <div className="text-center items-center">
-          <h1 className="text-[40px] font-semibold">Trendings</h1>
-          <hr className="w-52 h-1.5 bg-primary mx-auto" />
+        <div
+          id="trending-section"
+          className="text-center items-center mt-6 mb-6 mx-11"
+        >
+          <h1
+            className={`text-[40px] font-semibold ${
+              isVisibleTrending
+                ? "opacity-100 animate-fade-in-left duration-3000"
+                : "opacity-0"
+            }`}
+          >
+            Trending
+          </h1>
+          <hr
+            className={`w-52 h-1.5 bg-primary mx-auto ${
+              isVisibleTrending
+                ? "opacity-100 animate-fade-in-left duration-3000"
+                : "opacity-0"
+            }`}
+          />
         </div>
-        <div className="mt-6 mb-6 mx-11 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 ">
-          {all_listing.slice(9, 17).map((product) => (
+        <div className="mt-6 mb-6 mx-11 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+          {all_listing.slice(9, 17).map((product, index) => (
             <div
               key={product.id}
-              className="group relative justify-evenly flex"
+              className={`trending-product-item group relative justify-evenly flex transition-all transform ${
+                isVisibleTrendingProduct[index]
+                  ? "opacity-100 animate-fade-in-left duration-3000"
+                  : "opacity-0"
+              }`}
             >
               <div
                 onClick={() => {
@@ -272,82 +376,50 @@ export default function Home() {
         </div>
 
         {/* About Us Section */}
+
         <div
           className="m-4 mx-8 mb-10 opacity-0 transition-opacity duration-1000 ease-linear"
           id="about-us"
         >
-          <Modal onClose={handleOnClose} visible={showMyModal}>
-            <Card2
-              image={kid}
-              title="UN Goals"
-              img_width="md:w-1/4"
-              div_width="w-1/2"
-            >
-              <div className="flex items-center">
-                <div className="flex items-center"></div>
-                <p class="mb-1 text-neutral-300 dark:text-neutral-200 text-xl font-bold">
-                  Climate Action
-                </p>
-                <p class="mb-3 text-neutral-300 dark:text-neutral-200 pl-8">
-                  Reduce environmental impact by curbing the demand for fast
-                  fashion! Cut gas emissions and thrift today!
-                </p>
-                <p class="mb-1 text-neutral-300 dark:text-neutral-200 text-xl font-bold">
-                  Responsible Consumption & Production
-                </p>
-                <p class="mb-3 text-neutral-300 dark:text-neutral-200 pl-8">
-                  Do your part and extend the lifespan on clothing to reduce
-                  textile waste!
-                </p>
-                <p class="mb-1 text-neutral-300 dark:text-neutral-200 text-xl font-bold">
-                  Sustainable Cities & Communities
-                </p>
-                <p class="mb-3 text-neutral-300 dark:text-neutral-200 pl-8">
-                  Join the thrifting community and let us raise awareness about
-                  sustainable fashion together!
-                </p>
-              </div>
-            </Card2>
-          </Modal>
-          <Card2 image={shirt} title="About us">
-            <p class="mb-6 text-neutral-300 dark:text-neutral-200 text-lg">
-              Supreme Thrifter is created to promote thirfting among youths by
-              making it accessible and convenient for all. Here you can explore
-              and purchase beloved second-hand clothings that is nearest to you
-              rather than having to locate a thrift store which can be very out
-              of the way.
-            </p>
-            <p class="mb-4 text-neutral-300 dark:text-neutral-200 text-xl font-bold">
-              Did you Know?
-            </p>
-            <p className="text-neutral-300 dark:text-neutral-200">
-              The fashion industry contributes:
-            </p>
-            <ul className="text-neutral-300 dark:text-neutral-200 list-disc pl-8">
-              <li>
-                <span className="font-bold text-white text-lg">8-10%</span> of
-                global greenhouse gas emissions.
-              </li>
-              <li>
-                an estimated{" "}
-                <span className="font-bold text-white text-lg">
-                  92 million tons
-                </span>{" "}
-                of textile waste created annually.
-              </li>
-            </ul>
+          <div>
+            <Modal onClose={handleOnClose} visible={showMyModal}></Modal>
+            <Card2 image={shirt} title="About us" img_width="md:w-1/4">
+              <p class="mb-6 text-neutral-300 dark:text-neutral-200 text-lg">
+                Supreme Thrifter is created to promote thrifting among youths by
+                making it accessible and convenient for all. Here you can
+                explore and purchase beloved second-hand clothings that is
+                nearest to you rather than having to locate a thrift store which
+                can be very out of the way.
+              </p>
+              <p class="mb-4 text-neutral-300 dark:text-neutral-200 text-xl font-bold">
+                Did you Know?
+              </p>
+              <p className="text-neutral-300 dark:text-neutral-200">
+                The fashion industry contributes:
+              </p>
+              <ul className="text-neutral-300 dark:text-neutral-200 list-disc pl-8 mb-3">
+                <li>
+                  <span className="font-bold text-white text-lg">8-10%</span> of
+                  global greenhouse gas emissions.
+                </li>
+                <li>
+                  an estimated{" "}
+                  <span className="font-bold text-white text-lg">
+                    92 million tons
+                  </span>{" "}
+                  of textile waste created annually.
+                </li>
+              </ul>
 
-            <p class="text-xs text-neutral-500 dark:text-neutral-300">
-              Last updated 3 mins ago
-            </p>
-            <a
-              onClick={() => setShowMyModal(true)}
-              className="whitespace-nowrap"
-            >
-              Click here to find out how thrifting aligns with the UN
-              sustainability goals!
-            </a>
-          </Card2>
+              <a
+                onClick={() => setShowMyModal(true)}
+                className="mb-0 whitespace-normal hidden lg:block text-neutral-300 dark:text-neutral-200 list-disc "
+              >
+                Click here to find out how thrifting aligns with the UN
+                sustainability goals!
+              </a>
+            </Card2>
+          </div>
         </div>
       </div>
 
