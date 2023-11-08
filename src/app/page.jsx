@@ -22,7 +22,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { useRouter } from "next/navigation";
-import shirt from "../../public/shirt1.jpg";
+import shirt from "../../public/clothing.avif";
 import like from "../../public/like.svg";
 import { getAuth } from "firebase/auth";
 import Modal from "@/components/Modal";
@@ -338,7 +338,7 @@ export default function Home() {
           <Modal onClose={handleOnClose} visible={showMyModal}>
 
           </Modal>
-          <Card2 image={shirt} title="About us">
+          <Card2 image={shirt} title="About us" img_width={"md:w-1/4"} div_width={"md:w-full"}>
             <p class="mb-6 text-neutral-300 dark:text-neutral-200 text-lg">
               Supreme Thrifter is created to promote thirfting among youths by
               making it accessible and convenient for all. Here you can explore
@@ -352,7 +352,7 @@ export default function Home() {
             <p className="text-neutral-300 dark:text-neutral-200">
               The fashion industry contributes:
             </p>
-            <ul className="text-neutral-300 dark:text-neutral-200 list-disc pl-8">
+            <ul className="text-neutral-300 dark:text-neutral-200 list-disc pl-8 mb-3">
               <li>
                 <span className="font-bold text-white text-lg">8-10%</span> of
                 global greenhouse gas emissions.
@@ -366,18 +366,12 @@ export default function Home() {
               </li>
             </ul>
 
-            <p class="text-xs text-neutral-500 dark:text-neutral-300">
-              Last updated 3 mins ago
-            </p>
             <a
               onClick={() => setShowMyModal(true)}
-              className="whitespace-nowrap"
+              className="mb-0 whitespace-normal hidden lg:block text-neutral-300 dark:text-neutral-200 list-disc animate-bounce"
             >
               Click here to find out how thrifting aligns with the UN sustainability goals!
             </a>
-            {/* <a onClick={() => setShowMyModal(true)}>
-              here
-            </a> */}
           </Card2>
         </div>
       </div>

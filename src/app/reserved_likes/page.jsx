@@ -153,6 +153,9 @@ export default function Reserved() {
                                 <p className="mt-1 text-sm text-gray-500">
                                   {product?.username}
                                 </p>
+                                <p className="mt-1 text-sm text-gray-500">
+                                  Contact No.: 9876 4321
+                                </p>
                               </div>
                               <p className="text-sm font-medium text-gray-900">
                                 {product?.price}
@@ -171,6 +174,7 @@ export default function Reserved() {
                               >
                                 Unreserve
                               </Button>
+                              
                               <Button
                                 className="z-0"
                                 onClick={(e) => {
