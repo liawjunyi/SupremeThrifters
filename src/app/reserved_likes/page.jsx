@@ -69,7 +69,7 @@ export default function Reserved() {
 
       alert("Listing has been unreserved!")
 
-    }).then(() => push("/reserved_likes"));
+    }).then(() => getData_reserved(user.uid));
   
     
   };
@@ -81,7 +81,7 @@ export default function Reserved() {
 
       alert("Listing has been unliked!")
 
-    }).then(() => push("/reserved_likes"));
+    }).then(() => getData_liked(user.uid));
   
     
   };

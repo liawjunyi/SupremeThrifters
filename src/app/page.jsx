@@ -54,7 +54,7 @@ export default function Home() {
       await setDoc(doc(db, `users/${user.uid}/liked`, product.product_name), {
         product,
       });
-      alert(`you liked ${product.product_name}`);
+      alert(`You liked ${product.product_name}`);
     } else {
       router.push("/login");
     }
@@ -65,7 +65,7 @@ export default function Home() {
     await setDoc(doc(db, `users/${user.uid}/reserved`, product.product_name), {
       product,
     });
-    alert(`you reserved ${product.product_name}`);
+    alert(`You have reserved ${product.product_name}`);
   };}
 
   const observeElement = () => {
