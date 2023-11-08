@@ -153,6 +153,9 @@ export default function Reserved() {
                                 <p className="mt-1 text-sm text-gray-500">
                                   {product?.username}
                                 </p>
+                                <p className="mt-1 text-sm text-gray-500">
+                                  Contact No.: 9876 4321
+                                </p>
                               </div>
                               <p className="text-sm font-medium text-gray-900">
                                 {product?.price}
@@ -171,6 +174,7 @@ export default function Reserved() {
                               >
                                 Unreserve
                               </Button>
+                              
                               <Button
                                 className="z-0"
                                 onClick={(e) => {
@@ -208,30 +212,30 @@ export default function Reserved() {
                       products_liked.map((product) => {
                         product = product.product;
                         return (
-                          <div key={product.id} className="group relative">
+                          <div key={product?.id} className="group relative">
                             <Card className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                               <img
-                                src={product.product_img_url}
+                                src={product?.product_img_url}
                                 className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                               />
                             </Card>
                             <div className="mt-4 flex justify-between">
                               <div>
                                 <h3 className="text-sm text-gray-700">
-                                  <a href={product.href}>
+                                  <a href={product?.href}>
                                     <span
                                       aria-hidden="true"
                                       className="absolute inset-0"
                                     />
-                                    {product.product_name}
+                                    {product?.product_name}
                                   </a>
                                 </h3>
                                 <p className="mt-1 text-sm text-gray-500">
-                                  {product.username}
+                                  {product?.username}
                                 </p>
                               </div>
                               <p className="text-sm font-medium text-gray-900">
-                                {product.price}
+                                {product?.price}
                               </p>
                             </div>
                             <div className="flex justify-between pt-lg">
@@ -242,8 +246,8 @@ export default function Reserved() {
                                   e.stopPropagation();
                                   console.log("reserved");
                                 }}
-                                animation="animate-bounce"
                                 confetti={true}
+                                animation="animate-bounce"
                               >
                                 Reserve
                               </Button>

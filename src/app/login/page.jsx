@@ -18,6 +18,7 @@ import {
 import { auth, db } from "../../../firebase";
 import { useRouter } from "next/navigation";
 import { doc, setDoc } from "firebase/firestore";
+import Button from "@/components/Button";
 
 export default function Login() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -147,11 +148,9 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <input
-              type="submit"
-              value="Login"
-              className="btn solid w-[150px] bg-blue-500 border-none outline-none h-12 rounded-3xl text-white uppercase font-semibold my-2.5 mx-0 cursor-pointer transition duration-500 btn hover:bg-blue-500"
-            />
+            <Button size="xs" type="submit" className={"my-3"}>
+              Sign In
+            </Button>
           </form>
           <form
             className={`flex items-center justify-center flex-col py-0 px-20 transition-all delay-700 duration-200 overflow-hidden col-start-1 col-end-2 row-start-1 row-end-2  ${
@@ -199,11 +198,9 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <input
-              type="submit"
-              className="btn solid w-[150px] bg-blue-500 border-none outline-none h-12 rounded-3xl text-white uppercase font-semibold my-2.5 mx-0 cursor-pointer transition duration-500 btn hover:bg-blue-500"
-              value="Sign up"
-            />
+            <Button size="xs" type="submit" className={"my-3"}>
+              Sign Up
+            </Button>
           </form>
         </div>
       </div>
@@ -222,12 +219,14 @@ export default function Login() {
           >
             <h3 className="text-2xl text-white">Welcome Back!</h3>
             <p className="text-white">Please login with your personal info.</p>
-            <button
-              className="btn transparent bg-white text-gray-700 py-2 px-4 rounded-full mt-4 cursor-pointer"
+
+            <Button
+              size="xs"
+              className={"my-3 !bg-white !text-primary"}
               onClick={() => setIsSignUp((prev) => !prev)}
             >
-              Sign up
-            </button>
+              Sign Up
+            </Button>
           </div>
           <Image
             src={log}
@@ -261,13 +260,13 @@ export default function Login() {
             <p className="text-white">
               Enter your personal details and sign up with us.
             </p>
-
-            <button
-              className="btn transparent bg-white text-gray-700 py-2 px-4 rounded-full mt-4 cursor-pointer"
+            <Button
+              size="xs"
+              className={"my-3 !bg-white !text-primary"}
               onClick={() => setIsSignUp((prev) => !prev)}
             >
               Sign in
-            </button>
+            </Button>
           </div>
           <Image
             src={register}
