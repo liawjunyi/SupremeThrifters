@@ -8,6 +8,7 @@ const Button = ({
   fontColor,
   className,
   children,
+  animation,
   ...props
 }) => {
   bold = bold ? "font-bold" : "font-normal";
@@ -24,7 +25,7 @@ const Button = ({
     <button
       onClick={handleChange}
       type={type}
-      className={`${bold} ${size} hover:bg-secondary hover:text-white bg-primary ${fontColor} cursor-pointer uppercase rounded-md text-sm ${className}`}
+      className={`${bold} ${size} hover:${animation} hover:bg-secondary hover:text-white bg-primary ${fontColor} cursor-pointer uppercase rounded-md text-sm ${className}`}
       {...props}
     >
       {children}
@@ -37,6 +38,7 @@ Button.defaultProps = {
   bold: "false",
   type: "button",
   fontColor: "text-white",
+  animation: "none",
 };
 
 export default Button;
