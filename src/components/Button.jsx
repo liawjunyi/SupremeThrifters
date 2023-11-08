@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import Confetti from "react-confetti";
 
 const Button = ({
   size,
@@ -9,6 +10,7 @@ const Button = ({
   className,
   children,
   animation,
+  confetti,
   ...props
 }) => {
   bold = bold ? "font-bold" : "font-normal";
@@ -21,14 +23,30 @@ const Button = ({
       ? "px-md py-lg"
       : "px-lg py-xl";
 
+  // State to control confetti visibility
+  const [showConfetti, setShowConfetti] = useState(false);
+
+  // Function to toggle confetti
+  const toggleConfetti = () => {
+    setShowConfetti(true);
+    setTimeout(() => {
+      setShowConfetti(false);
+    }, 3000);
+  };
+  
+
   return (
     <button
-      onClick={handleChange}
+      onClick={(e) => {
+        handleChange(e);
+        toggleConfetti(); // Toggle confetti when button is clicked
+      }}
       type={type}
       className={`${bold} ${size} hover:${animation} hover:bg-secondary hover:text-white bg-primary ${fontColor} cursor-pointer uppercase rounded-md text-sm ${className}`}
       {...props}
     >
       {children}
+      {confetti && showConfetti && <Confetti width={200} height={200} />}
     </button>
   );
 };
@@ -39,6 +57,7 @@ Button.defaultProps = {
   type: "button",
   fontColor: "text-white",
   animation: "none",
+  confetti: false
 };
 
 export default Button;

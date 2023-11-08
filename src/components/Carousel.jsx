@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "@reach/combobox/styles.css";
 
 const Carousel = () => {
   let carousel_slides = [
@@ -22,12 +21,10 @@ const Carousel = () => {
       Description: "Thrift Shop",
       // link: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtfeR2gr_Z2U5rNiTKieMXMM9ZY96GbKUQQg&usqp=CAU",
       link: "https://i.pinimg.com/originals/37/81/80/37818060ae92c0da020fe7626f80f80d.jpg",
-
     },
     {
       Description: "Recommended for You",
       link: "https://i.pinimg.com/originals/28/a5/5d/28a55d757683ab73fecb4b9ef7168e15.jpg",
-
     },
   ];
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -61,10 +58,16 @@ const Carousel = () => {
           backgroundImage: `url(${carousel_slides[currentIndex].link})`,
         }}
         className="w-full h-full rounded-2xl bg-center bg-cover duration-500"
-      ><div className="absolute inset-0 flex items-center justify-center">
-      <p className="text-[20px] lg:text-[50px] font-bold font-serif text-white  text-center ">Fast fashion doesn't go <br /> well with my outfit.<br /><br />Thrift Now.</p>
-      
-    </div></div>
+      >
+        <div className="absolute inset-0 flex items-center justify-center">
+          <p className="text-[20px] lg:text-[50px] font-bold font-serif text-white  text-center ">
+            Fast fashion does not go <br /> well with my outfit.
+            <br />
+            <br />
+            Thrift Now.
+          </p>
+        </div>
+      </div>
       <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20text-white cursor-pointer">
         <i
           class="fa-solid fa-circle-arrow-left"

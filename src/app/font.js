@@ -5,4 +5,7 @@ export const inter = Inter({
   display: "swap",
 });
 
-export const tiltneon = Tilt_Neon({ subsets: ["latin"] });
+export const tiltneon = Tilt_Neon({
+  subsets: ["latin"],
+  display: "swap",
+});
