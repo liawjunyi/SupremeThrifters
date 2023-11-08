@@ -1,5 +1,4 @@
 "use client";
-import "@reach/combobox/styles.css";
 import {
   GoogleMap,
   useLoadScript,
@@ -21,7 +20,7 @@ import SideMenu from "@/components/Sidemenu";
 import Autocomplete2 from "@/components/Autocomplete2";
 import algoliasearch from "algoliasearch";
 import { getAlgoliaResults } from "@algolia/autocomplete-js";
-import { ProductItem } from "@/components/Productitem";
+import ProductItem from "@/components/Productitem";
 import insightsClient from "search-insights";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase";
@@ -35,7 +34,6 @@ export default function Places() {
     mapIds: ["aa0423f1ef73f4ca"],
     libraries: ["places", "marker"],
   });
-  
 
   if (!isLoaded)
     return (
@@ -85,23 +83,26 @@ function Map() {
       });
       alert(`you liked ${product.product_name}`);
     } else {
-      router.push("/login")
-    };
+      router.push("/login");
+    }
   };
 
   const handleReserved = async (product) => {
     if (user != null) {
-      await setDoc(doc(db, `users/${user.uid}/reserved`, product.product_name), {
-        product,
-      });
+      await setDoc(
+        doc(db, `users/${user.uid}/reserved`, product.product_name),
+        {
+          product,
+        }
+      );
       alert(`you reserved ${product.product_name}`);
     } else {
-      router.push("/login")
+      router.push("/login");
     }
   };
 
   const searchParams = useSearchParams();
-  const search = searchParams.get('product_id');
+  const search = searchParams.get("product_id");
   console.log(search);
 
   return (

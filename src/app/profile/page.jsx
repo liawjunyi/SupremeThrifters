@@ -15,7 +15,7 @@ import {
   where,
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import Sidemenu from "@/components/SideMenu";
+import Sidemenu from "@/components/Sidemenu";
 import { useRouter } from "next/navigation";
 
 export default function Profile() {
@@ -79,23 +79,23 @@ export default function Profile() {
           updateProfilePicInFirestore(url); // Update the Firestore document with the new URL
         });
     }
-};
+  };
 
   const updateProfilePicInFirestore = (newProfilePicURL) => {
     const userDocRef = doc(db, "users", user.uid);
 
     // Update only the 'profilePic' field in the Firestore document
     const updateData = {
-        profilePic: newProfilePicURL,
+      profilePic: newProfilePicURL,
     };
 
     updateDoc(userDocRef, updateData)
-        .then(() => alert("Profile picture updated successfully"))
-        .then(() => push("/"))
-        .catch((error) => {
-            console.error("Error updating profile picture:", error);
-        });
-};
+      .then(() => alert("Profile picture updated successfully"))
+      .then(() => push("/"))
+      .catch((error) => {
+        console.error("Error updating profile picture:", error);
+      });
+  };
 
   const removeProfilePic = () => {
     setUserData((prev) => {
@@ -193,7 +193,11 @@ export default function Profile() {
                 </label>
                 <div className="mt-2 flex items-center gap-x-3">
                   {isloggedin ? (
-                    <img className="rounded-full w-20 h-20" src={userData.profilePic} alt="" />
+                    <img
+                      className="rounded-full w-20 h-20"
+                      src={userData.profilePic}
+                      alt=""
+                    />
                   ) : (
                     <svg
                       className="h-20 w-20 text-gray-300"
