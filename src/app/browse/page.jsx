@@ -144,6 +144,7 @@ function Map() {
             {selected.map((item) => (
               <Card
                 className={"m-md border border-gray-200 rounded-md shadow "}
+                key={item.product_id}
               >
                 <Accordion
                   title={item.product_name}
@@ -352,6 +353,7 @@ function Map() {
                     onMouseOver={() => setHighlight(true)}
                     animation={2}
                     onClick={() => setActiveMarker(user_id)}
+                    key={item.product_id}
                   >
                     {activeMarker == user_id && (
                       <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
