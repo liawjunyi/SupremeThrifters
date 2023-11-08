@@ -3,21 +3,18 @@
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import React, { useEffect, useState } from "react";
-import { collection, query, where, getDocs, deleteDoc, doc } from "firebase/firestore";
-import { db, storage } from "../../../firebase";
+import { collection, query, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { db } from "../../../firebase";
 import Navbar from "@/components/Navbar";
-import like from "../../../public/like.svg";
 import likeFilled from "../../../public/like_filled.svg";
 import Image from "next/image";
 import Sidemenu from "@/components/Sidemenu";
 import { getAuth } from "firebase/auth";
-import { getDownloadURL, ref } from "firebase/storage";
-import Confetti from "react-confetti";
 import { useRouter } from "next/navigation";
 
 export default function Reserved() {
-  const [products_reserved, setProductsReserved] = useState([]);
-  const [products_liked, setProductsLiked] = useState([]);
+  const [products_reserved, setProductsReserved] = useState(null);
+  const [products_liked, setProductsLiked] = useState(null);
   const [menuActive, setMenuActive] = useState(false);
   const [selectedTab, setSelectedTab] = useState("reserved");
   const { push } = useRouter();
@@ -27,12 +24,10 @@ export default function Reserved() {
   // Getting all the listings that is RESERVED by a user
   const getData_reserved = async (uid) => {
     // Geting the reserved collection from firebase of the user that is logged in
-    const q_user = query(
-      collection(db, "users", uid, "reserved")
-    );
+    const q_user = query(collection(db, "users", uid, "reserved"));
 
     const reservedList = [];
-    
+
     // Pushing the listings from the firebase reserved collection into the reserved list
     const querySnapshot = await getDocs(q_user);
     querySnapshot.forEach((doc) => {
@@ -45,12 +40,10 @@ export default function Reserved() {
   // Getting all the listing that is LIKED by user
   const getData_liked = async (uid) => {
     // Geting the liked collection from firebase of the user that is logged in
-    const q_liked = query(
-      collection(db, "users", uid, "liked")
-    );
+    const q_liked = query(collection(db, "users", uid, "liked"));
 
     let likedList = [];
-    
+
     // Pushing the listings from the firebase reserved collection into the reserved list
     const querySnapshot = await getDocs(q_liked);
     querySnapshot.forEach((doc) => {
@@ -61,31 +54,13 @@ export default function Reserved() {
     setProductsLiked(likedList);
   };
 
-
-  const unreserveListing = async (product) => {
-   
-    
-    await deleteDoc(doc(db, "users", user.uid, "reserved", product.product_name)) .then(() => {
-
-      alert("Listing has been unreserved!")
-
-    }).then(() => push("/reserved_likes"));
-  
-    
-  };
-
   const unlikeListing = async (product) => {
-   
-    
-    await deleteDoc(doc(db, "users", user.uid, "liked", product.product_name)) .then(() => {
-
-      alert("Listing has been unliked!")
-
-    }).then(() => push("/reserved_likes"));
-  
-    
+    await deleteDoc(doc(db, "users", user.uid, "liked", product.product_name))
+      .then(() => {
+        alert("Listing has been unliked!");
+      })
+      .then(() => push("/reserved_likes"));
   };
-
 
   useEffect(() => {
     if (user) {
@@ -115,7 +90,6 @@ export default function Reserved() {
 
         {/* Main Div for Reserved and Liked Tabs */}
         <div className="mx-auto max-w-2xl px-4 py-16 mt-8 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-
           {/* The tab button to toggle between Reserved and Liked */}
           <div className="flex space-x-4">
             {/* The Reserved Tab Button */}
@@ -144,14 +118,12 @@ export default function Reserved() {
           </div>
 
           <div className="tab-content">
-            
             {/* If the Reserved Tab is selected */}
             {selectedTab === "reserved" && (
-              
               // Listings that the user has Reserved
               <div>
                 {/* If there are no listing Reserved */}
-                {products_reserved.length === 0 ? (
+                {products_reserved && products_reserved.length === 0 ? (
                   <h2 className="mt-20 font-bold">
                     You have NO reserved listings!
                   </h2>
@@ -159,7 +131,8 @@ export default function Reserved() {
                   // Div of all the Reserved listing Cards
                   <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gap-x-8">
                     {/* If there are listings in Reserved */}
-                    {products_reserved.length > 0 &&
+                    {products_reserved &&
+                      products_reserved.length > 0 &&
                       products_reserved.map((product) => {
                         product = product.product;
                         return (
@@ -191,33 +164,6 @@ export default function Reserved() {
                                 {product?.price}
                               </p>
                             </div>
-                            <div className="flex justify-between pt-lg">
-                              <Button
-                                className="z-0"
-                                size="sm"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  console.log("reserved");
-                                  unreserveListing(product);
-                              
-                                }}
-                                animation="animate-bounce"
-                              >
-                                Unreserve
-                              </Button>
-                              <Button
-                                className="z-0"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  console.log("liked");
-                                }}
-                                size="sm"
-                                bold={true}
-                                animation="animate-bounce"
-                              >
-                                <Image src={like} />
-                              </Button>
-                            </div>
                           </div>
                         );
                       })}
@@ -228,11 +174,9 @@ export default function Reserved() {
 
             {/* If the Liked Tab is selected */}
             {selectedTab === "liked" && (
-
-              // Listings that the user has Liked
+              // Listings that the user has Reserved
               <div>
-                {/* If there are no listing Liked */}
-                {products_liked.length === 0 ? (
+                {products_liked?.length === 0 ? (
                   <h2 className="mt-20 font-bold">
                     You have NO liked listings!
                   </h2>
@@ -244,7 +188,6 @@ export default function Reserved() {
                       products_liked.map((product) => {
                         product = product.product;
                         return (
-
                           <div key={product?.id} className="group relative">
                             {/* Showing Image of Listing */}
 
@@ -308,8 +251,8 @@ export default function Reserved() {
                 )}
               </div> // End of the Main Div for Liked Listings
             )}
-          </div> 
-        </div> 
+          </div>
+        </div>
       </div>
     </div>
   );

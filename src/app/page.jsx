@@ -3,36 +3,24 @@ import React, { useState, useEffect } from "react";
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import Card2 from "@/components/Card2";
-import menu from "../../public/menu.svg";
-import close from "../../public/close.svg";
-import aboutus from "../../public/aboutus_pic.jpg";
+import kid from "../../public/kid.avif";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Carousel from "@/components/Carousel";
 import Sidemenu from "@/components/Sidemenu";
 import { db } from "../../firebase";
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  doc,
-  setDoc,
-  updateDoc,
-} from "firebase/firestore";
+import { collection, getDocs, doc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import shirt from "../../public/shirt1.jpg";
 import like from "../../public/like.svg";
 import { getAuth } from "firebase/auth";
 import Modal from "@/components/Modal";
 
-
 export default function Home() {
   const auth = getAuth();
   const user = auth.currentUser;
   const [menuActive, setMenuActive] = useState(false);
   const [all_listing, setAllListings] = useState([]);
-  const [selected, setSelected] = useState(null);
   const allListings = async () => {
     const listing = [];
     const querySnapshot = await getDocs(collection(db, "listings"));
@@ -45,28 +33,33 @@ export default function Home() {
   };
 
   const handleLiked = async (product) => {
-    if(user != null){
-    await setDoc(doc(db, `users/${user.uid}/liked`, product.product_name), {
-      product,
-    });
-    alert(`you liked ${product.product_name}`);
     if (user != null) {
       await setDoc(doc(db, `users/${user.uid}/liked`, product.product_name), {
         product,
       });
       alert(`you liked ${product.product_name}`);
-    } else {
-      router.push("/login");
+      if (user != null) {
+        await setDoc(doc(db, `users/${user.uid}/liked`, product.product_name), {
+          product,
+        });
+        alert(`you liked ${product.product_name}`);
+      } else {
+        router.push("/login");
+      }
     }
-  };}
+  };
 
   const handleReserved = async (product) => {
-    if(user != null){
-    await setDoc(doc(db, `users/${user.uid}/reserved`, product.product_name), {
-      product,
-    });
-    alert(`you reserved ${product.product_name}`);
-  };}
+    if (user != null) {
+      await setDoc(
+        doc(db, `users/${user.uid}/reserved`, product.product_name),
+        {
+          product,
+        }
+      );
+      alert(`you reserved ${product.product_name}`);
+    }
+  };
 
   const observeElement = () => {
     const options = {
@@ -104,18 +97,6 @@ export default function Home() {
     };
   }, []); // Empty dependency array to run the effect only once
 
-  //const handleReserved = async (product) => {
-  // if(user != null){
-  //   await setDoc(doc(db, users/${user.uid}/reserved, product.product_name), {
-  //     product,
-  //   });
-  // }
-
-  // else{
-  //   push("/login")
-  // }
-  // };
-
   useEffect(() => {
     allListings();
   }, []);
@@ -125,22 +106,6 @@ export default function Home() {
     router.push(`browse?product_id=${item}`);
     console.log(`browse?product_id=${item}`);
   };
-  //  useEffect(() => {
-  //     const updateMediaQuery = (e) => {
-  //       if (e.matches) {
-  //         setShowSideMenu(true);
-  //       } else {
-  //         setShowSideMenu(false);
-  //       }
-  //     };
-
-  //     const mediaQuery = window.matchMedia("(max-width: 992px)"); //smaller than 992px replace with SideMenu
-  //     mediaQuery.addEventListener("change", updateMediaQuery);
-
-  //     return () => {
-  //       mediaQuery.removeEventListener("change", updateMediaQuery);
-  //     };
-  //  }, []);
 
   const [showMyModal, setShowMyModal] = useState(false);
 
@@ -180,7 +145,6 @@ export default function Home() {
                   <img
                     src={product.product_img_url}
                     className="h-[300px] w-full object-cover object-center lg:h-[300px] lg:w-full"
-                    // onClick={}
                   />
                   <div className="mt-4 flex">
                     <div>
@@ -201,25 +165,6 @@ export default function Home() {
                       {product.price}
                     </p>
                   </div>
-                  {/* <div className="mt-4">
-                    <div className="flex">
-                      <h3 className="text-sm text-gray-700">
-                        <a href={product.href}>
-                          <span
-                            aria-hidden="true"
-                            className="absolute inset-0"
-                          />
-                          {product.product_name}
-                        </a>
-                      </h3>
-                      <p className="text-right ml-auto text-sm font-medium text-gray-900">
-                        {product.price}
-                      </p>
-                    </div>
-                    <p className=" mt-1 text-sm text-gray-500">
-                      {product.username}
-                    </p>
-                  </div> */}
                 </Card>
                 <div className="flex justify-between">
                   <Button
@@ -331,10 +276,39 @@ export default function Home() {
           className="m-4 mx-8 mb-10 opacity-0 transition-opacity duration-1000 ease-linear"
           id="about-us"
         >
-          {/* <Button onClick={() => setShowMyModal(true)}>
-            Click here
-          </Button> */}
-          <Modal onClose={handleOnClose} visible={showMyModal}></Modal>
+          <Modal onClose={handleOnClose} visible={showMyModal}>
+            <Card2
+              image={kid}
+              title="UN Goals"
+              img_width="md:w-1/4"
+              div_width="w-1/2"
+            >
+              <div className="flex items-center">
+                <div className="flex items-center"></div>
+                <p class="mb-1 text-neutral-300 dark:text-neutral-200 text-xl font-bold">
+                  Climate Action
+                </p>
+                <p class="mb-3 text-neutral-300 dark:text-neutral-200 pl-8">
+                  Reduce environmental impact by curbing the demand for fast
+                  fashion! Cut gas emissions and thrift today!
+                </p>
+                <p class="mb-1 text-neutral-300 dark:text-neutral-200 text-xl font-bold">
+                  Responsible Consumption & Production
+                </p>
+                <p class="mb-3 text-neutral-300 dark:text-neutral-200 pl-8">
+                  Do your part and extend the lifespan on clothing to reduce
+                  textile waste!
+                </p>
+                <p class="mb-1 text-neutral-300 dark:text-neutral-200 text-xl font-bold">
+                  Sustainable Cities & Communities
+                </p>
+                <p class="mb-3 text-neutral-300 dark:text-neutral-200 pl-8">
+                  Join the thrifting community and let us raise awareness about
+                  sustainable fashion together!
+                </p>
+              </div>
+            </Card2>
+          </Modal>
           <Card2 image={shirt} title="About us">
             <p class="mb-6 text-neutral-300 dark:text-neutral-200 text-lg">
               Supreme Thrifter is created to promote thirfting among youths by
@@ -373,9 +347,6 @@ export default function Home() {
               Click here to find out how thrifting aligns with the UN
               sustainability goals!
             </a>
-            {/* <a onClick={() => setShowMyModal(true)}>
-              here
-            </a> */}
           </Card2>
         </div>
       </div>
@@ -388,40 +359,3 @@ export default function Home() {
     </div>
   );
 }
-
-// export default Home;
-
-// "use client"
-// import React, { useState, useEffect } from "react";
-// import "@reach/combobox/styles.css";
-// import SideMenu from "@/components/SideMenu";
-// import Navbar from "@/components/Navbar";
-
-// const Home = () => {
-//  const [showSideMenu, setShowSideMenu] = useState(false);
-
-//   useEffect(() => {
-//     const updateMediaQuery = (e) => {
-//       if (e.matches) {
-//         setShowSideMenu(true);
-//       } else {
-//         setShowSideMenu(false);
-//       }
-//     };
-
-//     const mediaQuery = window.matchMedia("(max-width: 992px)");
-//     mediaQuery.addEventListener("change", updateMediaQuery);
-
-//     return () => {
-//       mediaQuery.removeEventListener("change", updateMediaQuery);
-//     };
-//  }, []);
-
-//  return (
-// <>
-//   {showSideMenu ? <SideMenu /> : <Navbar />}
-// </>
-//  );
-// };
-
-// export default Home;

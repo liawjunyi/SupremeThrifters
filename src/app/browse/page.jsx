@@ -26,9 +26,8 @@ import insightsClient from "search-insights";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase";
 import { getAuth } from "firebase/auth";
-import { useSearchParams } from "next/navigation";
-import index from "instantsearch.js/es/widgets/index/index";
 import { useRouter } from "next/navigation";
+
 export default function Places() {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyB7VnhdFUqZiSbJ_em-PsgI6zxrfcgeOnw",
@@ -102,10 +101,6 @@ function Map() {
     }
   };
 
-  const searchParams = useSearchParams();
-  const search = searchParams.get("product_id");
-  console.log(search);
-
   return (
     <>
       <SideMenu
@@ -144,6 +139,7 @@ function Map() {
             {selected.map((item) => (
               <Card
                 className={"m-md border border-gray-200 rounded-md shadow "}
+                key={item.product_id}
               >
                 <Accordion
                   title={item.product_name}
@@ -154,7 +150,6 @@ function Map() {
                   }}
                 >
                   <div>
-                    {/* <Image src={image} /> */}
                     <div>Price: ${item.price}</div>
                     <div>Description: {item.product_description}</div>
 
@@ -190,45 +185,6 @@ function Map() {
           </Sidebar>
         )}
         <div className="absolute top-lg inset-x-0 mx-auto z-10 rounded-sm xs:w-[300px] w-[150px]">
-          {/* <PlacesAutocomplete
-          setSelected={setSelected}
-          selected={selected}
-          setCenter={setCenter}
-          openOnFocus={true}
-          getSources={({ query }) => [
-            {
-              sourceId: "name",
-              getItems() {
-                return getAlgoliaResults({
-                  searchClient,
-                  queries: [
-                    {
-                      indexName: "supremeThrifters",
-                      query,
-                    },
-                  ],
-                });
-              },
-              templates: {
-                item({ item, components }) {
-                  console.log(item, components);
-                  return <ProductItem hit={item} components={components} />;
-                },
-              },
-            },
-          ]}
-        /> */}
-          {/* <Autocomplete
-            onSelect={({ item, setQuery }) => {
-              setSelected([item]);
-              setCenter(item.address.geo);
-            }}
-            onSubmit={({ state }) => {
-              console.log(state.collections[0].items);
-              setSelected(state.collections[0].items);
-              setZoom(10);
-            }}
-          /> */}
           <Autocomplete2
             openOnFocus={true}
             classNames={{
@@ -285,7 +241,6 @@ function Map() {
               },
             ]}
           />
-          {/* {(selected || selected) && <Sidebar></Sidebar>} */}
         </div>
         <GoogleMap
           zoom={zoom}
@@ -352,6 +307,7 @@ function Map() {
                     onMouseOver={() => setHighlight(true)}
                     animation={2}
                     onClick={() => setActiveMarker(user_id)}
+                    key={user_id}
                   >
                     {activeMarker == user_id && (
                       <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
@@ -365,23 +321,6 @@ function Map() {
                 );
               }
             )}
-          {/* 
-       {selected &&
-          selected.map
-          <MarkerF
-            position={{ ...selected.address.geo }}
-            icon={{ url: "/tshirt.svg" }}
-            onMouseOver={() => setHighlight(true)}
-            animation={2}
-            onClick={() => setActiveMarker(true)}
-          >
-            {activeMarker === true ? (
-              <InfoWindowF onCloseClick={() => setActiveMarker(false)}>
-                <ItemCard></ItemCard>
-              </InfoWindowF>
-            ) : null}
-          </MarkerF>
-        )} */}
         </GoogleMap>
       </div>
     </>
