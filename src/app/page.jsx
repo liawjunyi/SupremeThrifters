@@ -58,7 +58,7 @@ export default function Home() {
     } else {
       router.push("/login");
     }
-  };
+  };}
 
   const handleReserved = async (product) => {
     if(user != null){
@@ -66,7 +66,7 @@ export default function Home() {
       product,
     });
     alert(`you reserved ${product.product_name}`);
-  };
+  };}
 
   const observeElement = () => {
     const options = {
