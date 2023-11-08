@@ -1,4 +1,5 @@
 "use client";
+
 import {
   GoogleMap,
   useLoadScript,
@@ -20,7 +21,7 @@ import SideMenu from "@/components/Sidemenu";
 import Autocomplete2 from "@/components/Autocomplete2";
 import algoliasearch from "algoliasearch";
 import { getAlgoliaResults } from "@algolia/autocomplete-js";
-import ProductItem from "@/components/Productitem";
+import { ProductItem } from "@/components/Productitem";
 import insightsClient from "search-insights";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase";
@@ -143,7 +144,6 @@ function Map() {
             {selected.map((item) => (
               <Card
                 className={"m-md border border-gray-200 rounded-md shadow "}
-                key={item.product_id}
               >
                 <Accordion
                   title={item.product_name}
@@ -352,7 +352,6 @@ function Map() {
                     onMouseOver={() => setHighlight(true)}
                     animation={2}
                     onClick={() => setActiveMarker(user_id)}
-                    key={user_id}
                   >
                     {activeMarker == user_id && (
                       <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
