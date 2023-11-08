@@ -439,12 +439,10 @@ export default function Home() {
           className="m-4 mx-8 mb-10 opacity-0 transition-opacity duration-1000 ease-linear"
           id="about-us"
         >
-          {/* <Button onClick={() => setShowMyModal(true)}>
-            Click here
-          </Button> */}
 
+          <div>
           <Modal onClose={handleOnClose} visible={showMyModal}></Modal>
-          <Card2 image={shirt} title="About us">
+          <Card2 image={shirt} title="About us" img_width="md:w-1/4">
             <p class="mb-6 text-neutral-300 dark:text-neutral-200 text-lg">
               Supreme Thrifter is created to promote thrifting among youths by
               making it accessible and convenient for all. Here you can explore
@@ -480,6 +478,7 @@ export default function Home() {
               sustainability goals!
             </a>
           </Card2>
+          </div>
         </div>
       </div>
 
