@@ -9,7 +9,13 @@ import Button from "./Button";
 import close from "../../public/close.svg";
 import { signOut, getAuth } from "firebase/auth";
 
+
+
+
 const Sidemenu = ({ className, onClick }) => {
+
+
+
   const [loggedin, setLoggedin] = useState(true);
 
   const auth = getAuth();
@@ -73,29 +79,33 @@ const Sidemenu = ({ className, onClick }) => {
           </Link>
 
           {loggedin ? (
-            <Link
+              <Link
               className={`${
                 pathname == "/profile" && "text-shadow-neon text-neon"
               } text-2xl leading-[4.5rem] uppercase text-gray-400 hover:text-shadow-neon hover:text-neon`}
-              onClick={() => {
-                signOut(auth);
-                setLoggedin(false);
-                console.log("signin status" + loggedin);
-              }}
-              href="/"
-            >
-              Sign Out
-            </Link>
-          ) : (
-            <Link
+                onClick={() => {
+                  signOut(auth);
+                  setLoggedin(false);
+                  console.log("signin status" + loggedin);
+                }}
+                href="/"
+              >
+                Sign Out
+              </Link>
+            ) : (
+              <Link
               className={`${
                 pathname == "/profile" && "text-shadow-neon text-neon"
-              } text-2xl leading-[4.5rem] uppercase text-gray-400 hover:text-shadow-neon hover:text-neon`}
-              href="/login"
-            >
-              Login
-            </Link>
-          )}
+              } text-2xl leading-[4.5rem] uppercase text-gray-400 hover:text-shadow-neon hover:text-neon`}                href="/login"
+              >
+                Login
+              </Link>
+            )}
+
+
+
+
+
         </nav>
       </aside>
     </div>

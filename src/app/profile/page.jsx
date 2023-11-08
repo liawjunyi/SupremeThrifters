@@ -31,7 +31,7 @@ export default function Profile() {
   const auth = getAuth();
   const user = auth.currentUser;
 
-  const addProfilePic = (e) => {
+  const addProfilePic = (e) => { //function to add profile pic
     const file = e.target.files[0];
     const imagesRef = ref(storage, `profilePic/${file.name}`);
     console.log(userData);
@@ -40,7 +40,10 @@ export default function Profile() {
       setUserData((prev) => {
         return { ...prev, profilePic: "" };
       });
-      
+      const deleteImageRef = ref(
+        storage,
+        `profilePic/${userData.profilePic.name}`
+      );
 
       uploadBytes(imagesRef, file)
         .then(() => getDownloadURL(imagesRef)) // Get the download URL
@@ -74,7 +77,7 @@ export default function Profile() {
     }
   };
 
-  const updateProfilePicInFirestore = (newProfilePicURL) => {
+  const updateProfilePicInFirestore = (newProfilePicURL) => { //function to update the new profile pic to firestore
     const userDocRef = doc(db, "users", user.uid);
 
     // Update only the 'profilePic' field in the Firestore document
@@ -101,13 +104,13 @@ export default function Profile() {
     deleteObject(deleteImageRef);
   };
 
-  const validateEmail = (email) => {
+  const validateEmail = (email) => {  //real time validation of email address
     // Use a simple regex pattern to check for a valid email format
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{3}$/;
     return emailPattern.test(email);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = () => {  //update all user details to the database
     updateDoc(doc(db, "users", user.uid), userData)
       .then(() => alert("successfully saved"))
       .then(() => push("/profile"));
@@ -129,7 +132,7 @@ export default function Profile() {
     // }
   };
 
-  const fetchUserData = async () => {
+  const fetchUserData = async () => { //retrieve every user in the users collection in firestore
     const usersRef = collection(db, "users");
 
     const q = query(usersRef, where("uid", "==", user.uid));
@@ -142,7 +145,7 @@ export default function Profile() {
     });
   };
 
-  useEffect(() => {
+  useEffect(() => { //display the user profile details retrieved from database
     if (user) {
       const displayName = user.displayName;
       const email = user.email;
@@ -156,7 +159,12 @@ export default function Profile() {
   }, [user]);
 
   return (
-    <div className={`${menuActive ? "h-screen overflow-hidden" : ""} `}>
+    //dynamic webpage in iphone 12pro and laptop size
+    //allows user to update profile details and profile picture
+    //checks if user is logged in and show details, otherwise show placeholder values
+    //checks if user has keyed in a valid email
+    //alerts users that profile pic, details are saved succesfully.
+    <div className={`${menuActive ? "h-screen overflow-hidden" : ""} `}>    
       <Sidemenu
         className={`transition-opacity duration-500 ${
           menuActive ? "opacity-100 ease-in z-20" : "opacity-0 ease-out -z-1  "
@@ -185,7 +193,13 @@ export default function Profile() {
                   Photo
                 </label>
                 <div className="mt-2 flex items-center gap-x-3">
-                  { (!isloggedin || userData.profilePic === "" )?  (
+                  {isloggedin ? (
+                    <img
+                      className="rounded-full w-20 h-20"
+                      src={userData.profilePic}
+                      alt=""
+                    />
+                  ) : (
                     <svg
                       className="h-20 w-20 text-gray-300"
                       viewBox="0 0 24 24"
@@ -198,14 +212,7 @@ export default function Profile() {
                         clipRule="evenodd"
                       />
                     </svg>
-                  ):(
-                    <img
-                      className="rounded-full w-20 h-20"
-                      src={userData?.profilePic}
-                      alt="Upload "
-                    />
-                  ) 
-                }
+                  )}
 
                   {/*  */}
                   <Button

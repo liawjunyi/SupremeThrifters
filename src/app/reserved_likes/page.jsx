@@ -3,7 +3,7 @@
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import React, { useEffect, useState } from "react";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db, storage } from "../../../firebase";
 import Navbar from "@/components/Navbar";
 import like from "../../../public/like.svg";
@@ -13,13 +13,14 @@ import Sidemenu from "@/components/Sidemenu";
 import { getAuth } from "firebase/auth";
 import { getDownloadURL, ref } from "firebase/storage";
 import Confetti from "react-confetti";
+import { useRouter } from "next/navigation";
 
 export default function Reserved() {
   const [products_reserved, setProductsReserved] = useState([]);
   const [products_liked, setProductsLiked] = useState([]);
   const [menuActive, setMenuActive] = useState(false);
   const [selectedTab, setSelectedTab] = useState("reserved");
-
+  const { push } = useRouter();
   const auth = getAuth();
   const user = auth.currentUser;
 
@@ -59,6 +60,32 @@ export default function Reserved() {
 
     setProductsLiked(likedList);
   };
+
+
+  const unreserveListing = async (product) => {
+   
+    
+    await deleteDoc(doc(db, "users", user.uid, "reserved", product.product_name)) .then(() => {
+
+      alert("Listing has been unreserved!")
+
+    }).then(() => push("/reserved_likes"));
+  
+    
+  };
+
+  const unlikeListing = async (product) => {
+   
+    
+    await deleteDoc(doc(db, "users", user.uid, "liked", product.product_name)) .then(() => {
+
+      alert("Listing has been unliked!")
+
+    }).then(() => push("/reserved_likes"));
+  
+    
+  };
+
 
   useEffect(() => {
     if (user) {
@@ -159,9 +186,6 @@ export default function Reserved() {
                                 <p className="mt-1 text-sm text-gray-500">
                                   {product?.username}
                                 </p>
-                                <p className="mt-1 text-sm text-gray-500">
-                                  Contact No.: 9876 4321
-                                </p>
                               </div>
                               <p className="text-sm font-medium text-gray-900">
                                 {product?.price}
@@ -174,12 +198,13 @@ export default function Reserved() {
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   console.log("reserved");
+                                  unreserveListing(product);
+                              
                                 }}
                                 animation="animate-bounce"
                               >
                                 Unreserve
                               </Button>
-                              
                               <Button
                                 className="z-0"
                                 onClick={(e) => {
@@ -219,11 +244,13 @@ export default function Reserved() {
                       products_liked.map((product) => {
                         product = product.product;
                         return (
+
                           <div key={product?.id} className="group relative">
                             {/* Showing Image of Listing */}
+
                             <Card className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                               <img
-                                src={product?.product_img_url}
+                                src={product.product_img_url}
                                 className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                               />
                             </Card>
@@ -231,20 +258,20 @@ export default function Reserved() {
                             <div className="mt-4 flex justify-between">
                               <div>
                                 <h3 className="text-sm text-gray-700">
-                                  <a href={product?.href}>
+                                  <a href={product.href}>
                                     <span
                                       aria-hidden="true"
                                       className="absolute inset-0"
                                     />
-                                    {product?.product_name}
+                                    {product.product_name}
                                   </a>
                                 </h3>
                                 <p className="mt-1 text-sm text-gray-500">
-                                  {product?.username}
+                                  {product.username}
                                 </p>
                               </div>
                               <p className="text-sm font-medium text-gray-900">
-                                {product?.price}
+                                {product.price}
                               </p>
                             </div>
                             <div className="flex justify-between pt-lg">
@@ -256,6 +283,7 @@ export default function Reserved() {
                                   console.log("reserved");
                                 }}
                                 animation="animate-bounce"
+                                confetti={true}
                               >
                                 Reserve
                               </Button>
@@ -264,6 +292,7 @@ export default function Reserved() {
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   console.log("liked");
+                                  unlikeListing(product);
                                 }}
                                 size="sm"
                                 bold={true}
