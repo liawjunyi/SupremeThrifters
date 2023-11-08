@@ -43,7 +43,7 @@ export default function Modal({ visible, onClose }) {
           Sustainable Cities & Communities
         </p>
         <p class="mb-3 text-neutral-300 dark:text-neutral-200 pl-8">
-          Join the thrifting community and let's raise awareness about
+          Join the thrifting community and let us raise awareness about
           sustainable fashion together!
         </p>
 
