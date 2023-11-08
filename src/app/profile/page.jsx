@@ -15,20 +15,16 @@ import {
   where,
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import Sidemenu from "@/components/SideMenu";
+import Sidemenu from "@/components/Sidemenu";
 import { useRouter } from "next/navigation";
 
 export default function Profile() {
   const [userData, setUserData] = useState("");
-  const [currentPassword, setCurrentPassword] = useState(null);
-  const [newPassword, setNewPassword] = useState(null);
-  const [confirmPassword, setConfirmPassword] = useState(null);
   const [display, setDisplay] = useState("");
   const [pfp, setPfp] = useState("");
   const [email, setEmail] = useState("");
   const [isloggedin, setIsloggedin] = useState(false);
   const [menuActive, setMenuActive] = useState(false);
-  const [isValid, setIsValid] = useState(false);
 
   const { push } = useRouter();
   const profileRef = useRef(null);
@@ -79,23 +75,23 @@ export default function Profile() {
           updateProfilePicInFirestore(url); // Update the Firestore document with the new URL
         });
     }
-};
+  };
 
   const updateProfilePicInFirestore = (newProfilePicURL) => {
     const userDocRef = doc(db, "users", user.uid);
 
     // Update only the 'profilePic' field in the Firestore document
     const updateData = {
-        profilePic: newProfilePicURL,
+      profilePic: newProfilePicURL,
     };
 
     updateDoc(userDocRef, updateData)
-        .then(() => alert("Profile picture updated successfully"))
-        .then(() => push("/"))
-        .catch((error) => {
-            console.error("Error updating profile picture:", error);
-        });
-};
+      .then(() => alert("Profile picture updated successfully"))
+      .then(() => push("/"))
+      .catch((error) => {
+        console.error("Error updating profile picture:", error);
+      });
+  };
 
   const removeProfilePic = () => {
     setUserData((prev) => {
@@ -193,7 +189,11 @@ export default function Profile() {
                 </label>
                 <div className="mt-2 flex items-center gap-x-3">
                   {isloggedin ? (
-                    <img className="rounded-full w-20 h-20" src={userData.profilePic} alt="" />
+                    <img
+                      className="rounded-full w-20 h-20"
+                      src={userData.profilePic}
+                      alt=""
+                    />
                   ) : (
                     <svg
                       className="h-20 w-20 text-gray-300"
@@ -309,7 +309,7 @@ export default function Profile() {
               Notifications
             </h2>
             <p className="mt-1 text-sm leading-6 text-gray-600">
-              We'll always let you know about important changes, but you pick
+              We will always let you know about important changes, but you pick
               what else you want to hear about.
             </p>
           </div>

@@ -1,5 +1,4 @@
 "use client";
-import "@reach/combobox/styles.css";
 import React, { useState, useEffect } from "react";
 import Button from "@/components/Button";
 import Card from "@/components/Card";
@@ -51,28 +50,31 @@ export default function Home() {
       });
       alert(`you liked ${product.product_name}`);
     } else {
-      router.push("/login")
-    };
+      router.push("/login");
+    }
   };
 
   const handleReserved = async (product) => {
     if (user != null) {
-      await setDoc(doc(db, `users/${user.uid}/reserved`, product.product_name), {
-        product,
-      });
+      await setDoc(
+        doc(db, `users/${user.uid}/reserved`, product.product_name),
+        {
+          product,
+        }
+      );
       alert(`you reserved ${product.product_name}`);
     } else {
-      router.push("/login")
+      router.push("/login");
     }
   };
 
   const observeElement = () => {
     const options = {
       root: null, // Use the viewport as the root
-      rootMargin: '0px', // No margin
+      rootMargin: "0px", // No margin
       threshold: 0.5, // Trigger when 50% of the element is visible
     };
-    
+
     const observer = new IntersectionObserver((entries) => {
       // Callback function when intersection occurs
       entries.forEach((entry) => {
@@ -80,40 +82,39 @@ export default function Home() {
           // Do something when the target element is in the viewport
           // entry.target.style.visibility = 'visible';
           entry.target.style.opacity = 1;
-          
-          console.log('Element is in the viewport!');
+
+          console.log("Element is in the viewport!");
         } else {
           entry.target.style.opacity = 0;
         }
       });
     }, options);
 
-    const target = document.getElementById('about-us'); // Replace with your target element's ID
-      if (target) {
-        observer.observe(target);
-      }
-      return observer;
-    };
+    const target = document.getElementById("about-us"); // Replace with your target element's ID
+    if (target) {
+      observer.observe(target);
+    }
+    return observer;
+  };
 
-    useEffect(() => {
-      const observer = observeElement();
-      return () => {
-        observer.disconnect();
-      };
-    }, []); // Empty dependency array to run the effect only once
+  useEffect(() => {
+    const observer = observeElement();
+    return () => {
+      observer.disconnect();
+    };
+  }, []); // Empty dependency array to run the effect only once
 
   //const handleReserved = async (product) => {
-    // if(user != null){
-    //   await setDoc(doc(db, users/${user.uid}/reserved, product.product_name), {
-    //     product,
-    //   });
-    // }
-  
-    // else{
-    //   push("/login")
-    // }
-    // };
+  // if(user != null){
+  //   await setDoc(doc(db, users/${user.uid}/reserved, product.product_name), {
+  //     product,
+  //   });
+  // }
 
+  // else{
+  //   push("/login")
+  // }
+  // };
 
   useEffect(() => {
     allListings();
@@ -141,7 +142,7 @@ export default function Home() {
   //     };
   //  }, []);
 
-  const [showMyModal, setShowMyModal] = useState(false)
+  const [showMyModal, setShowMyModal] = useState(false);
 
   const handleOnClose = () => setShowMyModal(false);
 
@@ -247,7 +248,6 @@ export default function Home() {
                     <Image src={like} />
                   </Button>
                 </div>
-                          
               </div>
             </div>
           ))}
@@ -328,17 +328,16 @@ export default function Home() {
 
         {/* About Us Section */}
         <div
-          
           className="m-4 mx-8 mb-10 opacity-0 transition-opacity duration-1000 ease-linear"
           id="about-us"
         >
           {/* <Button onClick={() => setShowMyModal(true)}>
             Click here
           </Button> */}
-          <Modal onClose={handleOnClose} visible={showMyModal}>
 
-          </Modal>
-          <Card2 image={shirt} title="About us" img_width={"md:w-1/4"} div_width={"md:w-full"}>
+          <Modal onClose={handleOnClose} visible={showMyModal}></Modal>
+          <Card2 image={shirt} title="About us">
+
             <p class="mb-6 text-neutral-300 dark:text-neutral-200 text-lg">
               Supreme Thrifter is created to promote thirfting among youths by
               making it accessible and convenient for all. Here you can explore
@@ -370,7 +369,8 @@ export default function Home() {
               onClick={() => setShowMyModal(true)}
               className="mb-0 whitespace-normal hidden lg:block text-neutral-300 dark:text-neutral-200 list-disc animate-bounce"
             >
-              Click here to find out how thrifting aligns with the UN sustainability goals!
+              Click here to find out how thrifting aligns with the UN
+              sustainability goals!
             </a>
           </Card2>
         </div>
